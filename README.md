@@ -10,12 +10,6 @@ A speaking gym app helping people overcome public speaking anxiety through pract
 - Audio processing and transcription
 - ML-powered speech analysis
 
-### [Dittodex](https://github.com/rirachii)
-Pokémon TCG database and card classifier using computer vision.
-- TensorFlow/PyTorch CNN models
-- Perceptual hashing for image recognition
-- TFLite model optimization for mobile
-
 ### [Umami](https://github.com/rirachii)
 Food and culinary content discovery platform.
 - Full-stack mobile application
@@ -23,11 +17,11 @@ Food and culinary content discovery platform.
 
 ## 💻 Tech Stack
 
-**Mobile:** React Native, Expo, Swift, Kotlin  
+**Mobile:** React Native, Expo, Swift  
 **Backend:** Node.js, Python, REST APIs, Serverless  
 **ML/AI:** TensorFlow, PyTorch, Computer Vision, NLP  
-**Cloud:** Google Cloud Platform, AWS  
-**Languages:** JavaScript/TypeScript, Python, Swift, Kotlin, C++
+**Cloud:** Google Cloud Platform  
+**Languages:** JavaScript/TypeScript, Python, Swift, C++
 
 ## 🛠️ What I'm Building With
 
@@ -43,4 +37,4 @@ Always interested in connecting with other developers and entrepreneurs building
 
 ---
 
-*Based in NYC/Malaysia • Indie App Developer • Full-Stack Engineer*
+*Based in NYC • Indie App Developer • Full-Stack Engineer*
