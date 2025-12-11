@@ -37,7 +37,9 @@ export const Home: React.FC = () => {
              </div>
              
              <p className="text-gray-800 font-mono text-xs md:text-sm leading-relaxed text-justify md:text-left border-t border-b border-gray-200 py-4">
-                Michelle Weng. Dwelling in the wired. Constructing maximalist web experiences and efficient backend systems. Obsessed with Y2K aesthetics, clean code, and digital decay.
+                Dwelling in the wired. <br />
+                Constructing simple app experiences and efficient backend systems. <br />
+                Learning neuromarketing, clean code, and digital decay. 
              </p>
 
              <div className="flex flex-wrap justify-center md:justify-start gap-4 text-[10px] font-mono text-gray-500 uppercase tracking-wider">
@@ -51,7 +53,7 @@ export const Home: React.FC = () => {
 
         {/* Right Column: Memory Dump */}
         <div id="blog" className="w-full mt-10 md:mt-0 scroll-mt-24">
-           <Blog />
+           <Blog limit={3} showViewAllLink={true} />
         </div>
       </div>
     </div>

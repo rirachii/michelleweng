@@ -82,9 +82,9 @@ const DecorativeElements = () => (
      <div className="absolute top-0 right-24 w-[1px] h-screen bg-gradient-to-b from-transparent via-gray-300 to-transparent opacity-50" />
      
      {/* Random Crosses */}
-     <div className="absolute top-1/4 right-1/3 text-gray-300 text-4xl opacity-50 rotate-12">👁️‍🗨️</div>
+     {/* <div className="absolute top-1/4 right-1/3 text-gray-300 text-4xl opacity-50 rotate-12">👁️‍🗨️</div>
      <div className="absolute bottom-1/3 left-1/4 text-gray-300 text-6xl opacity-50 -rotate-12">🕳️</div>
-     <div className="absolute bottom-10 right-1/4 text-gray-300 text-2xl opacity-50">🐇</div>
+     <div className="absolute bottom-10 right-1/4 text-gray-300 text-2xl opacity-50">🐇</div> */}
   </div>
 );
 

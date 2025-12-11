@@ -2,16 +2,24 @@ import React from 'react';
 import Link from 'next/link';
 import { BLOG_POSTS } from '../constants';
 
-export const Blog: React.FC = () => {
+interface BlogProps {
+  limit?: number;
+  showViewAllLink?: boolean;
+}
+
+export const Blog: React.FC<BlogProps> = ({ limit, showViewAllLink = false }) => {
+  const sortedPosts = [...BLOG_POSTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const displayedPosts = limit ? sortedPosts.slice(0, limit) : sortedPosts;
+
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
       <div className="border-b border-red-500/50 pb-2 mb-8 flex justify-between items-end">
-        <h2 className="text-2xl text-black font-vt323 tracking-widest">MEMORY_DUMP</h2>
+        <h2 className="text-2xl text-black font-vt323 tracking-widest">BLOG: MEMORY_DUMP</h2>
         <span className="text-[10px] font-mono text-gray-500">{BLOG_POSTS.length} RECORDS</span>
       </div>
 
       <div className="space-y-4">
-        {BLOG_POSTS.map((post) => (
+        {displayedPosts.map((post) => (
           <div key={post.id} className="group relative pl-3 border-l-2 border-gray-300 hover:border-red-500 transition-colors duration-300 pb-4">
             <div className="absolute -left-[5px] top-0 w-2 h-2 bg-white border border-gray-400 group-hover:border-red-500 group-hover:bg-red-500 transition-all" />
             
@@ -38,6 +46,14 @@ export const Blog: React.FC = () => {
           </div>
         ))}
       </div>
+
+      {showViewAllLink && (
+        <div className="pt-4 text-center md:text-right">
+          <Link href="/blog" className="text-xs font-mono text-red-600 hover:text-black hover:underline tracking-widest">
+            VIEW_ALL_RECORDS &gt;&gt;
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
