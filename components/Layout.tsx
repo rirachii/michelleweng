@@ -48,13 +48,26 @@ const Navigation = ({ activeSection, scrollToSection }: { activeSection: string,
 };
 
 const Footer = () => (
-  <footer className="fixed bottom-4 left-6 z-30 pointer-events-none">
-    <div className="flex flex-col text-[10px] text-gray-400 font-mono leading-tight">
-       <span>USER: MICHELLE_WENG</span>
-       <span>LOCATION: UNDERGROUND</span>
-       <span>LATEST_SYNC: {new Date().toLocaleTimeString()}</span>
+  <>
+    {/* Bottom Left Socials */}
+    <div className="fixed bottom-4 left-6 z-30 pointer-events-none md:pointer-events-auto">
+       <div className="flex flex-col text-[10px] text-gray-400 font-mono leading-tight space-y-1">
+          <a href="https://github.com/rirachii" target="_blank" rel="noopener noreferrer" className="hover:text-black cursor-alias transition-colors hover:underline">[ GitHub ]</a>
+          <a href="https://linkedin.com/in/wengmichelle" target="_blank" rel="noopener noreferrer" className="hover:text-black cursor-alias transition-colors hover:underline">[ LinkedIn ]</a>
+          <a href="https://twitter.com/mykov20" target="_blank" rel="noopener noreferrer" className="hover:text-black cursor-alias transition-colors hover:underline">[ X / Twitter ]</a>
+          <a href="mailto:michelleweng25@gmail.com" target="_blank" rel="noopener noreferrer" className="hover:text-black cursor-alias transition-colors hover:underline">[ Email ]</a>
+       </div>
     </div>
-  </footer>
+
+    {/* Bottom Right User Info */}
+    <footer className="fixed bottom-4 right-6 z-30 pointer-events-none text-right">
+      <div className="flex flex-col items-end text-[10px] text-gray-400 font-mono leading-tight">
+         <span>USER: MICHELLE_WENG</span>
+         <span>LOCATION: UNDERGROUND</span>
+         <span>LATEST_SYNC: {new Date().toLocaleTimeString()}</span>
+      </div>
+    </footer>
+  </>
 );
 
 const DecorativeElements = () => (
@@ -94,6 +107,15 @@ export const Layout: React.FC<LayoutProps> = ({ children, activeSection: propAct
   }, [propActiveSection]);
 
   const scrollToSection = (id: string) => {
+    if (id === 'home') {
+      if (pathname !== '/') {
+        router.push('/?targetId=top');
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
+
     if (pathname !== '/') {
       // Use query param to indicate target section when navigating home
       router.push(`/?targetId=${id}`);

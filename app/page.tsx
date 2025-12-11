@@ -16,14 +16,27 @@ function LandingPageContent() {
   const targetId = searchParams.get('targetId');
 
   // Handle navigation from other pages back to specific sections
+  // Handle navigation and scroll restoration
   useEffect(() => {
+    // Prevent browser from restoring scroll position
+    if (typeof window !== 'undefined' && 'scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
     if (targetId) {
       setTimeout(() => {
+        if (targetId === 'top') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
         const element = document.getElementById(targetId);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
+    } else {
+      // Force scroll to top on load if no targetId
+      window.scrollTo(0, 0);
     }
   }, [targetId]);
 

@@ -119,7 +119,6 @@ export const AIChat: React.FC = () => {
               onChange={(e) => setInput(e.target.value)}
               className="flex-grow bg-transparent border-none text-black font-mono focus:outline-none focus:ring-0 placeholder-gray-400 disabled:opacity-50"
               placeholder={isRateLimited ? "SYSTEM COOLING DOWN..." : "Enter message..."}
-              autoFocus
               disabled={isRateLimited || loading}
             />
             <button 

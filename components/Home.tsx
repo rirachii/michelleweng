@@ -22,9 +22,13 @@ export const Home: React.FC = () => {
              <span>⛓</span>
           </div>
           
-          <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold leading-none tracking-tighter text-black mix-blend-multiply">
-            <GlitchText text="MICHELLE_WENG" />
-          </h1>
+          {/* <h1 className="text-5xl md:text-8xl lg:text-9xl text-black font-bold leading-none tracking-tighter text-black flicker-text mix-blend-multiply">
+            <GlitchText text="M_WENG" />
+          </h1> */}
+
+          <div className="text-5xl font-bold text-black tracking-widest flicker-text">
+                       <GlitchText text="MICHELLE_WENG" textClassName="text-black glitch-home-style" />
+                     </div>
           
           {/* Compact Bio */}
           <div className="max-w-xl mx-auto md:mx-0 space-y-4">
@@ -36,11 +40,11 @@ export const Home: React.FC = () => {
                 Michelle Weng. Dwelling in the wired. Constructing maximalist web experiences and efficient backend systems. Obsessed with Y2K aesthetics, clean code, and digital decay.
              </p>
 
-             <div className="flex flex-wrap justify-center md:justify-start gap-2 text-[10px] font-mono text-gray-500 uppercase tracking-wider">
-                 <span className="hover:text-black cursor-crosshair transition-colors">[ React ]</span>
-                 <span className="hover:text-black cursor-crosshair transition-colors">[ Next.js ]</span>
-                 <span className="hover:text-black cursor-crosshair transition-colors">[ TypeScript ]</span>
-                 <span className="hover:text-black cursor-crosshair transition-colors">[ Vim ]</span>
+             <div className="flex flex-wrap justify-center md:justify-start gap-4 text-[10px] font-mono text-gray-500 uppercase tracking-wider">
+                 <a href="https://github.com/rirachii" target="_blank" rel="noopener noreferrer" className="hover:text-black cursor-alias transition-colors hover:scale-105 transform duration-200">[ GitHub ]</a>
+                 <a href="https://linkedin.com/in/wengmichelle" target="_blank" rel="noopener noreferrer" className="hover:text-black cursor-alias transition-colors hover:scale-105 transform duration-200">[ LinkedIn ]</a>
+                 <a href="https://twitter.com/mykov20" target="_blank" rel="noopener noreferrer" className="hover:text-black cursor-alias transition-colors hover:scale-105 transform duration-200">[ X / Twitter ]</a>
+                 <a href="mailto:michelleweng25@gmail.com" className="hover:text-black cursor-alias transition-colors hover:scale-105 transform duration-200">[ Email ]</a>
              </div>
           </div>
         </div>
