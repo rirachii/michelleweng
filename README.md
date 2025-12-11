@@ -1,20 +1,46 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Hi, I'm Michelle 👋
 
-# Run and deploy your AI Studio app
+Full-stack software engineer and indie app developer building mobile applications that solve real problems.
 
-This contains everything you need to run your app locally.
+## 🚀 Current Projects
 
-View your app in AI Studio: https://ai.studio/apps/drive/1pGZfrkOT_XfYgcqckc7IZfpjG-4J090y
+### [Vojo](https://github.com/rirachii)
+A speaking gym app helping people overcome public speaking anxiety through practice and feedback.
+- Built with React Native & Expo
+- Audio processing and transcription
+- ML-powered speech analysis
 
-## Run Locally
+### [Dittodex](https://github.com/rirachii)
+Pokémon TCG database and card classifier using computer vision.
+- TensorFlow/PyTorch CNN models
+- Perceptual hashing for image recognition
+- TFLite model optimization for mobile
 
-**Prerequisites:**  Node.js
+### [Umami](https://github.com/rirachii)
+Food and culinary content discovery platform.
+- Full-stack mobile application
+- React Native development
 
+## 💻 Tech Stack
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+**Mobile:** React Native, Expo, Swift, Kotlin  
+**Backend:** Node.js, Python, REST APIs, Serverless  
+**ML/AI:** TensorFlow, PyTorch, Computer Vision, NLP  
+**Cloud:** Google Cloud Platform, AWS  
+**Languages:** JavaScript/TypeScript, Python, Swift, Kotlin, C++
+
+## 🛠️ What I'm Building With
+
+- Mobile-first development with React Native
+- Machine learning models for real-world applications
+- Cloud-native architectures
+- API design and integration
+- Image classification and audio processing
+
+## 📫 Get in Touch
+
+Always interested in connecting with other developers and entrepreneurs building interesting products.
+
+---
+
+*Based in NYC/Malaysia • Indie App Developer • Full-Stack Engineer*
