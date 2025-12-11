@@ -20,12 +20,12 @@ const getSystemInstruction = () => {
 };
 
 export const sendMessageToGemini = async (history: { role: 'user' | 'model'; text: string }[], message: string): Promise<string> => {
-  if (!process.env.API_KEY) {
+  if (!process.env.NEXT_PUBLIC_GEMINI_API_KEY) {
     return "ERROR: AUTH_KEY_MISSING. CONNECTION DENIED.";
   }
 
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY });
     
     const recentHistory = history.slice(-10); 
     

@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { CRTOverlay } from './CRTOverlay';
 import { DitherBackground } from './DitherBackground';
 import { GlitchText } from './GlitchText';
@@ -80,8 +82,9 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children, activeSection: propActiveSection }) => {
   const [activeSection, setActiveSection] = useState('home');
-  const location = useLocation();
-  const navigate = useNavigate();
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   // Sync prop active section (from LandingPage) with local state
   useEffect(() => {
@@ -91,8 +94,9 @@ export const Layout: React.FC<LayoutProps> = ({ children, activeSection: propAct
   }, [propActiveSection]);
 
   const scrollToSection = (id: string) => {
-    if (location.pathname !== '/') {
-      navigate('/', { state: { targetId: id } });
+    if (pathname !== '/') {
+      // Use query param to indicate target section when navigating home
+      router.push(`/?targetId=${id}`);
     } else {
       const element = document.getElementById(id);
       if (element) {
