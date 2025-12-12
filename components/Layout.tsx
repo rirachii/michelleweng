@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { CRTOverlay } from './CRTOverlay';
 import { DitherBackground } from './DitherBackground';
 import { GlitchText } from './GlitchText';
+import { MusicPlayer } from './MusicPlayer';
 
 const Navigation = ({ activeSection, scrollToSection }: { activeSection: string, scrollToSection: (id: string) => void }) => {
   const navItems = [
@@ -63,7 +64,7 @@ const Footer = () => (
     <footer className="fixed bottom-4 right-6 z-30 pointer-events-none text-right">
       <div className="flex flex-col items-end text-[10px] text-gray-400 font-mono leading-tight">
          <span>USER: MICHELLE_WENG</span>
-         <span>LOCATION: UNDERGROUND</span>
+         <span>LOCATION: NYC/SF/ASIA </span>
          <span>LATEST_SYNC: {new Date().toLocaleTimeString()}</span>
       </div>
     </footer>
@@ -80,11 +81,6 @@ const DecorativeElements = () => (
      {/* Chains / Lines */}
      <div className="absolute top-0 right-20 w-[1px] h-screen bg-gradient-to-b from-transparent via-gray-300 to-transparent opacity-50" />
      <div className="absolute top-0 right-24 w-[1px] h-screen bg-gradient-to-b from-transparent via-gray-300 to-transparent opacity-50" />
-     
-     {/* Random Crosses */}
-     {/* <div className="absolute top-1/4 right-1/3 text-gray-300 text-4xl opacity-50 rotate-12">👁️‍🗨️</div>
-     <div className="absolute bottom-1/3 left-1/4 text-gray-300 text-6xl opacity-50 -rotate-12">🕳️</div>
-     <div className="absolute bottom-10 right-1/4 text-gray-300 text-2xl opacity-50">🐇</div> */}
   </div>
 );
 
@@ -141,6 +137,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, activeSection: propAct
         </main>
         
         <Footer />
+        <MusicPlayer />
       </div>
     </div>
   );
