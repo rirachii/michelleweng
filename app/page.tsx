@@ -64,15 +64,15 @@ function LandingPageContent() {
 
   return (
     <Layout activeSection={activeSection}>
-      <section id="home" className="min-h-screen flex flex-col justify-center py-20 scroll-mt-20">
+      <section id="home" className="min-h-screen flex flex-col justify-center py-12 md:py-20 scroll-mt-20">
          <Home />
       </section>
       
-      <section id="projects" className="min-h-screen flex flex-col justify-center py-20 scroll-mt-20">
+      <section id="projects" className="min-h-screen flex flex-col justify-center py-12 md:py-20 scroll-mt-20">
          <Projects />
       </section>
       
-      <section id="ai-uplink" className="min-h-screen flex flex-col justify-center py-20 scroll-mt-20">
+      <section id="ai-uplink" className="min-h-screen flex flex-col justify-center py-12 md:py-20 scroll-mt-20 pb-24 md:pb-20">
          <AIChat />
       </section>
     </Layout>

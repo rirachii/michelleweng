@@ -5,13 +5,13 @@ import { GlitchText } from './GlitchText';
 
 export const Projects: React.FC = () => {
   return (
-    <div className="space-y-12 max-w-6xl mx-auto">
-       <div className="border-b border-blue-500/50 pb-2 mb-12 flex justify-between items-end">
-        <h2 className="text-4xl text-black font-vt323 tracking-widest">EXECUTABLES</h2>
-        <span className="text-xs font-mono text-gray-500">DIR: /usr/local/projects</span>
+    <div className="space-y-8 md:space-y-12 max-w-6xl mx-auto">
+       <div className="border-b border-blue-500/50 pb-2 mb-8 md:mb-12 flex justify-between items-end">
+        <h2 className="text-2xl md:text-4xl text-black font-vt323 tracking-widest">EXECUTABLES</h2>
+        <span className="text-[8px] md:text-xs font-mono text-gray-500">DIR: /usr/local/projects</span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         {PROJECTS.map((project) => (
           <RetroCard 
             key={project.id} 

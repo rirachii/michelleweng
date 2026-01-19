@@ -253,6 +253,91 @@ export const BLOG_POSTS: BlogPost[] = [
   }
 ];
 
+export const RESUME_DATA = {
+  name: "Michelle Weng",
+  title: "Fullstack Engineer",
+  location: "New York, New York",
+  email: "michelleweng25@gmail.com",
+  linkedin: "linkedin.com/in/wengmichelle",
+  about: "Fullstack Engineer looking for fast pace environment to create meaningful impact at scale.",
+  experience: [
+    {
+      company: "JPMorgan Chase & Co.",
+      role: "Software Engineer",
+      location: "NYC, NY",
+      period: "Aug 2024– Sept 2025",
+      details: [
+        "Led international data retention compliance effort, ensured adherence to laws across multiple jurisdictions.",
+        "Deployed compliance project to production environment, ensuring reliability and scalability for global operations."
+      ]
+    },
+    {
+      company: "JPMorgan Chase & Co.",
+      role: "Software Engineer Intern",
+      location: "NYC, NY",
+      period: "June 2023 - Aug 2023",
+      details: [
+        "Implemented middleware authentication API using Java Spring Boot in collaboration with lead engineer.",
+        "Gained hands-on experience with corporate frameworks, adapting quickly to new tools and methodologies.",
+        "Strengthened networking and collaboration skills by engaging with peers and teams across the organization to understand broader operational goals."
+      ]
+    },
+    {
+      company: "BMO Bank",
+      role: "Cloud Infrastructure Intern",
+      location: "NYC, NY",
+      period: "Jan 2023– Apr 2023",
+      details: [
+        "Revamped data storage, reducing file size by 8x, resulting in a significant storage cost reduction.",
+        "Improved file retrieval latency from AWS servers.",
+        "Monitored AWS CloudWatch during testing of file uploads to AWS S3 bucket and debugged log files."
+      ]
+    },
+    {
+      company: "Industrial Manufacturing Metaverse Digital Twin System",
+      role: "REU Undergrad Research",
+      location: "Buffalo, NY",
+      period: "May 2022– Dec 2022",
+      details: [
+        "Architect and design the system leveraging AWS to create digital twins for industrial manufacturing.",
+        "Developed an interactive dashboard for real-time sensor data visualization of industrial machines in React.",
+        "Published demo paper for the ACM SenSys 2022 Conference."
+      ]
+    }
+  ],
+  hackathons: [
+    {
+      name: "Mockstars App",
+      event: "RevenueCat Shipaton 2025",
+      stack: "React Native, TS, PostgreSQL, Google Cloud Run",
+      details: [
+        "Implemented user dashboards that visualize strengths, weaknesses, and improvement trends across multiple sessions, stored securely with PostgreSQL.",
+        "Developed dynamic mock interview scenarios using ai models, adapt questions to targeted behavioral themes."
+      ]
+    },
+    {
+      name: "Kudo", 
+      event: "Hackthon Winner | FemHacks 2025",
+      stack: "React, TS, Python, Ai Agents", 
+      details: [
+        "Platform empowering youth through mentorship with college students",
+        "Developed ai agents for student and tutor intake and matching via Python LangChain"
+      ]
+    }
+  ],
+  skills: {
+    technology: ["Typescript", "SQL", "React", "React Native", "Java", "Python"],
+    tools: ["Git", "Docker", "AWS", "GCP", "Linux"]
+  },
+  education: {
+    school: "University at Buffalo",
+    degree: "Computer Science B.S.",
+    gpa: "3.72 / 4.0",
+    awards: "Won 2022 Russell L. Agrusa Innovation Competition",
+    graduation: "May 2024"
+  }
+};
+
 export const PROJECTS: Project[] = [
   {
     id: '1',

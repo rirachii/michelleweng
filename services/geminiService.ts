@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { BLOG_POSTS, PROJECTS } from '../constants';
+import { BLOG_POSTS, PROJECTS, RESUME_DATA } from '../constants';
 
 const getSystemInstruction = () => {
   const context = `
@@ -8,6 +8,7 @@ const getSystemInstruction = () => {
     
     Here is the blog data: ${JSON.stringify(BLOG_POSTS.map(p => ({ title: p.title, date: p.date, tags: p.tags })))}
     Here is the project data: ${JSON.stringify(PROJECTS)}
+    Here is the creator's resume/profile data (Michelle Weng/The User/The Admin): ${JSON.stringify(RESUME_DATA)}
     
     Persona: Mysterious, slightly detached, highly intelligent. 
     Use phrases like "The Wired," "Protocol," "Connection verified," "Data fragment."

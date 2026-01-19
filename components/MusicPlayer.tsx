@@ -7,7 +7,7 @@ export const MusicPlayer = () => {
 
     return (
         <div 
-            className={`fixed bottom-24 right-6 z-40 transition-all duration-300 font-mono text-[10px] md:text-xs select-none ${isExpanded ? 'w-80' : 'w-auto'}`}
+            className={`fixed bottom-16 right-2 md:bottom-24 md:right-6 z-40 transition-all duration-300 font-mono text-[10px] md:text-xs select-none ${isExpanded ? 'w-64 md:w-80' : 'w-auto'}`}
         >
             <div className="bg-black/90 backdrop-blur-sm border border-green-900/50 shadow-[0_0_15px_rgba(0,255,0,0.1)] p-1 rounded-sm">
                 {/* Header / Mini Status */}

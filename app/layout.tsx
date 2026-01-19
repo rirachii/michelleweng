@@ -10,6 +10,7 @@ const courierPrime = Courier_Prime({ weight: ['400', '700'], subsets: ['latin'],
 export const metadata: Metadata = {
   title: 'Michelle Weng - Cyberdeck Portfolio',
   description: 'Portfolio of Michelle Weng',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
 };
 
 export default function RootLayout({

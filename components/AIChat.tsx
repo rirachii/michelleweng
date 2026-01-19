@@ -67,15 +67,15 @@ export const AIChat: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto h-[65vh] flex flex-col relative">
-      <div className="absolute -top-10 -left-10 text-6xl text-gray-200 opacity-60 font-vt323 pointer-events-none">
+    <div className="max-w-3xl mx-auto h-[60vh] md:h-[65vh] flex flex-col relative">
+      <div className="hidden md:block absolute -top-10 -left-10 text-6xl text-gray-200 opacity-60 font-vt323 pointer-events-none">
         COMM_LINK
       </div>
 
       <RetroCard borderColor="border-gray-400" className="flex-grow flex flex-col p-0 overflow-hidden bg-white/80">
         
         {/* Header Bar */}
-        <div className="bg-gray-100 border-b border-gray-300 p-2 flex justify-between items-center text-xs font-mono text-gray-500">
+        <div className="bg-gray-100 border-b border-gray-300 p-2 flex justify-between items-center text-[10px] md:text-xs font-mono text-gray-500">
            <div className="flex gap-4">
              <span>PROTOCOL: GEMINI-2.5-FLASH</span>
              <span>LOAD: {Math.min(messageCount * 20, 100)}%</span>
@@ -86,7 +86,7 @@ export const AIChat: React.FC = () => {
         </div>
 
         {/* Chat Area - Plain text style like IRC */}
-        <div className="flex-grow overflow-y-auto p-4 font-mono text-sm space-y-2">
+        <div className="flex-grow overflow-y-auto p-3 md:p-4 font-mono text-xs md:text-sm space-y-2">
           {messages.map((msg, idx) => (
             <div key={idx} className="break-words leading-relaxed group flex items-start">
               <span className={`font-bold mr-2 whitespace-nowrap ${msg.role === 'user' ? 'text-red-600' : 'text-blue-600'}`}>
