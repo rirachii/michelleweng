@@ -1,0 +1,804 @@
+/* PortfolioOS — a vintage OS-simulator personal portfolio. Standalone build:
+   the desktop fills the whole viewport. All rules are scoped under .bapsos-root. */
+
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+#root {
+  position: relative;
+  overflow: hidden;
+}
+
+.bapsos-root {
+  --w98-face: #c0c0c0;
+  --w98-desktop: #008080;
+  --w98-navy: #000080;
+  --w98-navy2: #1084d0;
+  --w98-shadow: #808080;
+  --w98-dark: #404040;
+  --w98-light: #ffffff;
+  --w98-text: #000000;
+
+  /* Fill the dashboard's content outlet. The nearest positioned ancestor is a
+     `position:relative; z-index:2` stacking context, so absolute-inset-0 lands
+     exactly on the content area — no z-index war with the shell chrome. True
+     "boot into my OS" fullscreen is offered via the browser Fullscreen API
+     (see the ⛶ taskbar button), which covers all chrome natively. */
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: Tahoma, "MS Sans Serif", Geneva, Verdana, sans-serif;
+  font-size: 13px;
+  color: var(--w98-text);
+  -webkit-font-smoothing: none;
+}
+
+.bapsos-root button {
+  font-family: inherit;
+  font-size: 13px;
+}
+
+/* ---- desktop ---- */
+.bapsos-desktop {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background: var(--w98-desktop);
+}
+
+.bapsos-icons {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.bapsos-desktop-icon {
+  width: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: default;
+  padding: 4px;
+}
+.bapsos-desktop-icon:focus {
+  border: 1px dotted #ffffff;
+  outline: none;
+}
+.bapsos-desktop-icon-glyph {
+  font-size: 32px;
+  line-height: 1;
+  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.4));
+}
+.bapsos-desktop-icon-label {
+  color: #ffffff;
+  font-size: 12px;
+  text-align: center;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+/* ---- windows ---- */
+.bapsos-window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: var(--w98-face);
+  border-top: 2px solid var(--w98-light);
+  border-left: 2px solid var(--w98-light);
+  border-right: 2px solid var(--w98-dark);
+  border-bottom: 2px solid var(--w98-dark);
+  box-shadow: 1px 1px 0 var(--w98-shadow);
+  padding: 2px;
+}
+
+.bapsos-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 22px;
+  padding: 0 3px;
+  background: linear-gradient(90deg, var(--w98-navy), var(--w98-navy2));
+  color: #ffffff;
+  cursor: default;
+  user-select: none;
+  touch-action: none;
+}
+.bapsos-titlebar-inactive {
+  background: linear-gradient(90deg, #808080, #b5b5b5);
+}
+.bapsos-titlebar-inactive .bapsos-titlebar-text {
+  color: #d8d8d8;
+}
+.bapsos-titlebar-text {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+  font-size: 13px;
+}
+.bapsos-titlebar-icon {
+  font-size: 14px;
+}
+.bapsos-titlebar-buttons {
+  display: flex;
+  gap: 2px;
+}
+.bapsos-titlebar-buttons button {
+  width: 18px;
+  height: 18px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  background: var(--w98-face);
+  border-top: 1px solid var(--w98-light);
+  border-left: 1px solid var(--w98-light);
+  border-right: 1px solid var(--w98-dark);
+  border-bottom: 1px solid var(--w98-dark);
+  cursor: default;
+  font-size: 12px;
+}
+.bapsos-titlebar-buttons button:active {
+  border-top: 1px solid var(--w98-dark);
+  border-left: 1px solid var(--w98-dark);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+
+.bapsos-window-body {
+  flex: 1;
+  overflow: auto;
+  background: var(--w98-face);
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+  margin-top: 2px;
+}
+
+/* ---- app content helpers ---- */
+.bapsos-pad {
+  padding: 12px;
+}
+.bapsos-fieldrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.bapsos-emoji {
+  font-size: 16px;
+}
+.bapsos-fieldrow .bapsos-emoji,
+.bapsos-fieldrow .bapsos-strong + .bapsos-muted {
+  font-size: 13px;
+}
+.bapsos-fieldrow > .bapsos-emoji {
+  font-size: 26px;
+}
+.bapsos-strong {
+  font-weight: bold;
+}
+.bapsos-muted {
+  color: #555555;
+  font-size: 12px;
+}
+.bapsos-error {
+  color: #880000;
+  font-size: 12px;
+}
+.bapsos-fieldset {
+  border: 1px solid var(--w98-shadow);
+  box-shadow: inset 1px 1px 0 var(--w98-light);
+  padding: 10px 12px;
+}
+.bapsos-fieldset legend {
+  padding: 0 4px;
+  font-size: 12px;
+}
+.bapsos-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.bapsos-table td {
+  padding: 3px 6px;
+}
+.bapsos-table td:first-child {
+  color: #333333;
+  width: 90px;
+}
+
+/* ---- chat (placeholder) ---- */
+.bapsos-chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.bapsos-chat-log {
+  flex: 1;
+  overflow: auto;
+  padding: 10px;
+  background: #ffffff;
+  margin: 6px;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+.bapsos-chat-msg {
+  font-size: 13px;
+  margin-bottom: 8px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.4;
+}
+.bapsos-chat-user b {
+  color: #000080;
+}
+.bapsos-chat-agent b {
+  color: #006000;
+}
+.bapsos-chat-tool {
+  color: #555555;
+  font-style: italic;
+}
+.bapsos-caret {
+  animation: bapsos-blink 1s steps(1) infinite;
+}
+.bapsos-thinking {
+  color: #777777;
+  font-style: italic;
+  animation: bapsos-blink 1.4s steps(1) infinite;
+}
+@keyframes bapsos-blink {
+  50% {
+    opacity: 0;
+  }
+}
+.bapsos-chat-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px 6px;
+  font-size: 12px;
+  color: #555555;
+}
+.bapsos-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #a00000;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.bapsos-led.on {
+  background: #10a010;
+}
+.bapsos-chat-input {
+  display: flex;
+  gap: 6px;
+  padding: 0 6px 6px;
+}
+.bapsos-chat-input input {
+  flex: 1;
+  padding: 3px 5px;
+  font-size: 13px;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+.bapsos-chat-input button {
+  padding: 3px 12px;
+  background: var(--w98-face);
+  border-top: 1px solid var(--w98-light);
+  border-left: 1px solid var(--w98-light);
+  border-right: 1px solid var(--w98-dark);
+  border-bottom: 1px solid var(--w98-dark);
+}
+
+/* ---- task manager ---- */
+.bapsos-taskmgr {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.bapsos-taskmgr-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+.bapsos-taskmgr-head button,
+.bapsos-endbtn {
+  padding: 2px 10px;
+  background: var(--w98-face);
+  border-top: 1px solid var(--w98-light);
+  border-left: 1px solid var(--w98-light);
+  border-right: 1px solid var(--w98-dark);
+  border-bottom: 1px solid var(--w98-dark);
+  cursor: default;
+  font-size: 12px;
+}
+.bapsos-endbtn:active,
+.bapsos-taskmgr-head button:active {
+  border-top: 1px solid var(--w98-dark);
+  border-left: 1px solid var(--w98-dark);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+.bapsos-taskmgr-list {
+  flex: 1;
+  overflow: auto;
+  margin: 0 8px 8px;
+  background: #ffffff;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+.bapsos-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.bapsos-grid th {
+  position: sticky;
+  top: 0;
+  text-align: left;
+  background: var(--w98-face);
+  border-bottom: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-shadow);
+  padding: 4px 8px;
+  font-weight: normal;
+  font-size: 12px;
+}
+.bapsos-grid td {
+  padding: 4px 8px;
+  border-bottom: 1px solid #eeeeee;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bapsos-row-current {
+  background: #eef4ff;
+}
+
+/* ---- files ---- */
+.bapsos-files {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.bapsos-files-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+}
+.bapsos-files-toolbar button {
+  padding: 2px 10px;
+  background: var(--w98-face);
+  border-top: 1px solid var(--w98-light);
+  border-left: 1px solid var(--w98-light);
+  border-right: 1px solid var(--w98-dark);
+  border-bottom: 1px solid var(--w98-dark);
+  cursor: default;
+  font-size: 12px;
+}
+.bapsos-files-path {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  color: #333333;
+  padding: 2px 6px;
+  background: #ffffff;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+.bapsos-files-body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  margin: 0 8px 8px;
+  gap: 6px;
+}
+.bapsos-files-list {
+  width: 220px;
+  flex-shrink: 0;
+  overflow: auto;
+  background: #ffffff;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+.bapsos-file-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  font-size: 13px;
+  cursor: default;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bapsos-file-row:hover {
+  background: #f0f0f0;
+}
+.bapsos-file-selected {
+  background: var(--w98-navy);
+  color: #ffffff;
+}
+.bapsos-file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bapsos-files-preview {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  background: #ffffff;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+.bapsos-file-text {
+  margin: 0;
+  padding: 10px;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ---- taskbar ---- */
+.bapsos-taskbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 34px;
+  padding: 3px 4px;
+  background: var(--w98-face);
+  border-top: 2px solid var(--w98-light);
+}
+.bapsos-start {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+  padding: 3px 9px;
+  background: var(--w98-face);
+  border-top: 2px solid var(--w98-light);
+  border-left: 2px solid var(--w98-light);
+  border-right: 2px solid var(--w98-dark);
+  border-bottom: 2px solid var(--w98-dark);
+  cursor: default;
+}
+.bapsos-start.active {
+  border-top: 2px solid var(--w98-dark);
+  border-left: 2px solid var(--w98-dark);
+  border-right: 2px solid var(--w98-light);
+  border-bottom: 2px solid var(--w98-light);
+}
+.bapsos-start-glyph {
+  font-size: 15px;
+}
+.bapsos-tasks {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  overflow: hidden;
+  padding-left: 4px;
+}
+.bapsos-taskbtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 160px;
+  padding: 3px 8px;
+  background: var(--w98-face);
+  border-top: 1px solid var(--w98-light);
+  border-left: 1px solid var(--w98-light);
+  border-right: 1px solid var(--w98-dark);
+  border-bottom: 1px solid var(--w98-dark);
+  cursor: default;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.bapsos-taskbtn.active {
+  border-top: 1px solid var(--w98-dark);
+  border-left: 1px solid var(--w98-dark);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+  background: #d8d8d8;
+}
+.bapsos-root:fullscreen {
+  width: 100vw;
+  height: 100vh;
+}
+.bapsos-fsbtn {
+  padding: 3px 8px;
+  margin-right: 4px;
+  background: var(--w98-face);
+  border-top: 1px solid var(--w98-light);
+  border-left: 1px solid var(--w98-light);
+  border-right: 1px solid var(--w98-dark);
+  border-bottom: 1px solid var(--w98-dark);
+  cursor: default;
+  font-size: 13px;
+}
+.bapsos-clock {
+  padding: 3px 10px;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+  font-size: 13px;
+}
+
+/* ---- start menu ---- */
+.bapsos-startmenu {
+  position: absolute;
+  bottom: 34px;
+  left: 4px;
+  z-index: 10000;
+  display: flex;
+  min-width: 220px;
+  background: var(--w98-face);
+  border-top: 2px solid var(--w98-light);
+  border-left: 2px solid var(--w98-light);
+  border-right: 2px solid var(--w98-dark);
+  border-bottom: 2px solid var(--w98-dark);
+  box-shadow: 2px 2px 0 var(--w98-shadow);
+}
+.bapsos-startmenu-rail {
+  width: 30px;
+  background: linear-gradient(var(--w98-navy), #4040a0);
+  color: #ffffff;
+  font-weight: bold;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: center;
+  padding: 8px 0;
+  letter-spacing: 2px;
+}
+.bapsos-startmenu ul {
+  flex: 1;
+  list-style: none;
+  margin: 0;
+  padding: 3px;
+}
+.bapsos-startmenu li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 10px;
+  cursor: default;
+  font-size: 13px;
+}
+.bapsos-startmenu li:hover {
+  background: var(--w98-navy);
+  color: #ffffff;
+}
+.bapsos-startmenu-sep {
+  height: 0;
+  margin: 3px 8px;
+  padding: 0 !important;
+  border-top: 1px solid var(--w98-shadow);
+  border-bottom: 1px solid var(--w98-light);
+  cursor: default;
+}
+.bapsos-startmenu-sep:hover {
+  background: transparent;
+}
+
+/* ---- portfolio: About ---- */
+.bapsos-avatar {
+  width: 56px;
+  height: 56px;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+  object-fit: cover;
+}
+.bapsos-avatar-placeholder {
+  display: grid;
+  place-items: center;
+  font-size: 32px;
+  background: #ffffff;
+}
+.bapsos-about-bio {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.bapsos-about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+}
+.bapsos-about-links a,
+.bapsos-btn-link {
+  color: var(--w98-navy);
+  font-size: 13px;
+}
+
+/* ---- portfolio: Projects (master-detail) ---- */
+.bapsos-projects {
+  display: flex;
+  height: 100%;
+}
+.bapsos-projects-list {
+  width: 200px;
+  flex-shrink: 0;
+  overflow: auto;
+  background: #ffffff;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+  margin: 8px 0 8px 8px;
+}
+.bapsos-project-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  font-size: 13px;
+  cursor: default;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bapsos-project-row:hover {
+  background: #f0f0f0;
+}
+.bapsos-project-selected {
+  background: var(--w98-navy);
+  color: #ffffff;
+}
+.bapsos-projects-detail {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  background: #ffffff;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+  margin: 8px;
+}
+.bapsos-project-title {
+  font-size: 16px;
+}
+.bapsos-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 8px 0;
+}
+.bapsos-tag {
+  font-size: 12px;
+  padding: 1px 7px;
+  background: var(--w98-face);
+  border-top: 1px solid var(--w98-light);
+  border-left: 1px solid var(--w98-light);
+  border-right: 1px solid var(--w98-dark);
+  border-bottom: 1px solid var(--w98-dark);
+}
+.bapsos-project-desc {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ---- portfolio: Résumé ---- */
+.bapsos-resume {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.bapsos-resume-toolbar {
+  padding: 8px 10px;
+}
+.bapsos-resume-toolbar button {
+  padding: 3px 12px;
+  background: var(--w98-face);
+  border-top: 1px solid var(--w98-light);
+  border-left: 1px solid var(--w98-light);
+  border-right: 1px solid var(--w98-dark);
+  border-bottom: 1px solid var(--w98-dark);
+  cursor: default;
+  font-size: 12px;
+}
+.bapsos-resume-page {
+  flex: 1;
+  overflow: auto;
+  background: #ffffff;
+  margin: 0 8px 8px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.bapsos-resume-page h1 {
+  font-size: 20px;
+  margin: 0 0 2px;
+}
+.bapsos-resume-page h2 {
+  font-size: 14px;
+  margin: 16px 0 4px;
+  border-bottom: 1px solid #cccccc;
+}
+.bapsos-resume-page p {
+  margin: 4px 0;
+}
+.bapsos-resume-page ul {
+  margin: 4px 0 4px 18px;
+  padding: 0;
+}
+
+/* ---- portfolio: Contact ---- */
+.bapsos-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.bapsos-contact-row a,
+.bapsos-contact-input,
+.bapsos-contact-textarea {
+  color: var(--w98-navy);
+}
+.bapsos-contact-input,
+.bapsos-contact-textarea {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 4px 6px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--w98-text);
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+.bapsos-contact-textarea {
+  min-height: 72px;
+  resize: vertical;
+}
+.bapsos-contact-send {
+  padding: 3px 14px;
+  background: var(--w98-face);
+  border-top: 1px solid var(--w98-light);
+  border-left: 1px solid var(--w98-light);
+  border-right: 1px solid var(--w98-dark);
+  border-bottom: 1px solid var(--w98-dark);
+  cursor: default;
+  font-size: 13px;
+}
