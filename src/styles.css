@@ -16,14 +16,22 @@ body,
 }
 
 .bapsos-root {
-  --w98-face: #c0c0c0;
-  --w98-desktop: #008080;
-  --w98-navy: #000080;
-  --w98-navy2: #1084d0;
-  --w98-shadow: #808080;
-  --w98-dark: #404040;
-  --w98-light: #ffffff;
-  --w98-text: #000000;
+  /* "the wired" — a dark, Lain-inspired reskin of the classic win98 palette.
+     Warm charcoal faces, near-black recesses, a rust-amber active title bar,
+     and warm off-white text. The raised/inset 3D borders still read because
+     --w98-light stays lighter than the face and --w98-dark stays darker. */
+  --w98-face: #2b2930;
+  --w98-desktop: #0a0810;
+  --w98-navy: #4a2016; /* active title bar: dark rust */
+  --w98-navy2: #8f3c1d; /* active title bar gradient end: amber-rust */
+  --w98-shadow: #131118;
+  --w98-dark: #050408;
+  --w98-light: #4f4c58;
+  --w98-text: #d9d2c3;
+  --w98-canvas: #14121a; /* content panes (was white) */
+  --w98-muted: #968f81; /* secondary text on dark */
+  --w98-accent: #e0913c; /* amber links + highlights */
+  --w98-hover: #262330; /* row hover on dark */
 
   /* Fill the dashboard's content outlet. The nearest positioned ancestor is a
      `position:relative; z-index:2` stacking context, so absolute-inset-0 lands
@@ -50,20 +58,19 @@ body,
   position: relative;
   flex: 1;
   overflow: hidden;
-  background-color: #3a1f4a;
+  background-color: #0a0810;
 }
-/* Pixel-art sunset wallpaper on its own layer so we can zoom it 1.25× while
-   still fully covering the desktop. It sits behind the icons and windows and
-   ignores pointer events, so dragging is unaffected. A vaporwave gradient
-   stays underneath as a fallback while the image loads; `pixelated` keeps the
-   chunky pixels crisp. */
+/* Dark "wired" wallpaper on its own layer so we can zoom it 1.25× while still
+   fully covering the desktop. It sits behind the icons and windows and ignores
+   pointer events, so dragging is unaffected. A dark fallback gradient stays
+   underneath while the image loads; `pixelated` keeps the chunky pixels crisp. */
 .bapsos-desktop::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: url("/sunset.webp"),
-    linear-gradient(180deg, #3a1f4a 0%, #7a2f6a 45%, #d76a3a 80%, #f2b45a 100%);
+  background-image: url("/wallpaper.webp"),
+    linear-gradient(180deg, #0a0810 0%, #191016 55%, #2a1a12 100%);
   background-size: cover, cover;
   background-position: center, center;
   background-repeat: no-repeat, no-repeat;
@@ -72,21 +79,43 @@ body,
   transform-origin: center center;
   pointer-events: none;
 }
+/* Vignette to deepen the mood — over the wallpaper, behind icons and windows. */
+.bapsos-desktop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(135% 105% at 50% 40%, transparent 48%, rgba(0, 0, 0, 0.6) 100%);
+}
 .bapsos-icons {
   z-index: 1;
+}
+/* Subtle CRT scanlines across the whole screen — the "the wired" touch. Kept
+   faint so window text stays readable; sits above windows, below Start menu. */
+.bapsos-root::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 9997;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.16) 0 1px,
+    transparent 1px 3px
+  );
 }
 
 .bapsos-icons {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  gap: 14px 4px;
-  /* Wrap into additional columns once a column fills, like a real desktop. */
-  max-height: calc(100% - 24px);
+  top: 14px;
+  left: 10px;
+  /* A left-anchored icon grid that fills top-to-bottom, then wraps into the
+     next column (column-major, like a classic desktop). */
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(4, auto);
+  gap: 16px 12px;
 }
 
 .bapsos-desktop-icon {
@@ -150,10 +179,10 @@ body,
   touch-action: none;
 }
 .bapsos-titlebar-inactive {
-  background: linear-gradient(90deg, #808080, #b5b5b5);
+  background: linear-gradient(90deg, #232128, #3a3742);
 }
 .bapsos-titlebar-inactive .bapsos-titlebar-text {
-  color: #d8d8d8;
+  color: #8f897c;
 }
 .bapsos-titlebar-text {
   display: flex;
@@ -225,11 +254,11 @@ body,
   font-weight: bold;
 }
 .bapsos-muted {
-  color: #555555;
+  color: var(--w98-muted);
   font-size: 12px;
 }
 .bapsos-error {
-  color: #880000;
+  color: #e0645a;
   font-size: 12px;
 }
 .bapsos-fieldset {
@@ -250,7 +279,7 @@ body,
   padding: 3px 6px;
 }
 .bapsos-table td:first-child {
-  color: #333333;
+  color: var(--w98-muted);
   width: 90px;
 }
 
@@ -264,7 +293,7 @@ body,
   flex: 1;
   overflow: auto;
   padding: 10px;
-  background: #ffffff;
+  background: var(--w98-canvas);
   margin: 6px;
   border-top: 1px solid var(--w98-shadow);
   border-left: 1px solid var(--w98-shadow);
@@ -285,14 +314,14 @@ body,
   color: #006000;
 }
 .bapsos-chat-tool {
-  color: #555555;
+  color: var(--w98-muted);
   font-style: italic;
 }
 .bapsos-caret {
   animation: bapsos-blink 1s steps(1) infinite;
 }
 .bapsos-thinking {
-  color: #777777;
+  color: var(--w98-muted);
   font-style: italic;
   animation: bapsos-blink 1.4s steps(1) infinite;
 }
@@ -307,7 +336,7 @@ body,
   gap: 6px;
   padding: 3px 8px 6px;
   font-size: 12px;
-  color: #555555;
+  color: var(--w98-muted);
 }
 .bapsos-led {
   width: 8px;
@@ -377,7 +406,7 @@ body,
   flex: 1;
   overflow: auto;
   margin: 0 8px 8px;
-  background: #ffffff;
+  background: var(--w98-canvas);
   border-top: 1px solid var(--w98-shadow);
   border-left: 1px solid var(--w98-shadow);
   border-right: 1px solid var(--w98-light);
@@ -401,14 +430,14 @@ body,
 }
 .bapsos-grid td {
   padding: 4px 8px;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid var(--w98-shadow);
   max-width: 220px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .bapsos-row-current {
-  background: #eef4ff;
+  background: var(--w98-hover);
 }
 
 /* ---- files ---- */
@@ -439,9 +468,9 @@ body,
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 12px;
-  color: #333333;
+  color: var(--w98-muted);
   padding: 2px 6px;
-  background: #ffffff;
+  background: var(--w98-canvas);
   border-top: 1px solid var(--w98-shadow);
   border-left: 1px solid var(--w98-shadow);
   border-right: 1px solid var(--w98-light);
@@ -458,7 +487,7 @@ body,
   width: 220px;
   flex-shrink: 0;
   overflow: auto;
-  background: #ffffff;
+  background: var(--w98-canvas);
   border-top: 1px solid var(--w98-shadow);
   border-left: 1px solid var(--w98-shadow);
   border-right: 1px solid var(--w98-light);
@@ -476,7 +505,7 @@ body,
   text-overflow: ellipsis;
 }
 .bapsos-file-row:hover {
-  background: #f0f0f0;
+  background: var(--w98-hover);
 }
 .bapsos-file-selected {
   background: var(--w98-navy);
@@ -490,7 +519,7 @@ body,
   flex: 1;
   min-width: 0;
   overflow: auto;
-  background: #ffffff;
+  background: var(--w98-canvas);
   border-top: 1px solid var(--w98-shadow);
   border-left: 1px solid var(--w98-shadow);
   border-right: 1px solid var(--w98-light);
@@ -564,7 +593,7 @@ body,
   border-left: 1px solid var(--w98-dark);
   border-right: 1px solid var(--w98-light);
   border-bottom: 1px solid var(--w98-light);
-  background: #d8d8d8;
+  background: #1f1d25;
 }
 .bapsos-root:fullscreen {
   width: 100vw;
@@ -607,7 +636,7 @@ body,
 }
 .bapsos-startmenu-rail {
   width: 30px;
-  background: linear-gradient(var(--w98-navy), #4040a0);
+  background: linear-gradient(#7a3a1e, #150d12);
   color: #ffffff;
   font-weight: bold;
   writing-mode: vertical-rl;
@@ -660,7 +689,7 @@ body,
   display: grid;
   place-items: center;
   font-size: 32px;
-  background: #ffffff;
+  background: var(--w98-canvas);
 }
 .bapsos-about-bio {
   margin: 0;
@@ -675,7 +704,7 @@ body,
 }
 .bapsos-about-links a,
 .bapsos-btn-link {
-  color: var(--w98-navy);
+  color: var(--w98-accent);
   font-size: 13px;
 }
 
@@ -688,7 +717,7 @@ body,
   width: 200px;
   flex-shrink: 0;
   overflow: auto;
-  background: #ffffff;
+  background: var(--w98-canvas);
   border-top: 1px solid var(--w98-shadow);
   border-left: 1px solid var(--w98-shadow);
   border-right: 1px solid var(--w98-light);
@@ -707,7 +736,7 @@ body,
   text-overflow: ellipsis;
 }
 .bapsos-project-row:hover {
-  background: #f0f0f0;
+  background: var(--w98-hover);
 }
 .bapsos-project-selected {
   background: var(--w98-navy);
@@ -717,7 +746,7 @@ body,
   flex: 1;
   min-width: 0;
   overflow: auto;
-  background: #ffffff;
+  background: var(--w98-canvas);
   border-top: 1px solid var(--w98-shadow);
   border-left: 1px solid var(--w98-shadow);
   border-right: 1px solid var(--w98-light);
@@ -769,7 +798,7 @@ body,
 .bapsos-resume-page {
   flex: 1;
   overflow: auto;
-  background: #ffffff;
+  background: var(--w98-canvas);
   margin: 0 8px 8px;
   padding: 16px 20px;
   border-top: 1px solid var(--w98-shadow);
@@ -786,7 +815,7 @@ body,
 .bapsos-resume-page h2 {
   font-size: 14px;
   margin: 16px 0 4px;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid var(--w98-light);
 }
 .bapsos-resume-page p {
   margin: 4px 0;
@@ -807,7 +836,7 @@ body,
 .bapsos-contact-row a,
 .bapsos-contact-input,
 .bapsos-contact-textarea {
-  color: var(--w98-navy);
+  color: var(--w98-accent);
 }
 .bapsos-contact-input,
 .bapsos-contact-textarea {
@@ -817,6 +846,7 @@ body,
   font-family: inherit;
   font-size: 13px;
   color: var(--w98-text);
+  background: var(--w98-canvas);
   border-top: 1px solid var(--w98-shadow);
   border-left: 1px solid var(--w98-shadow);
   border-right: 1px solid var(--w98-light);
@@ -930,7 +960,7 @@ body,
 .bapsos-notepad {
   height: 100%;
   overflow: auto;
-  background: #ffffff;
+  background: var(--w98-canvas);
   margin: 6px;
   border-top: 1px solid var(--w98-shadow);
   border-left: 1px solid var(--w98-shadow);
@@ -1018,7 +1048,7 @@ body,
 .bapsos-tray-apps {
   font-size: 12px;
   padding: 2px 6px;
-  color: #333333;
+  color: var(--w98-muted);
 }
 .bapsos-tray-icon {
   font-size: 13px;
@@ -1065,12 +1095,12 @@ body,
   border-bottom: 1px solid var(--w98-light);
 }
 .bapsos-startmenu-empty {
-  color: #777777;
+  color: var(--w98-muted);
   font-style: italic;
 }
 .bapsos-startmenu-empty:hover {
   background: transparent;
-  color: #777777;
+  color: var(--w98-muted);
 }
 
 /* ---- shutdown screen ---- */
@@ -1205,7 +1235,8 @@ body,
   padding: 0;
 }
 .bapsos-mine-open {
-  border: 1px solid #b0b0b0;
+  background: #201d27;
+  border: 1px solid var(--w98-shadow);
 }
 .bapsos-mine-hint {
   font-size: 11px;
@@ -1295,7 +1326,7 @@ body,
 .bapsos-paint-canvas {
   display: block;
   margin: 2px auto 8px;
-  background: #ffffff;
+  background: var(--w98-canvas);
   cursor: crosshair;
   touch-action: none;
   border-top: 2px solid var(--w98-shadow);
@@ -1372,14 +1403,14 @@ body,
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background: #ffffff;
+  background: var(--w98-canvas);
   border-top: 1px solid var(--w98-shadow);
   border-left: 1px solid var(--w98-shadow);
   border-right: 1px solid var(--w98-light);
   border-bottom: 1px solid var(--w98-light);
 }
 .bapsos-guest-entry {
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid var(--w98-shadow);
   padding-bottom: 6px;
 }
 .bapsos-guest-entry:last-child {

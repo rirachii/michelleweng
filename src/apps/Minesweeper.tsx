@@ -47,7 +47,8 @@ function placeMines(board: Cell[][], safeR: number, safeC: number) {
   }
 }
 
-const NUM_COLORS = ["", "#0000ff", "#008000", "#ff0000", "#000080", "#800000", "#008080", "#000000", "#808080"];
+// Brightened classic palette so the counts read on the dark "wired" cells.
+const NUM_COLORS = ["", "#6a9cff", "#5bd35b", "#ff6b6b", "#b98cff", "#e0975a", "#4fd0d0", "#d9d2c3", "#a49c8e"];
 
 export function Minesweeper() {
   const [board, setBoard] = React.useState(emptyBoard);
