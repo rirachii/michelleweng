@@ -35,14 +35,14 @@ body,
   display: flex;
   flex-direction: column;
   font-family: Tahoma, "MS Sans Serif", Geneva, Verdana, sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--w98-text);
   -webkit-font-smoothing: none;
 }
 
 .bapsos-root button {
   font-family: inherit;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 /* ---- desktop ---- */
@@ -50,14 +50,16 @@ body,
   position: relative;
   flex: 1;
   overflow: hidden;
-  /* "cloud_surfing" — a soft sky with clouds hugging the horizon, a nod to
-     Michelle's cyberdeck theme, layered over the classic teal as a fallback. */
-  background-color: var(--w98-desktop);
-  background-image:
-    radial-gradient(120% 80% at 15% 110%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 60%),
-    radial-gradient(90% 70% at 82% 114%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 55%),
-    radial-gradient(70% 60% at 50% 122%, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0) 50%),
-    linear-gradient(180deg, #3a6ea5 0%, #6a9bc9 42%, #a8c8e0 78%, #cfe0ee 100%);
+  /* Pixel-art sunset wallpaper — on theme with Michelle's "cloud_surfing"
+     vibe. A vaporwave gradient stays underneath as a fallback while the image
+     loads. `pixelated` keeps the chunky pixels crisp when it scales up. */
+  background-color: #3a1f4a;
+  background-image: url("/sunset.webp"),
+    linear-gradient(180deg, #3a1f4a 0%, #7a2f6a 45%, #d76a3a 80%, #f2b45a 100%);
+  background-size: cover, cover;
+  background-position: center bottom, center;
+  background-repeat: no-repeat, no-repeat;
+  image-rendering: pixelated;
 }
 
 .bapsos-icons {
@@ -74,7 +76,7 @@ body,
 }
 
 .bapsos-desktop-icon {
-  width: 84px;
+  width: 92px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,15 +91,15 @@ body,
   outline: none;
 }
 .bapsos-desktop-icon-glyph {
-  font-size: 32px;
+  font-size: 38px;
   line-height: 1;
   filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.4));
 }
 .bapsos-desktop-icon-label {
   color: #ffffff;
-  font-size: 12px;
+  font-size: 13px;
   text-align: center;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.85);
 }
 
 /* ---- windows ---- */
@@ -118,8 +120,8 @@ body,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 22px;
-  padding: 0 3px;
+  height: 26px;
+  padding: 0 4px;
   background: linear-gradient(90deg, var(--w98-navy), var(--w98-navy2));
   color: #ffffff;
   cursor: default;
@@ -135,20 +137,20 @@ body,
 .bapsos-titlebar-text {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 15px;
 }
 .bapsos-titlebar-icon {
-  font-size: 14px;
+  font-size: 16px;
 }
 .bapsos-titlebar-buttons {
   display: flex;
   gap: 2px;
 }
 .bapsos-titlebar-buttons button {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   line-height: 1;
   display: grid;
   place-items: center;
@@ -487,7 +489,7 @@ body,
   display: flex;
   align-items: center;
   gap: 4px;
-  height: 34px;
+  height: 40px;
   padding: 3px 4px;
   background: var(--w98-face);
   border-top: 2px solid var(--w98-light);
@@ -570,7 +572,7 @@ body,
 /* ---- start menu ---- */
 .bapsos-startmenu {
   position: absolute;
-  bottom: 34px;
+  bottom: 40px;
   left: 4px;
   z-index: 10000;
   display: flex;
