@@ -66,7 +66,11 @@ body,
   left: 12px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 14px 4px;
+  /* Wrap into additional columns once a column fills, like a real desktop. */
+  max-height: calc(100% - 24px);
 }
 
 .bapsos-desktop-icon {
@@ -1080,4 +1084,294 @@ body,
   border-left: 2px solid var(--w98-dark);
   border-right: 2px solid var(--w98-light);
   border-bottom: 2px solid var(--w98-light);
+}
+
+/* ---- generic raised button (games/apps) ---- */
+.bapsos-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 3px 12px;
+  background: var(--w98-face);
+  border-top: 1px solid var(--w98-light);
+  border-left: 1px solid var(--w98-light);
+  border-right: 1px solid var(--w98-dark);
+  border-bottom: 1px solid var(--w98-dark);
+  cursor: default;
+  font-size: 12px;
+}
+.bapsos-btn:active,
+.bapsos-btn.active {
+  border-top: 1px solid var(--w98-dark);
+  border-left: 1px solid var(--w98-dark);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+
+/* ---- Minesweeper ---- */
+.bapsos-mine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.bapsos-mine-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 5px 7px;
+  border-top: 2px solid var(--w98-dark);
+  border-left: 2px solid var(--w98-dark);
+  border-right: 2px solid var(--w98-light);
+  border-bottom: 2px solid var(--w98-light);
+}
+.bapsos-mine-counter {
+  font-family: "Courier New", monospace;
+  background: #000000;
+  color: #ff2b2b;
+  padding: 2px 6px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  min-width: 42px;
+  text-align: center;
+}
+.bapsos-mine-face {
+  font-size: 16px;
+  width: 30px;
+  height: 28px;
+  background: var(--w98-face);
+  border-top: 2px solid var(--w98-light);
+  border-left: 2px solid var(--w98-light);
+  border-right: 2px solid var(--w98-dark);
+  border-bottom: 2px solid var(--w98-dark);
+  cursor: default;
+}
+.bapsos-mine-face:active {
+  border-top: 2px solid var(--w98-dark);
+  border-left: 2px solid var(--w98-dark);
+  border-right: 2px solid var(--w98-light);
+  border-bottom: 2px solid var(--w98-light);
+}
+.bapsos-mine-grid {
+  padding: 3px;
+  background: var(--w98-face);
+  border-top: 2px solid var(--w98-dark);
+  border-left: 2px solid var(--w98-dark);
+  border-right: 2px solid var(--w98-light);
+  border-bottom: 2px solid var(--w98-light);
+}
+.bapsos-mine-row {
+  display: flex;
+}
+.bapsos-mine-cell {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  background: var(--w98-face);
+  border-top: 2px solid var(--w98-light);
+  border-left: 2px solid var(--w98-light);
+  border-right: 2px solid var(--w98-shadow);
+  border-bottom: 2px solid var(--w98-shadow);
+  cursor: default;
+  padding: 0;
+}
+.bapsos-mine-open {
+  border: 1px solid #b0b0b0;
+}
+.bapsos-mine-hint {
+  font-size: 11px;
+}
+
+/* ---- Snake ---- */
+.bapsos-snake {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.bapsos-snake-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 272px;
+}
+.bapsos-snake-stage {
+  position: relative;
+  line-height: 0;
+}
+.bapsos-snake-canvas {
+  display: block;
+  border-top: 2px solid var(--w98-shadow);
+  border-left: 2px solid var(--w98-shadow);
+  border-right: 2px solid var(--w98-light);
+  border-bottom: 2px solid var(--w98-light);
+}
+.bapsos-snake-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  text-align: center;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  color: #dff7e6;
+  background: rgba(10, 20, 16, 0.72);
+}
+.bapsos-snake-hint {
+  font-size: 11px;
+}
+
+/* ---- Paint ---- */
+.bapsos-paint {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.bapsos-paint-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px 8px;
+}
+.bapsos-paint-swatches {
+  display: grid;
+  grid-template-columns: repeat(8, 16px);
+  gap: 2px;
+}
+.bapsos-paint-swatch {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 1px solid var(--w98-shadow);
+  cursor: default;
+}
+.bapsos-paint-swatch.active {
+  outline: 2px solid #000000;
+  outline-offset: -1px;
+}
+.bapsos-paint-sizes {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.bapsos-paint-dot {
+  display: inline-block;
+  background: #000000;
+  border-radius: 50%;
+}
+.bapsos-paint-canvas {
+  display: block;
+  margin: 2px auto 8px;
+  background: #ffffff;
+  cursor: crosshair;
+  touch-action: none;
+  border-top: 2px solid var(--w98-shadow);
+  border-left: 2px solid var(--w98-shadow);
+  border-right: 2px solid var(--w98-light);
+  border-bottom: 2px solid var(--w98-light);
+}
+
+/* ---- Calculator ---- */
+.bapsos-calc {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+}
+.bapsos-calc-display {
+  background: #000000;
+  color: #7dffb0;
+  font-family: "Courier New", monospace;
+  font-size: 22px;
+  text-align: right;
+  padding: 8px 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 2px solid var(--w98-shadow);
+  border-left: 2px solid var(--w98-shadow);
+  border-right: 2px solid var(--w98-light);
+  border-bottom: 2px solid var(--w98-light);
+}
+.bapsos-calc-pad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  flex: 1;
+}
+.bapsos-calc-btn {
+  padding: 8px 0;
+  font-size: 14px;
+  background: var(--w98-face);
+  border-top: 2px solid var(--w98-light);
+  border-left: 2px solid var(--w98-light);
+  border-right: 2px solid var(--w98-dark);
+  border-bottom: 2px solid var(--w98-dark);
+  cursor: default;
+}
+.bapsos-calc-btn:active {
+  border-top: 2px solid var(--w98-dark);
+  border-left: 2px solid var(--w98-dark);
+  border-right: 2px solid var(--w98-light);
+  border-bottom: 2px solid var(--w98-light);
+}
+.bapsos-calc-btn.wide {
+  grid-column: span 2;
+}
+.bapsos-calc-btn.op {
+  background: #d3d8ee;
+  font-weight: bold;
+}
+.bapsos-calc-btn.fn {
+  background: #eeded3;
+}
+
+/* ---- Guestbook ---- */
+.bapsos-guest {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+}
+.bapsos-guest-list {
+  flex: 1;
+  overflow: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #ffffff;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+.bapsos-guest-entry {
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 6px;
+}
+.bapsos-guest-entry:last-child {
+  border-bottom: none;
+}
+.bapsos-guest-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.bapsos-guest-msg {
+  font-size: 13px;
+  line-height: 1.4;
+  margin-top: 2px;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
