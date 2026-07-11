@@ -1,14 +1,16 @@
 // ─────────────────────────────────────────────────────────────────────────
-// EDIT ME — this is the only file you need to change to make the portfolio
-// yours. All windows read from here. Replace the placeholder values below.
+// EDIT ME - this is the only file you need to change to make the portfolio
+// yours. All windows read from here.
+//
+// Content sourced from Michelle Weng's cyberdeck portfolio, wengmichelle.com.
 // ─────────────────────────────────────────────────────────────────────────
 
 export const PROFILE = {
-  name: "[Your Name]", // TODO
-  role: "[Your role — e.g. Software Engineer]", // TODO
-  location: "[City, Country]", // TODO
+  name: "Michelle Weng",
+  role: "Software Engineer · apps & backend systems",
+  location: "NYC / SF / Asia",
   // A short intro shown in the About window. A few sentences is plenty.
-  bio: "Hi, I'm [Your Name] — [what you do in one line]. TODO: write two or three sentences about who you are, what you build, and what you're into. This text lives in src/content.ts.",
+  bio: "Dwelling in the wired. I build simple app experiences and efficient backend systems, and I'm usually somewhere down a rabbit hole. Lately I'm learning neuromarketing, clean code, and digital decay.",
   // Optional avatar. Drop an image in /public and set e.g. "/avatar.png",
   // or leave as null to show a placeholder tile.
   avatar: null as string | null,
@@ -25,48 +27,72 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    name: "Project One", // TODO
-    blurb: "A short one-liner about it.",
+    name: "Short Transcript",
+    blurb: "Auto-transcription for short-form video.",
     description:
-      "TODO: describe what this project is, the problem it solves, your role, and the tech used. Add as many projects as you like — they render automatically.",
-    tags: ["TypeScript", "React"],
-    link: "https://example.com",
-    linkLabel: "Visit",
+      "Automated transcription service for short-form video content - YouTube Shorts, TikTok, and Reels - powered by OpenAI Whisper and deployed on Cloud Run.",
+    tags: ["Python", "Flask", "Whisper", "Cloud Run"],
   },
   {
-    name: "Project Two", // TODO
-    blurb: "Another one-liner.",
-    description: "TODO: description for the second project.",
-    tags: ["Node", "API"],
-    link: "https://github.com/yourname/project-two",
-    linkLabel: "GitHub",
+    name: "Umami World",
+    blurb: "Catalog dishes from cuisines around the world.",
+    description:
+      "A mobile app for collecting and categorizing dishes you've tried from cuisines around the world - a personal, taggable food journal.",
+    tags: ["React Native", "TypeScript", "Firebase"],
   },
   {
-    name: "Project Three", // TODO
-    blurb: "One more one-liner.",
-    description: "TODO: description for the third project.",
-    tags: ["Design"],
+    name: "Void Mail",
+    blurb: "Encrypted email that self-destructs in 24 hours.",
+    description:
+      "A secure, encrypted email client that deletes messages after 24 hours - ephemeral by design, with end-to-end crypto and real-time delivery.",
+    tags: ["Node.js", "Cryptography", "Socket.io"],
+  },
+  {
+    name: "Retro Cam",
+    blurb: "Dithering and CRT effects in the browser.",
+    description:
+      "A web-based image processor that applies dithering and CRT effects to uploaded photos, with the heavy pixel work compiled to WebAssembly for speed.",
+    tags: ["Canvas API", "WASM", "Rust"],
   },
 ];
 
 // Résumé rendered as simple Markdown-ish text in the Résumé window.
-// Swap in your own, and optionally drop a PDF in /public and set RESUME_PDF.
-export const RESUME_MD = `# [Your Name]
-[Your role] · [City, Country] · [email@example.com]
+export const RESUME_MD = `# Michelle Weng
+Software Engineer · NYC / SF / Asia · michelleweng25@gmail.com
 
-## Experience
-**[Company]** — [Title]  (20XX–present)
-- TODO: a bullet about impact you had.
-- TODO: another bullet.
+## Summary
+Builder of simple app experiences and efficient backend systems. Comfortable
+across the stack - from React Native mobile apps to Python and Node backends
+deployed on the cloud. Curious about neuromarketing, consumer app growth, and
+the aesthetics of digital decay.
 
-**[Company]** — [Title]  (20XX–20XX)
-- TODO: a bullet.
+## Selected Projects
+**Short Transcript** - Auto-transcription for short-form video
+- Transcribes YouTube Shorts, TikTok, and Reels with OpenAI Whisper.
+- Python / Flask service deployed on Cloud Run.
 
-## Education
-**[School]** — [Degree]  (20XX)
+**Umami World** - World-cuisine dish journal
+- Mobile app to collect and categorize dishes tried around the world.
+- React Native + TypeScript, backed by Firebase.
+
+**Void Mail** - Ephemeral encrypted email
+- Encrypted client that self-destructs messages after 24 hours.
+- Node.js with real-time delivery over Socket.io.
+
+**Retro Cam** - In-browser dithering & CRT effects
+- Applies dithering and CRT effects to uploaded photos.
+- Canvas API front end with a Rust/WASM processing core.
+
+## Writing
+- Consumer App Growth Framework (LSDCP): Lab, Scale, Distribution, Creators, Paid.
+- Market analyses for localized AI calorie-tracking apps (Philippines, Malaysia).
 
 ## Skills
-TODO, comma, separated, skills
+Python, Flask, Node.js, TypeScript, React Native, Rust, WebAssembly, Firebase,
+Cloud Run, Socket.io, Whisper, Canvas API, cryptography, consumer growth
+
+## Currently exploring
+Neuromarketing, clean code, digital decay
 `;
 
 // If you add a PDF to /public (e.g. public/resume.pdf), set this to "/resume.pdf"
@@ -74,10 +100,10 @@ TODO, comma, separated, skills
 export const RESUME_PDF: string | null = null;
 
 export const CONTACT = {
-  email: "your@email.com", // TODO
+  email: "michelleweng25@gmail.com",
   links: [
-    { label: "GitHub", url: "https://github.com/yourname" }, // TODO
-    { label: "X / Twitter", url: "https://x.com/yourname" }, // TODO
-    { label: "LinkedIn", url: "https://linkedin.com/in/yourname" }, // TODO
+    { label: "GitHub", url: "https://github.com/rirachii" },
+    { label: "X / Twitter", url: "https://twitter.com/mykov20" },
+    { label: "LinkedIn", url: "https://linkedin.com/in/wengmichelle" },
   ],
 };
