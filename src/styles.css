@@ -543,21 +543,25 @@ body,
   gap: 5px;
   font-weight: bold;
   padding: 3px 9px;
-  background: var(--w98-face);
-  border-top: 2px solid var(--w98-light);
-  border-left: 2px solid var(--w98-light);
-  border-right: 2px solid var(--w98-dark);
-  border-bottom: 2px solid var(--w98-dark);
+  /* Light "start" button so it pops on the dark taskbar, with an amber star. */
+  background: #e9e3d5;
+  color: #17141c;
+  border-top: 2px solid #fffbf2;
+  border-left: 2px solid #fffbf2;
+  border-right: 2px solid #4a463f;
+  border-bottom: 2px solid #4a463f;
   cursor: default;
 }
 .bapsos-start.active {
-  border-top: 2px solid var(--w98-dark);
-  border-left: 2px solid var(--w98-dark);
-  border-right: 2px solid var(--w98-light);
-  border-bottom: 2px solid var(--w98-light);
+  background: #d8d2c4;
+  border-top: 2px solid #4a463f;
+  border-left: 2px solid #4a463f;
+  border-right: 2px solid #fffbf2;
+  border-bottom: 2px solid #fffbf2;
 }
 .bapsos-start-glyph {
   font-size: 15px;
+  color: #c0431a;
 }
 .bapsos-tasks {
   display: flex;
