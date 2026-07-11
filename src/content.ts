@@ -107,3 +107,64 @@ export const CONTACT = {
     { label: "LinkedIn", url: "https://linkedin.com/in/wengmichelle" },
   ],
 };
+
+// ── Writing window ─────────────────────────────────────────────────────────
+// Notes and essays, shown in the Writing (MEMORY_DUMP) window as a
+// master-detail list. Sourced from wengmichelle.com's blog.
+export interface Post {
+  date: string; // YYYY-MM-DD
+  title: string;
+  blurb: string; // one-line summary in the list
+  body: string; // rendered in the reading pane (plain paragraphs)
+}
+
+export const WRITING: Post[] = [
+  {
+    date: "2025-12-11",
+    title: "Idea: Calorie tracking app for the Philippines",
+    blurb: "Localizing a calorie tracker for a 'Rice is Life' culture.",
+    body: "Market analysis for a Filipino-localized calorie tracker. The thesis: food logging has to fit a 'Rice is Life' culture rather than fight it, lean on high social engagement, and take advantage of the Innovative Startup Act. Localization isn't translation - it's meeting people where their meals already are.",
+  },
+  {
+    date: "2025-12-09",
+    title: "Idea: Calorie tracking app for Malaysia",
+    blurb: "Market viability, the LSDCP growth framework, and hospital partnerships.",
+    body: "Strategic analysis for launching a localized AI calorie tracker in Malaysia. Looks at market viability, applies the LSDCP growth framework end to end, and explores hospital partnerships as a distribution wedge into a health-conscious but under-served market.",
+  },
+  {
+    date: "2025-12-04",
+    title: "Consumer App Growth Framework (LSDCP)",
+    blurb: "Lab, Scale, Distribution, Creators, Paid.",
+    body: "A full-funnel marketing system for growing consumer apps. Five stages: Lab (find what works), Scale (repeat it), Distribution (own the channels), Creators (borrow trust), and Paid (pour fuel on the fire). The point is sequencing - each stage only earns the right to the next once it's actually working.",
+  },
+];
+
+// ── Welcome note ───────────────────────────────────────────────────────────
+// Auto-opens on first boot in a Notepad-style window. Plain text.
+export const README_TXT = `        WELCOME TO MICHELLE_OS  v1.0
+  ============================================
+
+  hi, i'm michelle :)
+
+  you've booted into my portfolio OS - a little
+  desktop you can actually poke around in.
+
+  > double-click the icons to open programs
+  > drag windows around by their title bars
+  > try the Terminal if you like keyboards
+  > everything is also in the Start menu
+
+  what's inside:
+    About Me ... who i am
+    Projects ... things i've built
+    Writing .... things i think about
+    Terminal ... for the curious
+    Résumé ..... the formal version
+    Contact .... say hi
+
+  currently: dwelling in the wired, constructing
+  simple apps and efficient backends, learning
+  neuromarketing, clean code, and digital decay.
+
+  - michelle
+`;

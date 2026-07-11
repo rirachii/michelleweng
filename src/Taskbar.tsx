@@ -1,6 +1,7 @@
 import React from "react";
 import { useDesktop } from "./store";
 import { APPS } from "./apps/registry";
+import { PROFILE } from "./content";
 
 function FullscreenToggle() {
   const [fs, setFs] = React.useState(false);
@@ -27,13 +28,48 @@ function Clock() {
     const t = setInterval(() => setNow(new Date()), 1000 * 15);
     return () => clearInterval(t);
   }, []);
-  const label = now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-  return <div className="bapsos-clock">{label}</div>;
+  const time = now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+  const date = now.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" });
+  return (
+    <div className="bapsos-clock" title={date}>
+      {time}
+    </div>
+  );
+}
+
+// Classic "it is now safe to turn off your computer" send-off. Rendered fixed
+// so it covers everything regardless of the taskbar's place in the tree.
+function ShutdownScreen({ onRestart }: { onRestart: () => void }) {
+  return (
+    <div className="bapsos-shutdown">
+      <div className="bapsos-shutdown-text">
+        It's now safe to turn off
+        <br />
+        your computer.
+      </div>
+      <button className="bapsos-shutdown-btn" onClick={onRestart}>
+        ⏻ Restart MichelleOS
+      </button>
+    </div>
+  );
 }
 
 export function Taskbar() {
   const { windows, open, focus, toggleMinimize, cascade } = useDesktop();
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const [query, setQuery] = React.useState("");
+  const [off, setOff] = React.useState(false);
+
+  const launch = (id: string, meta: { title: string; icon: string; w?: number; h?: number }) => {
+    open(id, meta);
+    setMenuOpen(false);
+    setQuery("");
+  };
+
+  const openCount = windows.filter((w) => !w.minimized).length;
+  const filtered = APPS.filter((a) => a.title.toLowerCase().includes(query.toLowerCase()));
+
+  if (off) return <ShutdownScreen onRestart={() => window.location.reload()} />;
 
   return (
     <div className="bapsos-taskbar">
@@ -45,33 +81,63 @@ export function Taskbar() {
       </button>
 
       {menuOpen && (
-        <div className="bapsos-startmenu" onMouseLeave={() => setMenuOpen(false)}>
-          <div className="bapsos-startmenu-rail">BapsOS</div>
-          <ul>
-            {APPS.map((a) => (
-              <li
-                key={a.id}
-                onClick={() => {
-                  open(a.id, { title: a.title, icon: a.icon, w: a.w, h: a.h });
-                  setMenuOpen(false);
-                }}
-              >
-                <span className="bapsos-emoji">{a.icon}</span>
-                {a.title}
-              </li>
-            ))}
-            <li className="bapsos-startmenu-sep" />
-            <li
-              onClick={() => {
-                cascade();
-                setMenuOpen(false);
-              }}
-            >
-              <span className="bapsos-emoji">🗂️</span>
-              Cascade Windows
-            </li>
-          </ul>
-        </div>
+        <>
+          <div className="bapsos-startmenu-scrim" onClick={() => setMenuOpen(false)} />
+          <div className="bapsos-startmenu">
+            <div className="bapsos-startmenu-rail">
+              MICHELLE<span className="bapsos-rail-os">OS</span>
+            </div>
+            <div className="bapsos-startmenu-main">
+              <div className="bapsos-startmenu-head">
+                <span className="bapsos-startmenu-avatar">🙋</span>
+                <span>
+                  <div className="bapsos-strong">{PROFILE.name}</div>
+                  <div className="bapsos-muted">{PROFILE.role}</div>
+                </span>
+              </div>
+              <input
+                className="bapsos-startmenu-search"
+                placeholder="Search programs…"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                autoFocus
+              />
+              <ul>
+                {filtered.map((a) => (
+                  <li
+                    key={a.id}
+                    onClick={() => launch(a.id, { title: a.title, icon: a.icon, w: a.w, h: a.h })}
+                  >
+                    <span className="bapsos-emoji">{a.icon}</span>
+                    {a.title}
+                  </li>
+                ))}
+                {filtered.length === 0 && (
+                  <li className="bapsos-startmenu-empty">No programs found.</li>
+                )}
+                <li className="bapsos-startmenu-sep" />
+                <li
+                  onClick={() => {
+                    cascade();
+                    setMenuOpen(false);
+                  }}
+                >
+                  <span className="bapsos-emoji">🗂️</span>
+                  Cascade Windows
+                </li>
+                <li
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setOff(true);
+                  }}
+                >
+                  <span className="bapsos-emoji">⏻</span>
+                  Shut Down…
+                </li>
+              </ul>
+            </div>
+          </div>
+        </>
       )}
 
       <div className="bapsos-tasks">
@@ -87,8 +153,16 @@ export function Taskbar() {
         ))}
       </div>
 
-      <FullscreenToggle />
-      <Clock />
+      <div className="bapsos-tray">
+        <span className="bapsos-tray-apps" title={`${openCount} open`}>
+          ⚙ {openCount}
+        </span>
+        <span className="bapsos-tray-icon" title="Sound">
+          🔊
+        </span>
+        <FullscreenToggle />
+        <Clock />
+      </div>
     </div>
   );
 }

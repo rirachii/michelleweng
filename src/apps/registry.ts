@@ -1,6 +1,9 @@
 import type React from "react";
 import { AboutMe } from "./AboutMe";
 import { Projects } from "./Projects";
+import { Writing } from "./Writing";
+import { Terminal } from "./Terminal";
+import { Readme } from "./Readme";
 import { Resume } from "./Resume";
 import { Contact } from "./Contact";
 
@@ -19,8 +22,11 @@ export interface AppDef {
 export const APPS: AppDef[] = [
   { id: "about", title: "About Me", icon: "🙋", component: AboutMe, w: 460, h: 380, onDesktop: true },
   { id: "projects", title: "Projects", icon: "🗂️", component: Projects, w: 640, h: 440, onDesktop: true },
+  { id: "writing", title: "Writing", icon: "📝", component: Writing, w: 640, h: 420, onDesktop: true },
+  { id: "terminal", title: "Terminal", icon: "🖥️", component: Terminal, w: 560, h: 360, onDesktop: true },
   { id: "resume", title: "Résumé", icon: "📄", component: Resume, w: 560, h: 480, onDesktop: true },
   { id: "contact", title: "Contact", icon: "✉️", component: Contact, w: 460, h: 380, onDesktop: true },
+  { id: "readme", title: "read_me.txt", icon: "📃", component: Readme, w: 420, h: 460, onDesktop: false },
 ];
 
 export const appById = (id: string): AppDef | undefined => APPS.find((a) => a.id === id);

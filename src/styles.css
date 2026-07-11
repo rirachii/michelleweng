@@ -50,7 +50,14 @@ body,
   position: relative;
   flex: 1;
   overflow: hidden;
-  background: var(--w98-desktop);
+  /* "cloud_surfing" — a soft sky with clouds hugging the horizon, a nod to
+     Michelle's cyberdeck theme, layered over the classic teal as a fallback. */
+  background-color: var(--w98-desktop);
+  background-image:
+    radial-gradient(120% 80% at 15% 110%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 60%),
+    radial-gradient(90% 70% at 82% 114%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 55%),
+    radial-gradient(70% 60% at 50% 122%, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0) 50%),
+    linear-gradient(180deg, #3a6ea5 0%, #6a9bc9 42%, #a8c8e0 78%, #cfe0ee 100%);
 }
 
 .bapsos-icons {
@@ -801,4 +808,276 @@ body,
   border-bottom: 1px solid var(--w98-dark);
   cursor: default;
   font-size: 13px;
+}
+
+/* ---- maximized window + resize grip ---- */
+.bapsos-window-max {
+  inset: 0;
+  width: auto !important;
+  height: auto !important;
+}
+.bapsos-resize-grip {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  cursor: nwse-resize;
+  touch-action: none;
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0 3px,
+    var(--w98-shadow) 3px 4px,
+    var(--w98-light) 4px 5px
+  );
+}
+.bapsos-titlebar-buttons button {
+  font-family: "Segoe UI Symbol", Tahoma, sans-serif;
+}
+
+/* ---- boot splash ---- */
+.bapsos-boot {
+  position: absolute;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  background: #05070a;
+  color: #d8ffe0;
+  font-family: "Courier New", monospace;
+  cursor: pointer;
+  transition: opacity 0.45s ease;
+}
+.bapsos-boot-leaving {
+  opacity: 0;
+}
+.bapsos-boot-inner {
+  text-align: center;
+  padding: 0 20px;
+}
+.bapsos-boot-logo {
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: #eaf7ee;
+  text-shadow: 0 0 12px rgba(120, 255, 160, 0.35);
+}
+.bapsos-boot-os {
+  color: #f5d76e;
+}
+.bapsos-boot-tag {
+  margin-top: 10px;
+  font-style: italic;
+  color: #7fb894;
+  animation: bapsos-blink 1.2s steps(1) infinite;
+}
+.bapsos-boot-bar {
+  width: 240px;
+  height: 12px;
+  margin: 26px auto 8px;
+  border: 1px solid #2c6b45;
+  background: #0a1410;
+  padding: 2px;
+}
+.bapsos-boot-fill {
+  height: 100%;
+  width: 0;
+  background: repeating-linear-gradient(90deg, #37c66f 0 8px, #0a1410 8px 10px);
+  animation: bapsos-boot-fill 1.9s ease-out forwards;
+}
+@keyframes bapsos-boot-fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+.bapsos-boot-hint {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #3f5c4c;
+}
+
+/* ---- notepad (read_me) ---- */
+.bapsos-notepad {
+  height: 100%;
+  overflow: auto;
+  background: #ffffff;
+  margin: 6px;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+.bapsos-notepad-text {
+  margin: 0;
+  padding: 12px 14px;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ---- writing post ---- */
+.bapsos-post-date {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  color: #7a5a00;
+  margin-bottom: 2px;
+}
+
+/* ---- terminal ---- */
+.bapsos-term {
+  height: 100%;
+  background: #0a0e0c;
+  margin: 4px;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+  overflow: hidden;
+  cursor: text;
+}
+.bapsos-term-scroll {
+  height: 100%;
+  overflow: auto;
+  padding: 8px 10px;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #3fe07a;
+}
+.bapsos-term-line {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.bapsos-term-in {
+  color: #dff7e6;
+}
+.bapsos-term-form {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.bapsos-term-prompt {
+  color: #dff7e6;
+  flex-shrink: 0;
+}
+.bapsos-term-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #3fe07a;
+  font-family: inherit;
+  font-size: 13px;
+  caret-color: #3fe07a;
+}
+
+/* ---- system tray ---- */
+.bapsos-tray {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 3px 2px 6px;
+  margin-left: 2px;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+.bapsos-tray-apps {
+  font-size: 12px;
+  padding: 2px 6px;
+  color: #333333;
+}
+.bapsos-tray-icon {
+  font-size: 13px;
+  padding: 0 2px;
+}
+
+/* ---- start menu (enhanced) ---- */
+.bapsos-startmenu-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+.bapsos-startmenu {
+  min-width: 250px;
+}
+.bapsos-rail-os {
+  color: #f5d76e;
+}
+.bapsos-startmenu-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.bapsos-startmenu-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--w98-shadow);
+  box-shadow: 0 1px 0 var(--w98-light);
+}
+.bapsos-startmenu-avatar {
+  font-size: 26px;
+}
+.bapsos-startmenu-search {
+  margin: 6px 6px 2px;
+  padding: 3px 6px;
+  font-family: inherit;
+  font-size: 12px;
+  border-top: 1px solid var(--w98-shadow);
+  border-left: 1px solid var(--w98-shadow);
+  border-right: 1px solid var(--w98-light);
+  border-bottom: 1px solid var(--w98-light);
+}
+.bapsos-startmenu-empty {
+  color: #777777;
+  font-style: italic;
+}
+.bapsos-startmenu-empty:hover {
+  background: transparent;
+  color: #777777;
+}
+
+/* ---- shutdown screen ---- */
+.bapsos-shutdown {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  background: #000000;
+}
+.bapsos-shutdown-text {
+  color: #ffb000;
+  font-size: 22px;
+  text-align: center;
+  line-height: 1.5;
+  text-shadow: 0 0 8px rgba(255, 176, 0, 0.4);
+}
+.bapsos-shutdown-btn {
+  padding: 6px 16px;
+  background: var(--w98-face);
+  border-top: 2px solid var(--w98-light);
+  border-left: 2px solid var(--w98-light);
+  border-right: 2px solid var(--w98-dark);
+  border-bottom: 2px solid var(--w98-dark);
+  cursor: default;
+  font-size: 13px;
+}
+.bapsos-shutdown-btn:active {
+  border-top: 2px solid var(--w98-dark);
+  border-left: 2px solid var(--w98-dark);
+  border-right: 2px solid var(--w98-light);
+  border-bottom: 2px solid var(--w98-light);
 }

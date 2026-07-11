@@ -1,7 +1,9 @@
+import React from "react";
 import { useDesktop } from "./store";
-import { APPS } from "./apps/registry";
+import { APPS, appById } from "./apps/registry";
 import { Window } from "./Window";
 import { Taskbar } from "./Taskbar";
+import { BootSplash } from "./BootSplash";
 
 function DesktopIcon({
   icon,
@@ -23,8 +25,21 @@ function DesktopIcon({
 export function Desktop() {
   const { windows, open } = useDesktop();
 
+  // On a fresh visit (no restored windows) greet with the welcome note, so the
+  // desktop never opens empty. Runs once; the store dedupes by appId anyway.
+  const greeted = React.useRef(false);
+  React.useEffect(() => {
+    if (greeted.current) return;
+    greeted.current = true;
+    if (useDesktop.getState().windows.length === 0) {
+      const rm = appById("readme");
+      if (rm) open(rm.id, { title: rm.title, icon: rm.icon, w: rm.w, h: rm.h });
+    }
+  }, [open]);
+
   return (
     <div className="bapsos-root">
+      <BootSplash />
       <div className="bapsos-desktop">
         <div className="bapsos-icons">
           {APPS.filter((a) => a.onDesktop).map((a) => (

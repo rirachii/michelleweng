@@ -12,6 +12,7 @@ export interface WinState {
   h: number;
   z: number;
   minimized: boolean;
+  maximized?: boolean;
 }
 
 interface DesktopState {
@@ -21,7 +22,9 @@ interface DesktopState {
   close: (id: string) => void;
   focus: (id: string) => void;
   toggleMinimize: (id: string) => void;
+  toggleMaximize: (id: string) => void;
   move: (id: string, x: number, y: number) => void;
+  resize: (id: string, w: number, h: number) => void;
   cascade: () => void;
 }
 
@@ -59,6 +62,7 @@ export const useDesktop = create<DesktopState>()(
             h: meta.h ?? 360,
             z,
             minimized: false,
+            maximized: false,
           };
           return { z, windows: [...s.windows, win] };
         }),
@@ -74,8 +78,24 @@ export const useDesktop = create<DesktopState>()(
             w.id === id ? { ...w, minimized: !w.minimized } : w,
           ),
         })),
+      toggleMaximize: (id) =>
+        set((s) => {
+          const z = s.z + 1;
+          return {
+            z,
+            windows: s.windows.map((w) =>
+              w.id === id ? { ...w, maximized: !w.maximized, minimized: false, z } : w,
+            ),
+          };
+        }),
       move: (id, x, y) =>
         set((s) => ({ windows: s.windows.map((w) => (w.id === id ? { ...w, x, y } : w)) })),
+      resize: (id, w, h) =>
+        set((s) => ({
+          windows: s.windows.map((win) =>
+            win.id === id ? { ...win, w: Math.max(240, w), h: Math.max(140, h) } : win,
+          ),
+        })),
       cascade: () =>
         set((s) => {
           // Un-minimize and fan all windows out from the top-left in a tidy
