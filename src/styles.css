@@ -27,7 +27,7 @@ body,
   --w98-shadow: #131118;
   --w98-dark: #050408;
   --w98-light: #4f4c58;
-  --w98-text: #d9d2c3;
+  --w98-text: #e8e2d4;
   --w98-canvas: #14121a; /* content panes (was white) */
   --w98-muted: #968f81; /* secondary text on dark */
   --w98-accent: #e0913c; /* amber links + highlights */
@@ -91,19 +91,12 @@ body,
 .bapsos-icons {
   z-index: 1;
 }
-/* Subtle CRT scanlines across the whole screen — the "the wired" touch. Kept
-   faint so window text stays readable; sits above windows, below Start menu. */
-.bapsos-root::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 9997;
-  pointer-events: none;
-  background-image: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.16) 0 1px,
-    transparent 1px 3px
-  );
+/* Faint CRT scanlines, applied only to the desktop wallpaper (behind the icons
+   and windows) so window and taskbar text stay perfectly crisp. */
+.bapsos-desktop::after {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0 1px, transparent 1px 3px),
+    radial-gradient(135% 105% at 50% 40%, transparent 48%, rgba(0, 0, 0, 0.6) 100%);
 }
 
 .bapsos-icons {
