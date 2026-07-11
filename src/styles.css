@@ -32,6 +32,17 @@ body,
   --w98-muted: #968f81; /* secondary text on dark */
   --w98-accent: #e0913c; /* amber links + highlights */
   --w98-hover: #262330; /* row hover on dark */
+  --accent-hot: #c0431a; /* rust-red — Start star, alerts */
+  --danger: #e0645a; /* error text */
+
+  /* Type */
+  --font-ui: Tahoma, "MS Sans Serif", Geneva, Verdana, sans-serif;
+  --font-mono: "Courier New", monospace;
+
+  /* "Screen" surfaces — terminals, displays, boot (phosphor on black) */
+  --screen-black: #000000;
+  --crt-green: #3fe07a; /* phosphor green body text */
+  --crt-green-bright: #dff7e6; /* bright green — prompts, input echo */
 
   /* Fill the dashboard's content outlet. The nearest positioned ancestor is a
      `position:relative; z-index:2` stacking context, so absolute-inset-0 lands
@@ -42,7 +53,7 @@ body,
   inset: 0;
   display: flex;
   flex-direction: column;
-  font-family: Tahoma, "MS Sans Serif", Geneva, Verdana, sans-serif;
+  font-family: var(--font-ui);
   font-size: 15px;
   color: var(--w98-text);
   -webkit-font-smoothing: none;
@@ -251,7 +262,7 @@ body,
   font-size: 12px;
 }
 .bapsos-error {
-  color: #e0645a;
+  color: var(--danger);
   font-size: 12px;
 }
 .bapsos-fieldset {
@@ -521,7 +532,7 @@ body,
 .bapsos-file-text {
   margin: 0;
   padding: 10px;
-  font-family: "Courier New", monospace;
+  font-family: var(--font-mono);
   font-size: 12px;
   white-space: pre-wrap;
   word-break: break-word;
@@ -561,7 +572,7 @@ body,
 }
 .bapsos-start-glyph {
   font-size: 15px;
-  color: #c0431a;
+  color: var(--accent-hot);
 }
 .bapsos-tasks {
   display: flex;
@@ -898,7 +909,7 @@ body,
   place-items: center;
   background: #05070a;
   color: #d8ffe0;
-  font-family: "Courier New", monospace;
+  font-family: var(--font-mono);
   cursor: pointer;
   transition: opacity 0.45s ease;
 }
@@ -967,7 +978,7 @@ body,
 .bapsos-notepad-text {
   margin: 0;
   padding: 12px 14px;
-  font-family: "Courier New", monospace;
+  font-family: var(--font-mono);
   font-size: 13px;
   line-height: 1.45;
   white-space: pre-wrap;
@@ -976,9 +987,9 @@ body,
 
 /* ---- writing post ---- */
 .bapsos-post-date {
-  font-family: "Courier New", monospace;
+  font-family: var(--font-mono);
   font-size: 12px;
-  color: #7a5a00;
+  color: var(--w98-accent);
   margin-bottom: 2px;
 }
 
@@ -998,17 +1009,17 @@ body,
   height: 100%;
   overflow: auto;
   padding: 8px 10px;
-  font-family: "Courier New", monospace;
+  font-family: var(--font-mono);
   font-size: 13px;
   line-height: 1.5;
-  color: #3fe07a;
+  color: var(--crt-green);
 }
 .bapsos-term-line {
   white-space: pre-wrap;
   word-break: break-word;
 }
 .bapsos-term-in {
-  color: #dff7e6;
+  color: var(--crt-green-bright);
 }
 .bapsos-term-form {
   display: flex;
@@ -1016,7 +1027,7 @@ body,
   gap: 6px;
 }
 .bapsos-term-prompt {
-  color: #dff7e6;
+  color: var(--crt-green-bright);
   flex-shrink: 0;
 }
 .bapsos-term-input {
@@ -1024,10 +1035,10 @@ body,
   background: transparent;
   border: none;
   outline: none;
-  color: #3fe07a;
+  color: var(--crt-green);
   font-family: inherit;
   font-size: 13px;
-  caret-color: #3fe07a;
+  caret-color: var(--crt-green);
 }
 
 /* ---- system tray ---- */
@@ -1179,8 +1190,8 @@ body,
   border-bottom: 2px solid var(--w98-light);
 }
 .bapsos-mine-counter {
-  font-family: "Courier New", monospace;
-  background: #000000;
+  font-family: var(--font-mono);
+  background: var(--screen-black);
   color: #ff2b2b;
   padding: 2px 6px;
   font-size: 15px;
@@ -1271,9 +1282,9 @@ body,
   place-items: center;
   padding: 12px;
   text-align: center;
-  font-family: "Courier New", monospace;
+  font-family: var(--font-mono);
   font-size: 13px;
-  color: #dff7e6;
+  color: var(--crt-green-bright);
   background: rgba(10, 20, 16, 0.72);
 }
 .bapsos-snake-hint {
@@ -1307,7 +1318,7 @@ body,
   cursor: default;
 }
 .bapsos-paint-swatch.active {
-  outline: 2px solid #000000;
+  outline: 2px solid var(--w98-text);
   outline-offset: -1px;
 }
 .bapsos-paint-sizes {
@@ -1340,9 +1351,9 @@ body,
   height: 100%;
 }
 .bapsos-calc-display {
-  background: #000000;
+  background: var(--screen-black);
   color: #7dffb0;
-  font-family: "Courier New", monospace;
+  font-family: var(--font-mono);
   font-size: 22px;
   text-align: right;
   padding: 8px 10px;
