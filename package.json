@@ -2,11 +2,11 @@
   "name": "bapsos-portfolio",
   "version": "0.1.0",
   "private": true,
-  "description": "A vintage OS-simulator personal portfolio",
+  "description": "A fast cartridge-inspired portfolio with the original BapOS archive",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
   },
