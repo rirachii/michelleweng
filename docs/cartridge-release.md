@@ -55,5 +55,18 @@ This rolls the domain back to the original OS-only site.
 The archive source can also be checked out independently without resetting the redesign branch:
 
 ```sh
- git worktree add ../bapos-original archive/bapos-os-2026-09-08
+git worktree add ../bapos-original archive/bapos-os-2026-09-08
 ```
+
+## First published release
+
+The cartridge portfolio was published to `https://www.wengmichelle.com` on September 8, 2026.
+PR https://github.com/rirachii/michelleweng/pull/1 merged as `d50b8e4550a77fe780697ded80b15397185b3fdb`.
+Vercel deployment `dpl_EYUrVE1mzxVBDXFzENwDArHSPZSH` (`https://michelleweng-ijirpvlr1-rirachiis-projects.vercel.app`) reached Ready and received the existing portfolio domains.
+
+Live checks confirmed the prerendered page, all four cartridges, a functioning Umami World dialog, and no horizontal overflow at 390px.
+Both `/bapos` and `/bapos/` return the separate original desktop entry with HTTP 200.
+The original desktop renders with 11 icons and its taskbar on the live domain.
+The new JavaScript and CSS return HTTP 200 with `public, max-age=31536000, immutable` caching.
+No console errors were reported during the live portfolio interaction check.
+The archive and redesign branches were pushed to both repository remotes.
