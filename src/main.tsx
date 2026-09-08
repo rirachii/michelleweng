@@ -1,10 +1,15 @@
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { Desktop } from "./Desktop";
-import "./styles.css";
+import { createRoot, hydrateRoot } from "react-dom/client";
+import { Portfolio } from "./portfolio";
+import "./portfolio.css";
 
-createRoot(document.getElementById("root")!).render(
+const root = document.getElementById("root")!;
+const app = (
   <StrictMode>
-    <Desktop />
-  </StrictMode>,
+    <Portfolio />
+  </StrictMode>
 );
+
+// Production ships the complete portfolio HTML; development starts with an empty root.
+if (root.hasChildNodes()) hydrateRoot(root, app);
+else createRoot(root).render(app);
