@@ -1163,9 +1163,6 @@ h1 > span {
   .project-title {
     font-size: 16px;
   }
-  .project-blurb {
-    font-size: 11px;
-  }
 }
 @media (max-width: 800px) {
   .site-wrap {
@@ -1461,7 +1458,6 @@ h1 > span {
     font-size: 17px;
   }
   .project-blurb {
-    font-size: 11px;
     line-height: 1.65;
     margin-top: 5px;
   }
