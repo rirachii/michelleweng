@@ -50,7 +50,7 @@ See `docs/motion-review.md` for the motion review, measured payload, and browser
 - `scripts/prerender.mjs`: build-time HTML rendering through Vite and React.
 - `bapos/index.html` and `src/bapos-main.tsx`: isolated original desktop entry.
 
-Converty, Oompf, and Foodex lead the collection and link to the product websites supplied by the owner. Each has a Visit website action on its shelf preview, a hostname link in All projects, and a link in its detail dialog. The original four projects remain in the collection without invented URLs; their detail views offer an email link to ask about the project.
+Converty, Oompf, and Foodex lead the collection and link to the product websites supplied by the owner. Each has a Visit website action on its shelf preview, a hostname link in the top-right All projects menu, and a link in its detail dialog. The original four projects remain in the collection without invented URLs; their detail views offer an email link to ask about the project.
 Add a real `link` and optional `linkLabel` in `src/portfolio-content.ts` to enable a direct project link for new additions.
 The existing résumé downloads as Markdown until `RESUME_PDF` points to a real PDF in `public/`.
 

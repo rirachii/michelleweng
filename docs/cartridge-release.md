@@ -148,3 +148,9 @@ Validation: `npm run build` passed. The final production preview passed 69 brows
 The final local production preview scored 100 for Performance, Accessibility, Best Practices, and SEO in Lighthouse 12.8.2 with default simulated mobile settings at `2026-09-09T15:21:54.623Z`. LCP was 1.6 seconds, TBT 0 ms, and CLS 0. These are local lab results, not field measurements.
 
 PR [8](https://github.com/rirachii/michelleweng/pull/8) merged as `55aa9674a3702db2ca4cc19a99df19a919b7c1e6`; its Vercel production check succeeded. The public HTML, JavaScript (`portfolio-CnfxxE2V.js`), CSS (`portfolio-lRyVfOWc.css`), both new icons, and `/bapos/` HTML match the tested build bytes. New icons return `image/webp` with immutable caching. Live checks at 320px confirmed all seven project controls, Oompf's website action/dialog/icon, all three index URLs, and no overflow. At 1440px, Foodex's website action and icon rendered correctly without overflow. The browser reported no console errors. The archive source ref remains `a98e05e6fccd2948a436f9c7911840ff84829ebf`.
+
+## Collection controls, September 9, 2026
+
+All projects now sits at the top right beside Selected work, replacing the decorative Pick a cartridge note. The duplicate lower control is gone. Its native disclosure contains the existing seven-project index and three website links in a bounded panel. Outside click, Escape, or keyboard focus leaving dismisses it; opening a project dialog preserves the menu and its return-focus target. Arrow controls now have 24px of space above them.
+
+The production build passed. Browser checks at 320, 390, 768, and 1440 CSS pixels confirmed the top-right alignment, a single 44px menu trigger, the exact 24px action-to-navigation gap, no document overflow, bounded menu dimensions, all index content, project-dialog opening and focus return, keyboard activation, Escape, outside-click dismissal, and dismissal when Tab leaves the menu. The bundle adds no dependencies or assets.
