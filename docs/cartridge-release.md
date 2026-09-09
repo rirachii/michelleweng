@@ -87,3 +87,11 @@ Two responsive overrides were removed so project descriptions inherit the existi
 The original cartridge artwork and archived BapOS were unchanged.
 A rebuilt production preview confirmed 12px descriptions and no horizontal overflow at 320, 390, and 900px.
 The targeted post-fix Lighthouse check on the production preview passed font legibility (69.58% of text at least 12px) and scored best practices 100.
+
+## Motion update
+
+PR https://github.com/rirachii/michelleweng/pull/3 published the cartridge motion update on September 8, 2026, from merge `2107af60da084b01091a422b86a3c65e065ecc29`.
+The build, 50 browser assertions, mobile/desktop visual checks, and live-domain checks passed.
+The live Lighthouse audit scored performance 98 and all other standard categories 100, with 1.3s LCP and zero layout shift.
+The original archive still renders its 11 icons and taskbar, and its preserved source ref is unchanged.
+See [the motion review](motion-review.md) for the behavior contract, content assessment, payload, audit conditions, and full verification scope.

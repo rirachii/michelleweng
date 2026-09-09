@@ -76,3 +76,15 @@ The final serial audit at `2026-09-09T02:55:53Z` scored **100 for performance, a
 FCP, LCP, and speed index were 1.3s; total blocking time was 1ms (displayed as 0ms after rounding), and cumulative layout shift was zero.
 Observed first paint in this run was 362ms.
 Both audits used Lighthouse 12.8.2 with the default simulated mobile throttling; these are synthetic lab results, not field performance measurements.
+
+## Published verification
+
+PR https://github.com/rirachii/michelleweng/pull/3 merged as `2107af60da084b01091a422b86a3c65e065ecc29`.
+Vercel production deployment `https://michelleweng-q5di7wv8o-rirachiis-projects.vercel.app` reached Ready and the public domain served the verified `portfolio-DBPugxto.js` and `portfolio-BL0OHHR9.css` artifacts.
+The page and archive returned HTTP 200; fingerprinted JavaScript and CSS retained immutable caching.
+
+The live Lighthouse 12.8.2 audit at `2026-09-09T03:00:40Z` scored **performance 98, accessibility 100, best practices 100, and SEO 100**.
+FCP and LCP were 1.3s, speed index 4.2s, total blocking time 10ms, and cumulative layout shift zero, with no audit warnings.
+The public page retained 12px descriptions and no horizontal overflow at 390px, and its Retro Cam dialog used the new entry/exit transitions.
+No portfolio console errors were reported.
+The original `/bapos/` route rendered all 11 desktop icons and its taskbar.
