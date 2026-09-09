@@ -28,12 +28,12 @@ See `docs/upright-shelf.md` for the observed reference, the vgpu investigation, 
 ## Layout
 
 - Use a narrow, centered page with a short personal introduction above the interactive shelf.
-- Five upright Game Boy cartridges fit side by side at rest. Selecting one centers and rotates its front toward the visitor, moving the neighboring spines aside.
-- The selected name, summary, and explicit View project action sit below the shelf. Keep that area's height stable when content changes.
-- Tap/click selects a preview; View project opens the native dialog. Arrow buttons, horizontal touch swipes, horizontal trackpad gestures, and keyboard arrows also browse the shelf.
+- Seven upright Game Boy cartridges make up the collection. Desktop centers the full shelf; phones show the first five at rest, with all seven reachable through the arrows, gestures, keyboard, and project index. The three projects with supplied website URLs lead the shelf. Selecting one centers and rotates its front toward the visitor, moving the neighboring spines aside.
+- The selected name, summary, and primary Visit website link and secondary Project details action sit below the shelf. Keep that area's height stable when content changes.
+- Tap/click selects a preview; Visit website opens the project website in a new tab, and Project details opens the native dialog. Projects without a verified URL show only Project details. Arrow buttons, horizontal touch swipes, horizontal trackpad gestures, and keyboard arrows also browse the shelf.
 - Keep vertical document scrolling native. Swiping is optional; every project is also available in the All projects disclosure beneath the shelf.
 - Tablet and mobile retain the same hierarchy with smaller cartridge faces. Supporting sections and dialog contents stack on small screens.
-- Minimum verified target width is 320 CSS pixels. The initial five cartridge buttons must each have at least a 44px hit target.
+- Minimum verified target width is 320 CSS pixels. The initial visible cartridge buttons must each have at least a 44px hit target.
 - Neighboring cartridges may be clipped within the shelf when one is selected. The selected face and caption must stay fully visible without document overflow.
 - Show flat project names beneath resting cartridges at 12px or larger, so identifying a project never depends on reading a foreshortened face. Those names are part of the selection hit area.
 - The selected cartridge settles directly facing the visitor. Use bold system sans-serif titles, strong label contrast, and readable category text; omit miniature taglines, serial numbers, and other decorative print. Keep the molded shell and verified app icons.
@@ -50,8 +50,8 @@ Decorative text on cartridge artwork is hidden from assistive technology because
 ## Interaction and accessibility
 
 Cartridges are semantic preview buttons with `aria-pressed` selection and accessible project names.
-Click, tap, Enter, and Space select them. Arrow keys, Home, and End move both selection and keyboard focus.
-View project and the All projects list open native modal dialogs.
+Click, tap, Enter, and Space select them. Arrow keys, Home, and End move both selection and keyboard focus. The shelf has one Tab stop: the selected cartridge, or the first cartridge before selection. The next Tab reaches Visit website when available, then Project details.
+Project details and the project-name buttons in All projects open native modal dialogs. The All projects list also exposes each supplied website hostname as a separate link. Website links have descriptive accessible names, announce the new tab, and use noopener noreferrer. Never nest a link inside a button.
 Native dialogs provide modal focus containment and inert background content.
 Close, Escape, and backdrop clicks dismiss a dialog; focus returns to the opening button.
 Each project has a hash URL, and next, previous, browser Back, and direct reload preserve the corresponding selection.
@@ -82,7 +82,7 @@ All effects must stop when the reduced-motion preference changes, including effe
 Dialogs use native open/close behavior with progressive CSS entry and exit transitions.
 Keep the last detail content mounted through the exit so the dialog does not collapse before fading out.
 Rapid close/reopen and pagination must always reflect the latest selection, with no delayed state-changing timers.
-Changing projects resets dialog scroll and moves reading focus to the new title; closing returns focus to the opening View project or list button.
+Changing projects resets dialog scroll and moves reading focus to the new title; closing returns focus to the opening Project details or list button.
 Browsers without discrete-transition support retain immediate, functional native dialogs.
 Use CSS and the Web Animations API without adding an animation runtime dependency.
 

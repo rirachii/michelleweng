@@ -7,7 +7,7 @@ interface Props {
   onOpen: (index: number, source: HTMLElement) => void;
 }
 
-/** A compact shelf: selection previews a cartridge; View project opens its details. */
+/** Selection previews a cartridge, with separate website and detail actions. */
 export function CartridgeShelf({ editions, renderCartridge, onOpen }: Props) {
   const [selected, setSelected] = useState<number | null>(null);
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
@@ -107,6 +107,9 @@ export function CartridgeShelf({ editions, renderCartridge, onOpen }: Props) {
         {PROJECTS.map((project, index) => {
           const active = selected === index;
           const offset = index - (selected ?? (count - 1) / 2);
+          // Keep the first five readable on phones as the collection grows.
+          const compactOffset =
+            index - (selected ?? (Math.min(count, 5) - 1) / 2);
           const spread = selected === null ? 0 : Math.sign(offset);
           return (
             <div
@@ -116,6 +119,7 @@ export function CartridgeShelf({ editions, renderCartridge, onOpen }: Props) {
               style={
                 {
                   "--offset": offset,
+                  "--compact-offset": compactOffset,
                   "--spread-direction": spread,
                   zIndex: active ? 20 : count - index,
                 } as CSSProperties
@@ -150,6 +154,7 @@ export function CartridgeShelf({ editions, renderCartridge, onOpen }: Props) {
                 aria-label={`Preview ${project.name}`}
                 aria-pressed={active}
                 aria-controls="shelf-preview"
+                tabIndex={index === (selected ?? 0) ? 0 : -1}
                 data-active={active}
                 onClick={() => setSelected(index)}
                 onFocus={() => setSelected(index)}
@@ -175,13 +180,26 @@ export function CartridgeShelf({ editions, renderCartridge, onOpen }: Props) {
         </div>
         <div className="shelf-action">
           {selected !== null && (
-            <button
-              className="text-link"
-              aria-haspopup="dialog"
-              onClick={(event) => onOpen(selected, event.currentTarget)}
-            >
-              View project <span aria-hidden="true">↗</span>
-            </button>
+            <>
+              {PROJECTS[selected].link && (
+                <a
+                  className="website-link"
+                  href={PROJECTS[selected].link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${PROJECTS[selected].name} website (opens in a new tab)`}
+                >
+                  Visit website <span aria-hidden="true">↗</span>
+                </a>
+              )}
+              <button
+                className="text-link"
+                aria-haspopup="dialog"
+                onClick={(event) => onOpen(selected, event.currentTarget)}
+              >
+                Project details
+              </button>
+            </>
           )}
         </div>
         <div className="shelf-navigation">
@@ -205,18 +223,31 @@ export function CartridgeShelf({ editions, renderCartridge, onOpen }: Props) {
         </summary>
         <div className="project-index-list">
           {PROJECTS.map((project, index) => (
-            <button
-              key={project.name}
-              onClick={(event) => onOpen(index, event.currentTarget)}
-              aria-haspopup="dialog"
-            >
-              <span className="index-number">{editions[index].number}</span>
-              <span>
-                <strong>{project.name}</strong>
-                <span>{project.blurb}</span>
-              </span>
-              <span aria-hidden="true">↗</span>
-            </button>
+            <div className="project-index-row" key={project.name}>
+              <button
+                onClick={(event) => onOpen(index, event.currentTarget)}
+                aria-haspopup="dialog"
+              >
+                <span className="index-number">{editions[index].number}</span>
+                <span>
+                  <strong>{project.name}</strong>
+                  <span>{project.blurb}</span>
+                </span>
+                <span aria-hidden="true">→</span>
+              </button>
+              {project.link && (
+                <a
+                  className="index-website text-link"
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${project.name} website (opens in a new tab)`}
+                >
+                  {new URL(project.link).hostname}{" "}
+                  <span aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
           ))}
         </div>
       </details>
