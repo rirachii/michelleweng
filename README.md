@@ -32,8 +32,9 @@ See `docs/motion-review.md` for the motion review, measured payload, and browser
 ## Content and design
 
 - `src/content.ts`: original profile, project descriptions, writing summaries, résumé, and contact links, shared with the archive.
+- `src/portfolio-content.ts`: the current project collection, extending the original projects with new additions while keeping the archive unchanged.
 - `src/portfolio.tsx`: page composition, cartridge presentation metadata, and interactions.
-  If the project collection changes, update `EDITIONS` alongside `PROJECTS` in the same order and update the displayed collection count.
+  If the project collection changes, update `EDITIONS` alongside `PROJECTS` in the same order. The collection count and pagination use the actual collection length.
 - `src/portfolio.css`: responsive layouts, CSS cartridge artwork, and focus styles.
 - `src/motion.css`: finite cartridge and label animations, dialog transitions, interaction feedback, and reduced-motion overrides.
 - `src/usePortfolioMotion.ts`: progressive scroll reveals, fine-pointer tilt, and cancellable detail-copy animation.
@@ -43,9 +44,8 @@ See `docs/motion-review.md` for the motion review, measured payload, and browser
 - `scripts/prerender.mjs`: build-time HTML rendering through Vite and React.
 - `bapos/index.html` and `src/bapos-main.tsx`: isolated original desktop entry.
 
-Existing projects have descriptions but no verified project URLs.
-Their detail views therefore offer an email link to ask about the project.
-Add a real `link` and optional `linkLabel` in `src/content.ts` to enable a direct project link.
+Converty links to its verified product website. The original four projects have descriptions but no verified project URLs, so their detail views offer an email link to ask about the project.
+Add a real `link` and optional `linkLabel` in `src/portfolio-content.ts` to enable a direct project link for new additions.
 The existing résumé downloads as Markdown until `RESUME_PDF` points to a real PDF in `public/`.
 
 ## Preservation

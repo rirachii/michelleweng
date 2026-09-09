@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { animateDetails, usePortfolioMotion } from "./usePortfolioMotion";
+import { PROJECTS } from "./portfolio-content";
 import {
   CONTACT,
   PROFILE,
-  PROJECTS,
   RESUME_MD,
   RESUME_PDF,
   WRITING,
@@ -47,7 +47,18 @@ const EDITIONS = [
     caption: "A DIFFERENT WAY TO SEE.",
     number: "04",
   },
+  {
+    id: "converty",
+    type: "Mac app",
+    color: "blue",
+    title: ["converty", ""],
+    motif: "files",
+    caption: "NEW FORMAT. SAME FAMILIAR PLACE.",
+    number: "05",
+  },
 ] as const;
+
+const COLLECTION_COUNT = String(PROJECTS.length).padStart(2, "0");
 
 type Selection =
   | { kind: "project"; index: number }
@@ -120,6 +131,13 @@ function Cartridge({ index }: { index: number }) {
                 <em />
               </span>
               <span className="camera-spark">✦</span>
+            </span>
+          )}
+          {edition.motif === "files" && (
+            <span className="file-art">
+              <span className="file-sheet file-sheet--source">HEIC</span>
+              <b className="file-arrow">→</b>
+              <span className="file-sheet file-sheet--output">JPG</span>
             </span>
           )}
         </span>
@@ -308,7 +326,7 @@ export function Portfolio() {
           >
             <div className="section-heading">
               <h2 id="collection-title">
-                THE COLLECTION <span>04</span>
+                THE COLLECTION <span>{COLLECTION_COUNT}</span>
               </h2>
               <span className="section-note">
                 <span className="tiny-square" /> SELECT A CARTRIDGE
@@ -562,7 +580,9 @@ export function Portfolio() {
                     openSelection(
                       {
                         kind: "project",
-                        index: (displayedSelection.index + 3) % PROJECTS.length,
+                        index:
+                          (displayedSelection.index - 1 + PROJECTS.length) %
+                          PROJECTS.length,
                       },
                       returnFocus.current ?? document.body,
                     )
@@ -571,7 +591,9 @@ export function Portfolio() {
                 >
                   ← Previous
                 </button>
-                <span>{EDITIONS[displayedSelection.index].number} / 04</span>
+                <span>
+                  {EDITIONS[displayedSelection.index].number} / {COLLECTION_COUNT}
+                </span>
                 <button
                   onClick={() =>
                     openSelection(

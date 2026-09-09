@@ -27,7 +27,7 @@ The implemented direction follows the user's explicit requests for a clean portf
 
 ## Layout
 
-- Desktop: a restrained page width, a four-column cartridge collection, two-column about, and simple writing rows.
+- Desktop: a restrained page width, five cartridge columns from 1200px and three at intermediate widths, two-column about, and simple writing rows.
 - Tablet: a two-column collection with larger cartridge art and retained project descriptions.
 - Mobile: a two-column collection, stacked supporting sections, and single-column dialog contents.
 - Minimum verified target width: 320 CSS pixels.
@@ -38,7 +38,7 @@ The implemented direction follows the user's explicit requests for a clean portf
 
 `src/portfolio.css` owns the palette and styling.
 The background is warm paper `#f5f4ef`, primary ink is `#30332d`, muted text is `#696e61`, and dividers are `#ddded5`.
-Project labels use orange, pale green, violet, and warm yellow; surrounding UI stays neutral with restrained olive accents.
+Project labels use orange, pale green, violet, warm yellow, and pale blue; surrounding UI stays neutral with restrained olive accents.
 Body and display type use the system sans-serif stack; metadata uses a local monospace stack.
 No remote font request is allowed for the default page.
 Decorative text on cartridge artwork is hidden from assistive technology because project information appears in normal text alongside it.
@@ -64,7 +64,7 @@ Do not introduce autoplay, perpetual animation, scroll hijacking, novelty cursor
 
 Use finite motion to reinforce the cartridge interaction and guide the reading order.
 The collection settles into place with a 640ms arrival and 65ms spacing between cartridges.
-Each label plays one short effect on hover, keyboard focus, or opening: waveform, rising steam, mail through a portal, or camera sparkle.
+Each label plays one short effect on hover, keyboard focus, or opening: waveform, rising steam, mail through a portal, camera sparkle, or a converted file appearing beside its source.
 Fine-pointer tilt is limited to 5 degrees vertically and 7 degrees horizontally, updated at most once per animation frame and reset on exit.
 Touch controls must not require hover or use pointer tilt.
 
