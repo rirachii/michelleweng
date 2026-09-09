@@ -492,22 +492,24 @@
 .cartridge .label-art {
   margin: 4px 0;
 }
-.cartridge .label-art--app-icon {
-  transform: none;
+/* A square sticker shows the complete app artwork across the front label. */
+.cartridge .cartridge-label--app-icon {
+  inset: auto 10% 14%;
+  aspect-ratio: 1;
+  padding: 0;
+  border-radius: 5px;
 }
-.label-art--app-icon {
+.cartridge-label--app-icon .label-art--app-icon {
+  position: absolute;
+  inset: 0;
   transform: none;
-  margin: 5px 0;
-  overflow: hidden;
+  margin: 0;
 }
 .app-icon {
   display: block;
   height: 100%;
-  width: auto;
-  max-width: 100%;
-  aspect-ratio: 1;
+  width: 100%;
   object-fit: contain;
-  border-radius: 21%;
 }
 .collection-foot {
   margin-top: 30px;
@@ -632,9 +634,6 @@
   .spine-name {
     font-size: 12px;
     margin-top: 8px;
-  }
-  .label-art--app-icon {
-    margin: 3px 0;
   }
   .about-section {
     gap: 24px;

@@ -15,7 +15,15 @@ Both were resized to 256 × 256 and encoded with `cwebp`. Converty uses quality 
 Their combined payload is approximately 7 KB. No artwork was regenerated or substituted.
 
 The filename suffix is the first eight characters of the encoded file's SHA-256. Keep content hashes in replacement filenames so the existing `/assets/` immutable cache policy is safe.
-Image URLs remain stable through prerendering and hydration. Explicit dimensions reserve space; lower entries use native lazy loading.
+Image URLs remain stable through prerendering and hydration.
+Explicit dimensions reserve space; the four icons in the initial shelf load eagerly.
+
+## Full-label presentation
+
+Verified icons fill a square sticker across the cartridge front, using `object-fit: contain` with no inset image margins or additional rounded-icon mask.
+The original artwork remains complete and undistorted on the shelf and in project dialogs.
+Names remain in the ordinary page text and cartridge spines; only fallback illustrations retain printed titles and categories inside their labels.
+This treatment reuses all four existing WebP files, totaling 17,824 bytes, with no new image request or runtime dependency.
 
 ## Foodex and Oompf additions, September 9, 2026
 

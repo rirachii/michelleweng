@@ -8,7 +8,10 @@ The original BapOS interface remains a separate experience at `/bapos/`; its con
 
 The visual direction is quiet, tactile, nostalgic, and readable.
 The Game Boy reference belongs in the original cartridge shapes, molded shells, printed labels, and restrained control details.
-Cartridge shells and fallback illustrations are CSS. Labels use the actual app icons when a source is verified, with their provenance recorded in `docs/app-icons.md`.
+Cartridge shells and fallback illustrations are CSS.
+Verified app icons fill the entire square front label with the complete image visible and no overlaid title or category; project names remain on the spine, beneath resting cartridges, and in the selected caption.
+Labels without verified icons retain their title, category, and CSS illustration.
+Icon provenance is recorded in `docs/app-icons.md`.
 Do not substitute invented logos for missing app icons or use copied game covers or official Nintendo marks.
 
 The reading order is identity and navigation, a short introduction, the project collection, about, writing, contact, and the original-site link.
@@ -36,7 +39,7 @@ See `docs/upright-shelf.md` for the observed reference, the vgpu investigation, 
 - Minimum verified target width is 320 CSS pixels. The initial visible cartridge buttons must each have at least a 44px hit target.
 - Neighboring cartridges may be clipped within the shelf when one is selected. The selected face and caption must stay fully visible without document overflow.
 - Show flat project names beneath resting cartridges at 12px or larger, so identifying a project never depends on reading a foreshortened face. Those names are part of the selection hit area.
-- The selected cartridge settles directly facing the visitor. Use bold system sans-serif titles, strong label contrast, and readable category text; omit miniature taglines, serial numbers, and other decorative print. Keep the molded shell and verified app icons.
+- The selected cartridge settles directly facing the visitor. Fallback labels use bold system sans-serif titles, strong contrast, and readable category text; omit miniature taglines, serial numbers, and other decorative print. Keep the molded shell and show verified app icons across the whole square label, without cropping or distortion.
 
 ## Tokens and type
 
@@ -94,5 +97,8 @@ The default route must not import BapOS desktop code, its CSS, Zustand, or the w
 The build can share React and content between the two entries.
 The archive must retain its existing local storage key and data.
 Use original CSS shells and system fonts instead of a 3D engine or large cartridge renders.
-Keep real app icons locally in small, versioned WebP files under `public/assets/app-icons/`, with explicit dimensions and lazy loading for lower entries. Content hashes in filenames allow immutable caching without stale icons.
+Keep real app icons locally in small, versioned WebP files under `public/assets/app-icons/`, with explicit dimensions.
+The four current icons are visible in the initial shelf and load eagerly so the artwork does not wait for lazy-image scheduling.
+Reassess lazy loading if future collections add images outside the initial shelf.
+Content hashes in filenames allow immutable caching without stale icons.
 Fingerprint production assets and cache them immutably.

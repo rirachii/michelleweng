@@ -41,6 +41,7 @@ See `docs/motion-review.md` for the motion review, measured payload, and browser
 - `src/motion.css`: finite cartridge and label animations, dialog transitions, interaction feedback, and reduced-motion overrides.
 - `src/usePortfolioMotion.ts`: progressive lower-section reveals and cancellable detail-copy animation.
 - `docs/app-icons.md`: verified icon sources, compressed assets, and remaining icon gaps. Use real assets; do not invent an app icon for an unavailable source.
+- `docs/performance.md`: measured load speed, transfer budget, and the repeatable mobile audit command.
 - `docs/upright-shelf.md`: current reference interpretation, vgpu research, interaction contract, and verification.
 - `docs/label-readability.md`: cartridge typography, flat project labels, and responsive readability checks.
 - `docs/vertical-collection.md`: verification record for the previous vertical stack release.
