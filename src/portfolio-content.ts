@@ -14,7 +14,7 @@ export const PROJECTS: PortfolioProject[] = [
     tags: ["SwiftUI", "AppKit", "macOS"],
     link: "https://converty-pi.vercel.app/",
     linkLabel: "Visit Converty",
-    icon: "/assets/app-icons/converty-e2e22ee2.webp",
+    icon: "/assets/app-icons/converty-seamless-f44d737c.webp",
   },
   {
     name: "Oompf",
@@ -34,7 +34,7 @@ export const PROJECTS: PortfolioProject[] = [
     tags: ["iOS", "Food discovery", "Collection"],
     link: "https://foodex.space/",
     linkLabel: "Visit Foodex",
-    icon: "/assets/app-icons/foodex-51845474.webp",
+    icon: "/assets/app-icons/foodex-seamless-bbf20b33.webp",
   },
   ...ORIGINAL_PROJECTS.map((project) =>
     project.name === "Umami World"

@@ -21,9 +21,34 @@ Explicit dimensions reserve space; the four icons in the initial shelf load eage
 ## Full-label presentation
 
 Verified icons fill a square sticker across the cartridge front, using `object-fit: contain` with no inset image margins or additional rounded-icon mask.
-The original artwork remains complete and undistorted on the shelf and in project dialogs.
+The central app marks remain complete and undistorted on the shelf and in project dialogs.
 Names remain in the ordinary page text and cartridge spines; only fallback illustrations retain printed titles and categories inside their labels.
-This treatment reuses all four existing WebP files, totaling 17,824 bytes, with no new image request or runtime dependency.
+The four current WebP files total 16,350 bytes, with no additional image request or runtime dependency.
+
+## Seamless Converty and Foodex labels
+
+The owner requested the same uninterrupted label edges shown by Oompf.
+Converty and Foodex had glossy rounded-square rims baked into their original bitmaps, so their portfolio artwork now uses background edits derived from the verified originals above.
+These are portfolio presentation derivatives, not new official app icons.
+The original source images and previous compressed assets remain available.
+
+| Project | Current portfolio asset | Bytes |
+| --- | --- | --- |
+| Converty | `public/assets/app-icons/converty-seamless-f44d737c.webp` | 3,714 |
+| Foodex | `public/assets/app-icons/foodex-seamless-bbf20b33.webp` | 4,596 |
+
+The built-in image tool removed the background rims and extended the existing blue/orange backgrounds to the square canvas edges, retaining the complete central arrows and noodle bowl.
+The resulting assets were inspected and encoded at 256 × 256 using `cwebp -q 90 -m 6 -resize 256 256`.
+Their combined 8,310 bytes save 1,474 bytes relative to the previous two images.
+Oompf and Umami World's artwork and all cartridge layout rules are unchanged.
+
+### Edit prompts
+
+Each verified original was the sole edit-target reference in a separate built-in image-tool call.
+The common instruction was: remove the entire glossy rounded-square perimeter, beveled rim, corner highlights, and inset app-tile boundary from the background; seamlessly continue the existing color to all four straight edges and square corners.
+Keep the central cream-white 3D subject's silhouette, proportions, position, size, material, lighting, and shadows; do not crop, scale, move, or redesign it.
+Do not add a frame, rounded tile, perimeter glow, outline, extra padding, text, or cartridge mockup.
+Converty specified the saturated blue background and two opposing arrows; Foodex specified the vivid orange background and noodle bowl, noodles, and chopsticks.
 
 ## Foodex and Oompf additions, September 9, 2026
 
