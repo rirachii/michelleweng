@@ -82,8 +82,8 @@ function Cartridge({ index }: { index: number }) {
         <span>MICHELLE</span>
       </span>
       <span className="cartridge-ridges" />
-      <span className="cartridge-label">
-        <span className="label-title">{PROJECTS[index].name}</span>
+      <span className={`cartridge-label${icon ? " cartridge-label--app-icon" : ""}`}>
+        {!icon && <span className="label-title">{PROJECTS[index].name}</span>}
         <span
           className={`label-art label-art--${icon ? "app-icon" : edition.motif}`}
         >
@@ -94,7 +94,7 @@ function Cartridge({ index }: { index: number }) {
               width={256}
               height={256}
               alt=""
-              loading={index < 2 ? "eager" : "lazy"}
+              loading="eager"
               decoding="async"
             />
           )}
@@ -143,7 +143,7 @@ function Cartridge({ index }: { index: number }) {
             </span>
           )}
         </span>
-        <span className="label-category">{edition.type}</span>
+        {!icon && <span className="label-category">{edition.type}</span>}
       </span>
       <span className="cartridge-bottom">
         <span />
