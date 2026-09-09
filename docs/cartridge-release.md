@@ -167,3 +167,14 @@ All four initial shelf icons load eagerly.
 The public JavaScript `portfolio-oFMzQqeP.js`, CSS `portfolio-BUhlQMyE.css`, HTML, icons, and archive entry match the tested build.
 The public site scores 100 in all four Lighthouse categories on mobile and desktop, with 1.4s mobile LCP, 0.34s desktop LCP, zero blocking time, zero layout shift, and 90 KiB initial transfer.
 See [the performance record](performance.md) for baseline comparisons, audit conditions, and browser verification.
+
+## Seamless label edges, September 9, 2026
+
+PR [11](https://github.com/rirachii/michelleweng/pull/11) merged as `012eb4e95a81b56d6b4446c27f158ed60a325b17` and passed the Vercel production check.
+Converty and Foodex now use background-edited derivatives of their verified artwork, removing the baked-in glossy rounded tile rims while retaining the complete central marks.
+The two 256px WebP files total 8,310 bytes, saving 1,474 bytes compared with the previous assets.
+The build passed, and both shelf labels and dialogs were verified at 320px and 1440px with complete square images and no horizontal overflow.
+Live Chrome inspection confirmed the continuous blue and orange label edges.
+The public HTML, `portfolio-BGldM6EF.js`, unchanged CSS/shared bundle, all four current icons, and archive HTML match the tested build bytes; versioned assets retain immutable caching.
+The live Lighthouse 12.8.2 mobile audit at `2026-09-09T19:30:23.853Z` retained performance 100, 1.4s LCP, 0ms TBT, and 0 CLS, with 90,754 bytes transferred.
+See [app icon provenance and edit notes](app-icons.md) for the derivative assets and background-edit instructions.
