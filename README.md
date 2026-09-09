@@ -1,7 +1,7 @@
 # Michelle Weng - cartridge portfolio
 
 A lightweight, responsive portfolio built with React, TypeScript, and Vite.
-The main page presents projects in a vertical stack of Game Boy-inspired cartridges, with accessible project dialogs, writing, an about section, and direct contact links.
+The main page presents projects in an upright shelf of Game Boy-inspired cartridges, with accessible project dialogs, writing, an about section, and direct contact links.
 The complete page is prerendered at build time, then hydrated for interaction.
 There are no external fonts, video backgrounds, rendering libraries, analytics, or runtime APIs.
 
@@ -23,10 +23,10 @@ The preview server serves the production artifacts.
 
 Check the new page at 320px, 390px, 768px, and 1440px widths.
 Open every cartridge, navigate between projects, press Escape, use browser Back, and reload a direct project hash.
-Check that focus returns to the opening cartridge, dialogs scroll at small heights, email copy reports success or failure, and the original `/bapos/` entry still loads.
+Check that focus returns to the opening button, dialogs scroll at small heights, email copy reports success or failure, and the original `/bapos/` entry still loads.
 Respect reduced motion and verify that the main page never requests the archive bundle or wallpaper.
 Switch reduced motion on during a dialog transition and a scroll reveal; both must stop immediately.
-Close and reopen a dialog quickly, then check next/previous focus and the return to its opening cartridge.
+Close and reopen a dialog quickly, then check next/previous focus and the return to its opening button.
 See `docs/motion-review.md` for the motion review, measured payload, and browser checks.
 
 ## Content and design
@@ -36,11 +36,13 @@ See `docs/motion-review.md` for the motion review, measured payload, and browser
 - `src/portfolio.tsx`: page composition, cartridge presentation metadata, and interactions.
   If the project collection changes, update `EDITIONS` alongside `PROJECTS` in the same order. The collection count and pagination use the actual collection length.
 - `src/portfolio.css`: responsive layouts, CSS cartridge artwork, and focus styles.
-- `src/collection.css`: the responsive vertical stack, app-icon placement, and the cartridge lifted forward by native page scrolling.
+- `src/CartridgeShelf.tsx`: shelf selection, touch and trackpad gestures, keyboard browsing, preview controls, and the plain project index.
+- `src/collection.css`: the upright shelf, CSS 3D cartridge faces, compact page layout, and app-icon placement.
 - `src/motion.css`: finite cartridge and label animations, dialog transitions, interaction feedback, and reduced-motion overrides.
-- `src/usePortfolioMotion.ts`: the active cartridge on scroll/focus, progressive lower-section reveals, fine-pointer tilt, and cancellable detail-copy animation.
+- `src/usePortfolioMotion.ts`: progressive lower-section reveals and cancellable detail-copy animation.
 - `docs/app-icons.md`: verified icon sources, compressed assets, and remaining icon gaps. Use real assets; do not invent an app icon for an unavailable source.
-- `docs/vertical-collection.md`: vertical browsing behavior, responsive and accessibility checks, payload, and mobile performance audit.
+- `docs/upright-shelf.md`: current reference interpretation, vgpu research, interaction contract, and verification.
+- `docs/vertical-collection.md`: verification record for the previous vertical stack release.
 - `DESIGN.md`: current portfolio design and accessibility contract.
 - `docs/BAPOS-DESIGN.md`: preserved design system for the original desktop.
 - `src/main.tsx`: new page hydration in production and mounting in development.

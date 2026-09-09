@@ -15,25 +15,26 @@ The reading order is identity and navigation, a short introduction, the project 
 Project exploration is the main action at the collection; email is the main action at contact.
 A visitor must never need to boot a simulated device, double-click an icon, or drag an object to reach portfolio content.
 
-The user supplied three Threads references:
+The user supplied these Threads references:
 
 - https://www.threads.com/share/_usSrmah4/
 - https://www.threads.com/share/_zUk_P_nU/
 - https://www.threads.com/share/BAW4L91Pq3/
+- https://www.threads.com/share/HZHcvZIBn/
 
-Threads showed a login gate during review, and the web reader required authentication.
-The first visible post was by `mamuso`, captioned "it needs to work on mobile", with a phone preview partly obscured by the dialog.
-Full reference media was not verified.
-The implemented direction follows the user's explicit requests for a clean portfolio, Game Boy cartridges, responsive layouts, and fast loading.
+The earlier review encountered a login gate. On September 9, the last reference opened publicly and its full 19-second clip was inspected. It resolves to Mamuso's "it needs to work on mobile" post. The key pattern is an upright shelf: cartridges rest side by side, then the selected cartridge pulls forward and rotates to show its face. A short introduction and caption keep attention on the objects.
+See `docs/upright-shelf.md` for the observed reference, the vgpu investigation, implementation choice, and verification.
 
 ## Layout
 
-- The collection is a single vertical stack at every width. Cartridges overlap on the right, with readable project descriptions on the left.
-- Native page scrolling brings the cartridge nearest the viewport center forward. Keep the normal document scrollbar and touch behavior; do not capture wheel or touch scrolling in a nested scroller.
-- Tablet and mobile retain the same reading order with smaller artwork and compact descriptions. Supporting sections and dialog contents stack on small screens.
-- Minimum verified target width: 320 CSS pixels.
-- The cartridge tilt may extend inside the visual stage but must not create document overflow or obscure labels.
-- Project names and descriptions remain visible below the artwork, including on touch devices.
+- Use a narrow, centered page with a short personal introduction above the interactive shelf.
+- Five upright Game Boy cartridges fit side by side at rest. Selecting one centers and rotates its front toward the visitor, moving the neighboring spines aside.
+- The selected name, summary, and explicit View project action sit below the shelf. Keep that area's height stable when content changes.
+- Tap/click selects a preview; View project opens the native dialog. Arrow buttons, horizontal touch swipes, horizontal trackpad gestures, and keyboard arrows also browse the shelf.
+- Keep vertical document scrolling native. Swiping is optional; every project is also available in the All projects disclosure beneath the shelf.
+- Tablet and mobile retain the same hierarchy with smaller cartridge faces. Supporting sections and dialog contents stack on small screens.
+- Minimum verified target width is 320 CSS pixels. The initial five cartridge buttons must each have at least a 44px hit target.
+- Neighboring cartridges may be clipped within the shelf when one is selected. The selected face and caption must stay fully visible without document overflow.
 
 ## Tokens and type
 
@@ -46,8 +47,9 @@ Decorative text on cartridge artwork is hidden from assistive technology because
 
 ## Interaction and accessibility
 
-Cartridges are semantic buttons that open native modal dialogs.
-They work with click, tap, Enter, and Space.
+Cartridges are semantic preview buttons with `aria-pressed` selection and accessible project names.
+Click, tap, Enter, and Space select them. Arrow keys, Home, and End move both selection and keyboard focus.
+View project and the All projects list open native modal dialogs.
 Native dialogs provide modal focus containment and inert background content.
 Close, Escape, and backdrop clicks dismiss a dialog; focus returns to the opening button.
 Each project has a hash URL, and next, previous, browser Back, and direct reload preserve the corresponding selection.
@@ -64,12 +66,11 @@ Do not introduce autoplay, perpetual animation, scroll hijacking, novelty cursor
 ## Motion
 
 Use finite motion to reinforce the cartridge interaction and guide the reading order.
-The stack uses a passive scroll listener and at most one pending animation frame to select the cartridge nearest the viewport center.
-Only transforms and shadows change when that cartridge lifts forward; the document layout stays fixed.
-Every project remains readable before JavaScript runs, and keyboard focus brings its cartridge forward without requiring a separate selection click.
-Each label plays one short effect on hover, keyboard focus, or opening: waveform, rising steam, mail through a portal, camera sparkle, or a converted file appearing beside its source.
-Fine-pointer tilt is limited to 5 degrees vertically and 7 degrees horizontally, updated at most once per animation frame and reset on exit.
-Touch controls must not require hover or use pointer tilt.
+Shelf motion uses CSS transforms and finite transitions. There is no frame loop, global scroll listener, canvas, or graphics runtime.
+Cartridges are made from front, back, spine, and edge faces in CSS 3D space. Keep shell colors consistent across faces and actual app icons on the front labels.
+Hover gently tilts a cartridge without changing selection or moving its hit target. Selection is explicit and stable under a stationary pointer.
+Reduced motion changes shelf positions immediately with no transition. The project list remains readable in prerendered HTML before JavaScript runs.
+Each fallback label can play one short effect inside its opened project dialog; do not add looping shelf effects.
 
 Initially visible text stays fully visible through first paint and hydration.
 Lower sections may reveal once when they enter the viewport, but are never hidden waiting for JavaScript or an observer.
@@ -79,7 +80,7 @@ All effects must stop when the reduced-motion preference changes, including effe
 Dialogs use native open/close behavior with progressive CSS entry and exit transitions.
 Keep the last detail content mounted through the exit so the dialog does not collapse before fading out.
 Rapid close/reopen and pagination must always reflect the latest selection, with no delayed state-changing timers.
-Changing projects resets dialog scroll and moves reading focus to the new title; closing returns focus to the original cartridge.
+Changing projects resets dialog scroll and moves reading focus to the new title; closing returns focus to the opening View project or list button.
 Browsers without discrete-transition support retain immediate, functional native dialogs.
 Use CSS and the Web Animations API without adding an animation runtime dependency.
 
