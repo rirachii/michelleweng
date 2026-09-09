@@ -1,13 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { animateDetails, usePortfolioMotion } from "./usePortfolioMotion";
 import { PROJECTS } from "./portfolio-content";
-import {
-  CONTACT,
-  PROFILE,
-  RESUME_MD,
-  RESUME_PDF,
-  WRITING,
-} from "./content";
+import { CONTACT, PROFILE, RESUME_MD, RESUME_PDF, WRITING } from "./content";
 
 // Presentation metadata stays separate so the archived OS keeps its original content.
 const EDITIONS = [
@@ -74,6 +68,7 @@ function selectionFromHash(): Selection | null {
 
 function Cartridge({ index }: { index: number }) {
   const edition = EDITIONS[index];
+  const icon = PROJECTS[index].icon;
   return (
     <span
       className={`cartridge cartridge--${edition.color}`}
@@ -95,8 +90,21 @@ function Cartridge({ index }: { index: number }) {
           {edition.title[1]}
           <span className="label-star">✳</span>
         </span>
-        <span className={`label-art label-art--${edition.motif}`}>
-          {edition.motif === "wave" && (
+        <span
+          className={`label-art label-art--${icon ? "app-icon" : edition.motif}`}
+        >
+          {icon && (
+            <img
+              className="app-icon"
+              src={icon}
+              width={256}
+              height={256}
+              alt=""
+              loading={index < 2 ? "eager" : "lazy"}
+              decoding="async"
+            />
+          )}
+          {!icon && edition.motif === "wave" && (
             <span className="wave-bars">
               {[16, 28, 42, 22, 55, 72, 43, 28, 57, 36, 20, 34, 14].map(
                 (height, i) => (
@@ -105,7 +113,7 @@ function Cartridge({ index }: { index: number }) {
               )}
             </span>
           )}
-          {edition.motif === "bowl" && (
+          {!icon && edition.motif === "bowl" && (
             <span className="food-art">
               <span className="steam">≈ ≈ ≈</span>
               <span className="chopsticks" />
@@ -114,7 +122,7 @@ function Cartridge({ index }: { index: number }) {
               <span className="bowl-foot" />
             </span>
           )}
-          {edition.motif === "portal" && (
+          {!icon && edition.motif === "portal" && (
             <span className="portal-art">
               <span />
               <span />
@@ -123,7 +131,7 @@ function Cartridge({ index }: { index: number }) {
               <i>✉</i>
             </span>
           )}
-          {edition.motif === "camera" && (
+          {!icon && edition.motif === "camera" && (
             <span className="camera-art">
               <span className="camera-body">
                 <i />
@@ -133,7 +141,7 @@ function Cartridge({ index }: { index: number }) {
               <span className="camera-spark">✦</span>
             </span>
           )}
-          {edition.motif === "files" && (
+          {!icon && edition.motif === "files" && (
             <span className="file-art">
               <span className="file-sheet file-sheet--source">HEIC</span>
               <b className="file-arrow">→</b>
@@ -311,7 +319,7 @@ export function Portfolio() {
               <span>
                 A few things I’ve made.
                 <br />
-                Pick one. Take a look inside.
+                Scroll the stack. Pick one to take a look inside.
               </span>
               <span className="note-arrow" aria-hidden="true">
                 ↙
@@ -329,15 +337,16 @@ export function Portfolio() {
                 THE COLLECTION <span>{COLLECTION_COUNT}</span>
               </h2>
               <span className="section-note">
-                <span className="tiny-square" /> SELECT A CARTRIDGE
+                <span aria-hidden="true">↓</span> SCROLL TO BROWSE
               </span>
             </div>
-            <div className="cartridge-grid">
+            <div className="cartridge-stack">
               {PROJECTS.map((project, index) => (
                 <button
                   className={`project-card project-card--${EDITIONS[index].color}`}
                   key={project.name}
-                  data-reveal
+                  data-active={index === 0}
+                  style={{ "--stack-order": index } as CSSProperties}
                   onClick={(event) =>
                     openSelection(
                       { kind: "project", index },
@@ -490,7 +499,7 @@ export function Portfolio() {
             © {new Date().getFullYear()} {PROFILE.name}
           </span>
           <a href="/bapos/">
-            Visit the original BapOS <span aria-hidden="true">↗</span>
+            My OS <span aria-hidden="true">↗</span>
           </a>
           <span className="footer-signoff">
             THANKS FOR PLAYING <span aria-hidden="true">✳</span>
@@ -592,7 +601,8 @@ export function Portfolio() {
                   ← Previous
                 </button>
                 <span>
-                  {EDITIONS[displayedSelection.index].number} / {COLLECTION_COUNT}
+                  {EDITIONS[displayedSelection.index].number} /{" "}
+                  {COLLECTION_COUNT}
                 </span>
                 <button
                   onClick={() =>

@@ -8,7 +8,8 @@ The original BapOS interface remains a separate experience at `/bapos/`; its con
 
 The visual direction is quiet, tactile, nostalgic, and readable.
 The Game Boy reference belongs in the original cartridge shapes, molded shells, printed labels, and restrained control details.
-All cartridge artwork is CSS; it uses no copied game covers or official Nintendo marks.
+Cartridge shells and fallback illustrations are CSS. Labels use the actual app icons when a source is verified, with their provenance recorded in `docs/app-icons.md`.
+Do not substitute invented logos for missing app icons or use copied game covers or official Nintendo marks.
 
 The reading order is identity and navigation, a short introduction, the project collection, about, writing, contact, and the original-site link.
 Project exploration is the main action at the collection; email is the main action at contact.
@@ -27,9 +28,9 @@ The implemented direction follows the user's explicit requests for a clean portf
 
 ## Layout
 
-- Desktop: a restrained page width, five cartridge columns from 1200px and three at intermediate widths, two-column about, and simple writing rows.
-- Tablet: a two-column collection with larger cartridge art and retained project descriptions.
-- Mobile: a two-column collection, stacked supporting sections, and single-column dialog contents.
+- The collection is a single vertical stack at every width. Cartridges overlap on the right, with readable project descriptions on the left.
+- Native page scrolling brings the cartridge nearest the viewport center forward. Keep the normal document scrollbar and touch behavior; do not capture wheel or touch scrolling in a nested scroller.
+- Tablet and mobile retain the same reading order with smaller artwork and compact descriptions. Supporting sections and dialog contents stack on small screens.
 - Minimum verified target width: 320 CSS pixels.
 - The cartridge tilt may extend inside the visual stage but must not create document overflow or obscure labels.
 - Project names and descriptions remain visible below the artwork, including on touch devices.
@@ -63,7 +64,9 @@ Do not introduce autoplay, perpetual animation, scroll hijacking, novelty cursor
 ## Motion
 
 Use finite motion to reinforce the cartridge interaction and guide the reading order.
-The collection settles into place with a 640ms arrival and 65ms spacing between cartridges.
+The stack uses a passive scroll listener and at most one pending animation frame to select the cartridge nearest the viewport center.
+Only transforms and shadows change when that cartridge lifts forward; the document layout stays fixed.
+Every project remains readable before JavaScript runs, and keyboard focus brings its cartridge forward without requiring a separate selection click.
 Each label plays one short effect on hover, keyboard focus, or opening: waveform, rising steam, mail through a portal, camera sparkle, or a converted file appearing beside its source.
 Fine-pointer tilt is limited to 5 degrees vertically and 7 degrees horizontally, updated at most once per animation frame and reset on exit.
 Touch controls must not require hover or use pointer tilt.
@@ -87,5 +90,6 @@ Keep browser-only state reads inside effects so production hydration matches its
 The default route must not import BapOS desktop code, its CSS, Zustand, or the wallpaper.
 The build can share React and content between the two entries.
 The archive must retain its existing local storage key and data.
-Use original CSS artwork and system fonts instead of a 3D engine or raster cartridge assets.
+Use original CSS shells and system fonts instead of a 3D engine or large cartridge renders.
+Keep real app icons locally in small, versioned WebP files under `public/assets/app-icons/`, with explicit dimensions and lazy loading for lower entries. Content hashes in filenames allow immutable caching without stale icons.
 Fingerprint production assets and cache them immutably.

@@ -229,11 +229,6 @@ h1 > span {
   width: 4px;
   background: #8a9381;
 }
-.cartridge-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 30px;
-}
 .project-card {
   display: flex;
   flex-direction: column;
@@ -1172,10 +1167,6 @@ h1 > span {
   }
 }
 @media (min-width: 1200px) {
-  .cartridge-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 24px;
-  }
   .cartridge-stage {
     height: 280px;
   }
@@ -1183,9 +1174,6 @@ h1 > span {
 @media (min-width: 1440px) {
   .site-wrap {
     width: 1120px;
-  }
-  .cartridge-grid {
-    gap: 24px;
   }
   .cartridge {
     width: 228px;
@@ -1197,9 +1185,6 @@ h1 > span {
 @media (max-width: 1000px) {
   .site-wrap {
     width: calc(100% - 80px);
-  }
-  .cartridge-grid {
-    gap: 22px;
   }
   .cartridge-stage {
     height: 280px;
@@ -1264,11 +1249,6 @@ h1 > span {
   }
   .intro-description {
     font-size: 13px;
-  }
-  .cartridge-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 40px;
-    row-gap: 27px;
   }
   .cartridge-stage {
     height: 318px;
@@ -1432,9 +1412,6 @@ h1 > span {
     font-size: 7px;
     letter-spacing: 0.25px;
     gap: 5px;
-  }
-  .cartridge-grid {
-    gap: 18px 23px;
   }
   .cartridge-stage {
     height: 236px;
@@ -1706,9 +1683,6 @@ h1 > span {
   }
   .cartridge-stage {
     height: 205px;
-  }
-  .cartridge-grid {
-    column-gap: 18px;
   }
   .cartridge {
     width: 148px;

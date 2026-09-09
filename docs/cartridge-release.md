@@ -108,3 +108,9 @@ The production build and 27 browser assertions pass, covering 320/390/768/1024/1
 Desktop and mobile dialog visuals were inspected in Chrome.
 Initial HTML, JavaScript, CSS, and favicon total 65,286 bytes gzip, an increase of 853 bytes over the motion release.
 The BapOS JavaScript, CSS, and shared original content retain their previous asset hashes.
+
+## Vertical collection update
+
+The five projects now form one overlapping vertical stack at every screen size, driven by normal page scrolling. The nearest cartridge lifts forward, keyboard focus brings its cartridge forward, and reduced motion keeps the transforms static. Converty and Umami World use verified local app icons; the other three retain their existing illustrations pending verified assets. The archive link is labeled **My OS**.
+
+The production build, 42 browser assertions, and desktop/mobile visual inspection pass. Initial content including both icons totals 73,430 bytes gzip. All four standard Lighthouse categories score 100 in the local production preview. See [the vertical collection review](vertical-collection.md) for the interaction contract, source limitations, and audit conditions.
