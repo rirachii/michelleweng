@@ -129,14 +129,18 @@ export function CartridgeShelf({ editions, renderCartridge, onOpen }: Props) {
                 <span className="shelf-spine">
                   <span className="spine-grip" />
                   <span className="spine-name">{project.name}</span>
-                  <span className="spine-number">{editions[index].number}</span>
                 </span>
                 <span className="shelf-edge shelf-edge--top" />
                 <span className="shelf-edge shelf-edge--bottom" />
                 {renderCartridge(index)}
               </span>
-              <span className="shelf-number" aria-hidden="true">
-                {editions[index].number}
+              <span className="shelf-name" aria-hidden="true">
+                {project.name.split(" ").map((word, wordIndex, words) => (
+                  <span key={wordIndex}>
+                    {word}
+                    {wordIndex < words.length - 1 ? " " : ""}
+                  </span>
+                ))}
               </span>
               <button
                 ref={(element) => {

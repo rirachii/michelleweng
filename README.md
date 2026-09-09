@@ -42,6 +42,7 @@ See `docs/motion-review.md` for the motion review, measured payload, and browser
 - `src/usePortfolioMotion.ts`: progressive lower-section reveals and cancellable detail-copy animation.
 - `docs/app-icons.md`: verified icon sources, compressed assets, and remaining icon gaps. Use real assets; do not invent an app icon for an unavailable source.
 - `docs/upright-shelf.md`: current reference interpretation, vgpu research, interaction contract, and verification.
+- `docs/label-readability.md`: cartridge typography, flat project labels, and responsive readability checks.
 - `docs/vertical-collection.md`: verification record for the previous vertical stack release.
 - `DESIGN.md`: current portfolio design and accessibility contract.
 - `docs/BAPOS-DESIGN.md`: preserved design system for the original desktop.

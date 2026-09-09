@@ -35,6 +35,8 @@ See `docs/upright-shelf.md` for the observed reference, the vgpu investigation, 
 - Tablet and mobile retain the same hierarchy with smaller cartridge faces. Supporting sections and dialog contents stack on small screens.
 - Minimum verified target width is 320 CSS pixels. The initial five cartridge buttons must each have at least a 44px hit target.
 - Neighboring cartridges may be clipped within the shelf when one is selected. The selected face and caption must stay fully visible without document overflow.
+- Show flat project names beneath resting cartridges at 12px or larger, so identifying a project never depends on reading a foreshortened face. Those names are part of the selection hit area.
+- The selected cartridge settles directly facing the visitor. Use bold system sans-serif titles, strong label contrast, and readable category text; omit miniature taglines, serial numbers, and other decorative print. Keep the molded shell and verified app icons.
 
 ## Tokens and type
 
