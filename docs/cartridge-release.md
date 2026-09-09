@@ -70,3 +70,20 @@ The original desktop renders with 11 icons and its taskbar on the live domain.
 The new JavaScript and CSS return HTTP 200 with `public, max-age=31536000, immutable` caching.
 No console errors were reported during the live portfolio interaction check.
 The archive and redesign branches were pushed to both repository remotes.
+
+## Live retest and readability fix
+
+A second live retest on September 8, 2026 (audit timestamp `2026-09-09T02:01:23Z`) passed all four project dialogs, all three writing dialogs, previous/next wrapping, browser Back, direct project URLs, Escape/focus return, email copy, and the résumé data/download target.
+The site had no horizontal overflow at 320, 390, 768, or 1440 CSS pixels.
+The archive's 11 icons, taskbar, and Start menu rendered correctly.
+The page, archive routes, favicon, robots file, and initial assets returned HTTP 200; asset caching remained immutable.
+
+A fresh, isolated Lighthouse 12.8.2 audit of the public domain used simulated mobile throttling (150ms RTT, 1.6Mbps throughput, 4x CPU slowdown).
+It scored performance 98, accessibility 100, best practices 96, and SEO 100, with 1.2s FCP/LCP, 0ms total blocking time, and zero cumulative layout shift.
+These are synthetic lab measurements, not field measurements for all visitors.
+
+The best-practices deduction identified mobile font legibility: project descriptions were 11px and only 52.7% of visible text met the audit's 12px threshold.
+Two responsive overrides were removed so project descriptions inherit the existing 12px base size at every width.
+The original cartridge artwork and archived BapOS were unchanged.
+A rebuilt production preview confirmed 12px descriptions and no horizontal overflow at 320, 390, and 900px.
+The targeted post-fix Lighthouse check on the production preview passed font legibility (69.58% of text at least 12px) and scored best practices 100.
