@@ -17,6 +17,15 @@ Their combined payload is approximately 7 KB. No artwork was regenerated or subs
 The filename suffix is the first eight characters of the encoded file's SHA-256. Keep content hashes in replacement filenames so the existing `/assets/` immutable cache policy is safe.
 Image URLs remain stable through prerendering and hydration. Explicit dimensions reserve space; lower entries use native lazy loading.
 
+## Foodex and Oompf additions, September 9, 2026
+
+The owner supplied `https://foodex.space/` and `https://oompf.app/` for separate new cartridges. Umami World keeps its existing identity and icon.
+
+- Foodex: `public/foodex/app-icon.png` in the `foodex.space` website repository, explicitly configured in `app/(foodex)/layout.tsx`. Source SHA-256: `21338e238c2156aff70902bc703ac767e55fda7b351c3917bf3c29d32ba9033e`.
+- Oompf: `mobile/assets/common/branding/app-icon.png` in the `oompf` repository, explicitly configured in `mobile/app.config.ts`. Source SHA-256: `c1bc974752db3cfccb00a826b63a6e8b3da1f07b13983b90d32ee75fe262b8ea`.
+
+Both 1024 × 1024 originals were visually inspected and resized to 256 × 256 WebP with Pillow, quality 84, method 6. The artwork was preserved. Portfolio assets are `public/assets/app-icons/foodex-51845474.webp` (4,754 bytes) and `public/assets/app-icons/oompf-ccda7e9a.webp` (5,992 bytes).
+
 ## Sources still needed
 
 No icon asset was found in the inspected `rirachii/shortstranscript` tree. No verified app icon or matching repository was found for Void Mail or Retro Cam.

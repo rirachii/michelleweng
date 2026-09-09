@@ -130,3 +130,19 @@ PR https://github.com/rirachii/michelleweng/pull/6 merged as `0029a8e35b86e06c07
 PR https://github.com/rirachii/michelleweng/pull/7 merged as `d14704a784ebeb994d6bb86f64a585459f50ff5b`, and its Vercel production check succeeded. Larger bold labels, stronger contrast, flat project names, and a straight-on selected face address the user's readability screenshot. Miniature decorative print is removed. See [the readability review](label-readability.md) for type sizes, responsive checks, and the 100-point mobile lab audit.
 
 Live verification at 320px confirmed all five names, a 23px Converty title, the unrotated selected face, no horizontal overflow, and a working dialog with its actual icon. The production JavaScript, CSS, and `/bapos/` HTML match the tested build bytes. My OS remains linked, the archive source ref is unchanged, and no browser console errors were reported. The updated site was opened in Comet.
+
+
+## Direct project websites, September 9, 2026
+
+Converty, Oompf, and Foodex lead the seven-cartridge collection, using the owner-supplied URLs `https://converty-pi.vercel.app/`, `https://oompf.app/`, and `https://foodex.space/`. Oompf and Foodex are separate additions; the original four projects and all existing project hashes remain available.
+
+Selecting a linked cartridge exposes a primary Visit website link alongside Project details. The project index displays a direct hostname link, and dialogs retain their website action. Links open in a new tab with `noopener noreferrer` and descriptive accessible names. Website links are prerendered in the project index. The shelf uses a single keyboard Tab stop, allowing Tab to move from the selected cartridge to its actions; arrow keys still browse all seven.
+
+The two new verified app icons add 10,746 bytes of local WebP assets. No dependency was added. See [app icon provenance](app-icons.md) for the configured original assets and checksums.
+
+The Halfstep example could not be inspected because the browser showed a certificate interstitial. Converty and Oompf returned HTTP 200 during the public URL check. Foodex encountered a certificate trust error from this environment; its link is the exact HTTPS URL supplied by the owner. No certificate interstitial was bypassed.
+
+
+Validation: `npm run build` passed. The final production preview passed 69 browser assertions at 320, 390, 768, and 1440 CSS pixels, covering all seven selections, readable selected labels, 44px action targets, no horizontal overflow, matching website links in the shelf/index/dialogs, native external-tab activation, keyboard focus and wrap, reduced motion, every existing and new project hash, every project-index dialog, prerendered website links without JavaScript, and My OS. No browser errors were reported.
+
+The final local production preview scored 100 for Performance, Accessibility, Best Practices, and SEO in Lighthouse 12.8.2 with default simulated mobile settings at `2026-09-09T15:21:54.623Z`. LCP was 1.6 seconds, TBT 0 ms, and CLS 0. These are local lab results, not field measurements.

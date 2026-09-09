@@ -7,39 +7,53 @@ import { CONTACT, PROFILE, RESUME_MD, RESUME_PDF, WRITING } from "./content";
 // Presentation metadata stays separate so the archived OS keeps its original content.
 const EDITIONS = [
   {
+    id: "converty",
+    type: "Mac app",
+    color: "blue",
+    motif: "files",
+    number: "01",
+  },
+  {
+    id: "oompf",
+    type: "Mobile app",
+    color: "yellow",
+    motif: "wave",
+    number: "02",
+  },
+  {
+    id: "foodex",
+    type: "iPhone app",
+    color: "orange",
+    motif: "bowl",
+    number: "03",
+  },
+  {
     id: "short-transcript",
     type: "AI tool",
     color: "orange",
     motif: "wave",
-    number: "01",
+    number: "04",
   },
   {
     id: "umami-world",
     type: "Mobile app",
     color: "green",
     motif: "bowl",
-    number: "02",
+    number: "05",
   },
   {
     id: "void-mail",
     type: "Web app",
     color: "purple",
     motif: "portal",
-    number: "03",
+    number: "06",
   },
   {
     id: "retro-cam",
     type: "Experiment",
     color: "yellow",
     motif: "camera",
-    number: "04",
-  },
-  {
-    id: "converty",
-    type: "Mac app",
-    color: "blue",
-    motif: "files",
-    number: "05",
+    number: "07",
   },
 ] as const;
 
@@ -498,7 +512,8 @@ export function Portfolio() {
                   className="hello-button"
                   href={PROJECTS[displayedSelection.index].link}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${PROJECTS[displayedSelection.index].name} website (opens in a new tab)`}
                 >
                   {PROJECTS[displayedSelection.index].linkLabel ??
                     "View project"}{" "}
