@@ -1,7 +1,7 @@
 # Michelle Weng - cartridge portfolio
 
 A lightweight, responsive portfolio built with React, TypeScript, and Vite.
-The main page presents projects in an upright shelf of Game Boy-inspired cartridges, with accessible project dialogs, writing, an about section, and direct contact links.
+The main page presents projects in an upright shelf of Game Boy-inspired cartridges, with on-demand product screenshot previews, accessible project dialogs, writing, an about section, and direct contact links.
 The complete page is prerendered at build time, then hydrated for interaction.
 There are no external fonts, video backgrounds, rendering libraries, analytics, or runtime APIs.
 
@@ -37,10 +37,12 @@ See `docs/motion-review.md` for the motion review, measured payload, and browser
   If the project collection changes, update `EDITIONS` alongside `PROJECTS` in the same order. The collection count and pagination use the actual collection length.
 - `src/portfolio.css`: responsive layouts, CSS cartridge artwork, and focus styles.
 - `src/CartridgeShelf.tsx`: shelf selection, touch and trackpad gestures, keyboard browsing, preview controls, and the plain project index.
+- `src/ProjectPreview.tsx`: on-demand screenshot gallery, captions, thumbnail selection, and full-size links.
 - `src/collection.css`: the upright shelf, CSS 3D cartridge faces, compact page layout, and app-icon placement.
 - `src/motion.css`: finite cartridge and label animations, dialog transitions, interaction feedback, and reduced-motion overrides.
 - `src/usePortfolioMotion.ts`: progressive lower-section reveals and cancellable detail-copy animation.
 - `docs/app-icons.md`: verified icon sources, compressed assets, and remaining icon gaps. Use real assets; do not invent an app icon for an unavailable source.
+- `docs/project-previews.md`: verified screenshot sources, sample-data boundary, and gallery validation.
 - `docs/performance.md`: measured load speed, transfer budget, and the repeatable mobile audit command.
 - `docs/upright-shelf.md`: current reference interpretation, vgpu research, interaction contract, and verification.
 - `docs/label-readability.md`: cartridge typography, flat project labels, and responsive readability checks.
@@ -51,8 +53,11 @@ See `docs/motion-review.md` for the motion review, measured payload, and browser
 - `scripts/prerender.mjs`: build-time HTML rendering through Vite and React.
 - `bapos/index.html` and `src/bapos-main.tsx`: isolated original desktop entry.
 
-Converty, Oompf, and Foodex lead the collection and link to the product websites supplied by the owner. Each has a Visit website action on its shelf preview, a hostname link in the top-right All projects menu, and a link in its detail dialog. The original four projects remain in the collection without invented URLs; their detail views offer an email link to ask about the project.
+Chirpberry leads the eight-project collection and uses a View source link to its verified GitHub repository because no public product URL was found.
+Converty, Oompf, and Foodex follow and link to the product websites supplied by the owner. Each has a Visit website action on its shelf preview, a hostname link in the top-right All projects menu, and a link in its detail dialog. The original four projects remain in the collection without invented URLs; their detail views offer an email link to ask about the project.
+Chirpberry, Converty, Oompf, and Foodex include real product screenshot previews after selection and in their dialogs.
 Add a real `link` and optional `linkLabel` in `src/portfolio-content.ts` to enable a direct project link for new additions.
+Set `linkKind: "source"` when the destination is a source repository.
 The existing résumé downloads as Markdown until `RESUME_PDF` points to a real PDF in `public/`.
 
 ## Preservation

@@ -5,6 +5,7 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
+import { ProjectPreview } from "./ProjectPreview";
 import { PROJECTS } from "./portfolio-content";
 
 interface Props {
@@ -199,9 +200,9 @@ export function CartridgeShelf({ editions, renderCartridge, onOpen }: Props) {
                   href={PROJECTS[selected].link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Visit ${PROJECTS[selected].name} website (opens in a new tab)`}
+                  aria-label={`${PROJECTS[selected].linkKind === "source" ? "View" : "Visit"} ${PROJECTS[selected].name} ${PROJECTS[selected].linkKind === "source" ? "source" : "website"} (opens in a new tab)`}
                 >
-                  Visit website <span aria-hidden="true">↗</span>
+                  {PROJECTS[selected].linkKind === "source" ? "View source" : "Visit website"} <span aria-hidden="true">↗</span>
                 </a>
               )}
               <button
@@ -228,6 +229,9 @@ export function CartridgeShelf({ editions, renderCartridge, onOpen }: Props) {
         </div>
         <p id="shelf-help">Swipe, use the arrows, or pick a cartridge.</p>
       </div>
+      {selected !== null && (
+        <ProjectPreview key={selected} project={PROJECTS[selected]} />
+      )}
     </div>
   );
 }
@@ -296,7 +300,7 @@ function ProjectIndex({
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Visit ${project.name} website (opens in a new tab)`}
+                aria-label={`${project.linkKind === "source" ? "View" : "Visit"} ${project.name} ${project.linkKind === "source" ? "source" : "website"} (opens in a new tab)`}
               >
                 {new URL(project.link).hostname}{" "}
                 <span aria-hidden="true">↗</span>

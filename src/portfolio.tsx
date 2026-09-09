@@ -2,58 +2,66 @@ import { useEffect, useRef, useState } from "react";
 import { animateDetails, usePortfolioMotion } from "./usePortfolioMotion";
 import { PROJECTS } from "./portfolio-content";
 import { CartridgeShelf } from "./CartridgeShelf";
+import { ProjectPreview } from "./ProjectPreview";
 import { CONTACT, PROFILE, RESUME_MD, RESUME_PDF, WRITING } from "./content";
 
 // Presentation metadata stays separate so the archived OS keeps its original content.
 const EDITIONS = [
   {
+    id: "chirpberry",
+    type: "Mac app",
+    color: "purple",
+    motif: "wave",
+    number: "01",
+  },
+  {
     id: "converty",
     type: "Mac app",
     color: "blue",
     motif: "files",
-    number: "01",
+    number: "02",
   },
   {
     id: "oompf",
     type: "Mobile app",
     color: "yellow",
     motif: "wave",
-    number: "02",
+    number: "03",
   },
   {
     id: "foodex",
     type: "iPhone app",
     color: "orange",
     motif: "bowl",
-    number: "03",
+    number: "04",
   },
   {
     id: "short-transcript",
     type: "AI tool",
     color: "orange",
     motif: "wave",
-    number: "04",
+    number: "05",
   },
   {
     id: "umami-world",
     type: "Mobile app",
     color: "green",
     motif: "bowl",
-    number: "05",
+    number: "06",
   },
   {
     id: "void-mail",
     type: "Web app",
     color: "purple",
     motif: "portal",
-    number: "06",
+    number: "07",
   },
   {
     id: "retro-cam",
     type: "Experiment",
     color: "yellow",
     motif: "camera",
-    number: "07",
+    number: "08",
   },
 ] as const;
 
@@ -507,7 +515,7 @@ export function Portfolio() {
                   href={PROJECTS[displayedSelection.index].link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Visit ${PROJECTS[displayedSelection.index].name} website (opens in a new tab)`}
+                  aria-label={`${PROJECTS[displayedSelection.index].linkKind === "source" ? "View" : "Visit"} ${PROJECTS[displayedSelection.index].name} ${PROJECTS[displayedSelection.index].linkKind === "source" ? "source" : "website"} (opens in a new tab)`}
                 >
                   {PROJECTS[displayedSelection.index].linkLabel ??
                     "View project"}{" "}
@@ -558,6 +566,10 @@ export function Portfolio() {
                 </button>
               </div>
             </div>
+            <ProjectPreview
+              key={displayedSelection.index}
+              project={PROJECTS[displayedSelection.index]}
+            />
           </div>
         )}
         {displayedSelection?.kind === "writing" && (
