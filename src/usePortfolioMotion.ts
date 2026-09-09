@@ -14,7 +14,39 @@ export function usePortfolioMotion(rootRef: RefObject<HTMLElement>) {
     const animations = new Set<Animation>();
     let observer: IntersectionObserver | undefined;
     let frame = 0;
+    let stackFrame = 0;
     let hovered: HTMLElement | null = null;
+    const cartridges = Array.from(
+      root.querySelectorAll<HTMLElement>(".cartridge-stack .project-card"),
+    );
+    let activeCartridge = cartridges[0];
+
+    function activateCartridge(card: HTMLElement) {
+      if (card === activeCartridge) return;
+      activeCartridge?.setAttribute("data-active", "false");
+      card.setAttribute("data-active", "true");
+      activeCartridge = card;
+    }
+
+    function updateStack() {
+      stackFrame = 0;
+      const center = window.innerHeight * 0.52;
+      let closest = cartridges[0];
+      let distance = Infinity;
+      for (const card of cartridges) {
+        const rect = card.getBoundingClientRect();
+        const nextDistance = Math.abs(rect.top + rect.height / 2 - center);
+        if (nextDistance < distance) {
+          distance = nextDistance;
+          closest = card;
+        }
+      }
+      if (closest) activateCartridge(closest);
+    }
+
+    function onScroll() {
+      if (!stackFrame) stackFrame = requestAnimationFrame(updateStack);
+    }
 
     function resetTilt(card: HTMLElement | null) {
       card?.style.removeProperty("--tilt-x");
@@ -99,6 +131,19 @@ export function usePortfolioMotion(rootRef: RefObject<HTMLElement>) {
     function onFocus(event: FocusEvent) {
       const target = (event.target as Element).closest("[data-reveal]");
       target?.getAnimations().forEach((animation) => animation.finish());
+      const card = (event.target as Element).closest<HTMLElement>(
+        ".cartridge-stack .project-card",
+      );
+      if (card) {
+        activateCartridge(card);
+        // Native focus can scroll the page. Keep that scroll's frame from
+        // selecting a neighboring cartridge over the keyboard destination.
+        cancelAnimationFrame(stackFrame);
+        stackFrame = requestAnimationFrame(() => {
+          stackFrame = 0;
+          activateCartridge(card);
+        });
+      }
     }
 
     function onPreferenceChange() {
@@ -112,6 +157,9 @@ export function usePortfolioMotion(rootRef: RefObject<HTMLElement>) {
     }
 
     observe();
+    updateStack();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
     root.addEventListener("pointermove", onPointerMove, { passive: true });
     root.addEventListener("pointerout", onPointerOut);
     root.addEventListener("focusin", onFocus);
@@ -120,11 +168,14 @@ export function usePortfolioMotion(rootRef: RefObject<HTMLElement>) {
       observer?.disconnect();
       animations.forEach((animation) => animation.cancel());
       cancelAnimationFrame(frame);
+      cancelAnimationFrame(stackFrame);
       resetTilt(hovered);
       root.removeEventListener("pointermove", onPointerMove);
       root.removeEventListener("pointerout", onPointerOut);
       root.removeEventListener("focusin", onFocus);
       preference.removeEventListener("change", onPreferenceChange);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, [rootRef]);
 }

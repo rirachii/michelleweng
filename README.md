@@ -1,7 +1,7 @@
 # Michelle Weng - cartridge portfolio
 
 A lightweight, responsive portfolio built with React, TypeScript, and Vite.
-The main page presents projects as original Game Boy-inspired cartridges, with accessible project dialogs, writing, an about section, and direct contact links.
+The main page presents projects in a vertical stack of Game Boy-inspired cartridges, with accessible project dialogs, writing, an about section, and direct contact links.
 The complete page is prerendered at build time, then hydrated for interaction.
 There are no external fonts, video backgrounds, rendering libraries, analytics, or runtime APIs.
 
@@ -32,12 +32,15 @@ See `docs/motion-review.md` for the motion review, measured payload, and browser
 ## Content and design
 
 - `src/content.ts`: original profile, project descriptions, writing summaries, résumé, and contact links, shared with the archive.
-- `src/portfolio-content.ts`: the current project collection, extending the original projects with new additions while keeping the archive unchanged.
+- `src/portfolio-content.ts`: the current project collection and verified icon paths, extending the original projects while keeping the archive unchanged.
 - `src/portfolio.tsx`: page composition, cartridge presentation metadata, and interactions.
   If the project collection changes, update `EDITIONS` alongside `PROJECTS` in the same order. The collection count and pagination use the actual collection length.
 - `src/portfolio.css`: responsive layouts, CSS cartridge artwork, and focus styles.
+- `src/collection.css`: the responsive vertical stack, app-icon placement, and the cartridge lifted forward by native page scrolling.
 - `src/motion.css`: finite cartridge and label animations, dialog transitions, interaction feedback, and reduced-motion overrides.
-- `src/usePortfolioMotion.ts`: progressive scroll reveals, fine-pointer tilt, and cancellable detail-copy animation.
+- `src/usePortfolioMotion.ts`: the active cartridge on scroll/focus, progressive lower-section reveals, fine-pointer tilt, and cancellable detail-copy animation.
+- `docs/app-icons.md`: verified icon sources, compressed assets, and remaining icon gaps. Use real assets; do not invent an app icon for an unavailable source.
+- `docs/vertical-collection.md`: vertical browsing behavior, responsive and accessibility checks, payload, and mobile performance audit.
 - `DESIGN.md`: current portfolio design and accessibility contract.
 - `docs/BAPOS-DESIGN.md`: preserved design system for the original desktop.
 - `src/main.tsx`: new page hydration in production and mounting in development.

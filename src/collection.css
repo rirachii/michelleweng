@@ -1,0 +1,217 @@
+/* A physical stack on the native page scroll. Every project stays readable. */
+html:has(.cartridge-stack .project-card:focus-visible) {
+  scroll-behavior: auto;
+}
+.cartridge-stack {
+  max-width: 790px;
+  margin: 20px auto 36px;
+  padding: 12px 0 24px;
+  isolation: isolate;
+}
+.cartridge-stack .project-card {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  z-index: calc(1 + var(--stack-order));
+  border-radius: 8px;
+}
+.cartridge-stack .project-card + .project-card {
+  margin-top: -112px;
+}
+.cartridge-stack .project-card:is([data-active="true"], :focus-visible) {
+  z-index: 20;
+}
+.cartridge-stack .cartridge-stage {
+  position: absolute;
+  right: 18px;
+  top: 0;
+  width: 345px;
+  height: 340px;
+  padding: 0;
+  perspective: 1000px;
+  animation: none;
+}
+.cartridge-stack .cartridge {
+  width: 280px;
+  max-width: 94%;
+  transform: translateY(12px) rotateX(34deg) rotate(-7deg) rotateY(-6deg)
+    scale(0.92);
+  transform-origin: center 70%;
+}
+.cartridge-stack .project-info {
+  width: min(42%, 295px);
+  margin-top: 116px;
+  padding: 0 0 0 18px;
+  position: relative;
+}
+.cartridge-stack .project-info::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 3px;
+  height: 17px;
+  background: #d6d9ce;
+  border-radius: 2px;
+}
+.cartridge-stack [data-active="true"] .project-info::before,
+.cartridge-stack .project-card:focus-visible .project-info::before {
+  background: #758653;
+}
+.cartridge-stack .project-meta {
+  font-size: 10px;
+}
+.cartridge-stack .project-title {
+  font-size: 25px;
+  margin-top: 11px;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+}
+.cartridge-stack .project-blurb {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.cartridge-stack .project-arrow {
+  margin-left: 12px;
+  font-size: 21px;
+}
+.label-art--app-icon {
+  transform: none;
+  margin: 5px 0;
+  overflow: hidden;
+}
+.app-icon {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 21%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cartridge-stack .cartridge {
+    transition:
+      transform 420ms var(--motion-ease),
+      box-shadow 420ms ease;
+  }
+  .cartridge-stack
+    .project-card:is([data-active="true"], :focus-visible)
+    .cartridge {
+    transform: translateY(-14px) rotateX(0) rotate(-3deg) rotateY(-5deg);
+    box-shadow:
+      inset 2px 2px 2px #ffffff90,
+      inset -3px -2px 2px #0002,
+      2px 4px 0 -1px var(--shell-dark),
+      0 24px 24px -10px #25282140,
+      0 46px 38px -24px #25282130;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .cartridge-stack .project-card:hover {
+      z-index: 21;
+    }
+    .cartridge-stack .project-card:hover .cartridge {
+      transform: translateY(-20px) rotate(-2deg) rotateX(var(--tilt-x, 0deg))
+        rotateY(var(--tilt-y, 0deg));
+    }
+    .cartridge-stack .project-card:active .cartridge {
+      transform: translateY(-8px) rotate(-2deg) scale(0.98);
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .cartridge-stack {
+    margin-top: 14px;
+  }
+  .cartridge-stack .project-card {
+    height: 305px;
+  }
+  .cartridge-stack .project-card + .project-card {
+    margin-top: -76px;
+  }
+  .cartridge-stack .cartridge-stage {
+    width: 280px;
+    height: 305px;
+    right: 0;
+  }
+  .cartridge-stack .cartridge {
+    width: 238px;
+  }
+  .cartridge-stack .project-info {
+    width: 43%;
+    margin-top: 108px;
+    padding-left: 13px;
+  }
+  .cartridge-stack .project-title {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 560px) {
+  .cartridge-stack {
+    margin: 8px -3px 14px;
+    padding-top: 12px;
+  }
+  .cartridge-stack .project-card {
+    height: 275px;
+  }
+  .cartridge-stack .project-card + .project-card {
+    margin-top: -52px;
+  }
+  .cartridge-stack .cartridge-stage {
+    width: 59%;
+    height: 265px;
+    right: 0;
+  }
+  .cartridge-stack .cartridge {
+    width: 205px;
+  }
+  .cartridge-stack .project-info {
+    width: 39%;
+    margin-top: 81px;
+    padding-left: 10px;
+  }
+  .cartridge-stack .project-meta,
+  .cartridge-stack .project-meta > span {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+  .cartridge-stack .project-title {
+    font-size: 19px;
+    margin-top: 8px;
+    line-height: 1.15;
+    letter-spacing: -0.6px;
+  }
+  .cartridge-stack .project-blurb {
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+  .cartridge-stack .project-arrow {
+    display: none;
+  }
+  .label-art--app-icon {
+    margin: 3px 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .cartridge-stack .project-title {
+    font-size: 17px;
+  }
+  .cartridge-stack .project-card + .project-card {
+    margin-top: -32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cartridge-stack .project-card .cartridge,
+  .cartridge-stack
+    .project-card:is(:hover, :active, :focus-visible)
+    .cartridge {
+    transform: rotate(-4deg) rotateY(-5deg) scale(0.94);
+  }
+}

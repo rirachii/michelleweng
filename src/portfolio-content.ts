@@ -1,8 +1,16 @@
 import { PROJECTS as ORIGINAL_PROJECTS, type Project } from "./content";
 
+export interface PortfolioProject extends Project {
+  icon?: string;
+}
+
 // Extend the current collection without changing the original BapOS archive.
-export const PROJECTS: Project[] = [
-  ...ORIGINAL_PROJECTS,
+export const PROJECTS: PortfolioProject[] = [
+  ...ORIGINAL_PROJECTS.map((project) =>
+    project.name === "Umami World"
+      ? { ...project, icon: "/assets/app-icons/umami-world-f1bbebd9.webp" }
+      : project,
+  ),
   {
     name: "Converty",
     blurb: "Convert and edit files, right on your Mac.",
@@ -11,5 +19,6 @@ export const PROJECTS: Project[] = [
     tags: ["SwiftUI", "AppKit", "macOS"],
     link: "https://converty-pi.vercel.app/",
     linkLabel: "Visit Converty",
+    icon: "/assets/app-icons/converty-e2e22ee2.webp",
   },
 ];
