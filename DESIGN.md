@@ -10,7 +10,7 @@ The visual direction is quiet, tactile, nostalgic, and readable.
 The Game Boy reference belongs in the original cartridge shapes, molded shells, printed labels, and restrained control details.
 Cartridge shells and fallback illustrations are CSS.
 Verified app icons fill the entire square front label with the complete image visible and no overlaid title or category; project names remain on the spine, beneath resting cartridges, and in the selected caption.
-Converty and Foodex use approved artwork derivatives with their baked-in rounded tile rims removed, so blue and orange backgrounds continue to the sticker edges while retaining the central app marks.
+Chirpberry, Converty, and Foodex use artwork derivatives with their baked-in rounded tile rims removed, so mulberry, blue, and orange backgrounds continue to the sticker edges while retaining the central app marks.
 Labels without verified icons retain their title, category, and CSS illustration.
 Icon provenance is recorded in `docs/app-icons.md`.
 Do not substitute invented logos for missing app icons or use copied game covers or official Nintendo marks.
@@ -32,7 +32,7 @@ See `docs/upright-shelf.md` for the observed reference, the vgpu investigation, 
 ## Layout
 
 - Use a narrow, centered page with a short personal introduction above the interactive shelf.
-- Seven upright Game Boy cartridges make up the collection. Desktop centers the full shelf; phones show the first five at rest, with all seven reachable through the arrows, gestures, keyboard, and project index. The three projects with supplied website URLs lead the shelf. Selecting one centers and rotates its front toward the visitor, moving the neighboring spines aside.
+- Eight upright Game Boy cartridges make up the collection. Desktop centers the full shelf; phones show the first five at rest, with all eight reachable through the arrows, gestures, keyboard, and project index. Chirpberry leads the shelf with a verified source-repository link, followed by Converty, Oompf, and Foodex with their supplied website URLs. Selecting one centers and rotates its front toward the visitor, moving the neighboring spines aside.
 - The selected name, summary, and primary Visit website link and secondary Project details action sit below the shelf. Keep that area's height stable when content changes. Leave 24px above the arrow controls so their focus outlines stay clear of the project actions.
 - Tap/click selects a preview; Visit website opens the project website in a new tab, and Project details opens the native dialog. Projects without a verified URL show only Project details. Arrow buttons, horizontal touch swipes, horizontal trackpad gestures, and keyboard arrows also browse the shelf.
 - Keep vertical document scrolling native. Swiping is optional; every project is also available in the All projects menu at the top right beside Selected work. It replaces the decorative Pick a cartridge note; there is no duplicate control beneath the shelf. The native disclosure opens a bounded, scrollable project list, closes on outside click, Escape, or keyboard focus leaving the menu, and stays open behind a project dialog to preserve return focus.
@@ -41,6 +41,26 @@ See `docs/upright-shelf.md` for the observed reference, the vgpu investigation, 
 - Neighboring cartridges may be clipped within the shelf when one is selected. The selected face and caption must stay fully visible without document overflow.
 - Show flat project names beneath resting cartridges at 12px or larger, so identifying a project never depends on reading a foreshortened face. Those names are part of the selection hit area.
 - The selected cartridge settles directly facing the visitor. Fallback labels use bold system sans-serif titles, strong contrast, and readable category text; omit miniature taglines, serial numbers, and other decorative print. Keep the molded shell and show verified app icons across the whole square label, without cropping or distortion.
+
+## Product screenshots
+
+The owner supplied https://hivinz.com/ as a reference for presenting real product screens alongside project names and short descriptions.
+Keep the cartridge shelf as the selector and reveal an `Inside [project]` screenshot gallery beneath its controls.
+The same gallery is available in the project dialog, including direct hash navigation.
+Do not copy the reference site's assets, identity, or sidebar layout.
+
+Use real app captures and existing first-party marketing screens, preserving the complete UI.
+The main screenshot has a caption and a full-size image link; thumbnail buttons select alternative views with `aria-pressed` state.
+Reset the screenshot selection when the project changes.
+Desktop windows fill the gallery width; portrait screens remain legible and uncropped on a quiet background.
+Use ordinary keyboard-accessible buttons, native scrolling, and no autoplay or new motion effects.
+Chirpberry captures contain explicitly marked sample notes and transcript text, not customer meetings or a claim of live transcription accuracy.
+Projects without verified screenshots retain their existing detail view.
+
+Mount a gallery only after selecting or opening a project.
+No screenshot request belongs to the initial page load.
+Serve locally compressed, versioned WebP files with small separate thumbnail assets and explicit image dimensions.
+See `docs/project-previews.md` for sources and validation.
 
 ## Tokens and type
 
@@ -99,7 +119,7 @@ The build can share React and content between the two entries.
 The archive must retain its existing local storage key and data.
 Use original CSS shells and system fonts instead of a 3D engine or large cartridge renders.
 Keep real app icons locally in small, versioned WebP files under `public/assets/app-icons/`, with explicit dimensions.
-The four current icons are visible in the initial shelf and load eagerly so the artwork does not wait for lazy-image scheduling.
+The five current icons are visible in the initial shelf and load eagerly so the artwork does not wait for lazy-image scheduling.
 Reassess lazy loading if future collections add images outside the initial shelf.
 Content hashes in filenames allow immutable caching without stale icons.
 Fingerprint production assets and cache them immutably.

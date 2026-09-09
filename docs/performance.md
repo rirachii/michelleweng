@@ -86,3 +86,13 @@ The default page requests only its own bundles and the four icons; the original 
 After PR [11](https://github.com/rirachii/michelleweng/pull/11), the two updated 256px WebP assets save 1,474 bytes while removing Converty and Foodex's inset background rims.
 A public mobile Lighthouse 12.8.2 audit at `2026-09-09T19:30:23.853Z` retained performance 100, 1.4s LCP, 0ms TBT, and 0 CLS, with 90,754 bytes (88.6 KiB) total transfer.
 This audit used the same simulated mobile settings; it checked the performance category only.
+
+## Chirpberry and on-demand screenshots
+
+The fifth 256px icon brings the eager icon total to 19,632 bytes.
+The seven full screenshots and their small thumbnails are mounted only after project selection or detail navigation; none are requested by an initial visit to `/`.
+The local production build passed TypeScript, both Vite entries, and prerendering.
+A Lighthouse 12.8.2 audit at `2026-09-09T20:29:26.875Z` scored 100 in all four categories, with 1.35s FCP, 1.65s LCP, 0ms TBT, 0 CLS, and 93,721 bytes of total transfer.
+This is a local production-preview audit under the same default simulated mobile settings, not a public-site or visitor field measurement.
+The initial requests contained only the five icons and portfolio resources, with no screenshots or BapOS assets.
+The initial transfer remains below the 100 KiB budget.

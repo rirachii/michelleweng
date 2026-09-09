@@ -16,7 +16,7 @@ Their combined payload is approximately 7 KB. No artwork was regenerated or subs
 
 The filename suffix is the first eight characters of the encoded file's SHA-256. Keep content hashes in replacement filenames so the existing `/assets/` immutable cache policy is safe.
 Image URLs remain stable through prerendering and hydration.
-Explicit dimensions reserve space; the four icons in the initial shelf load eagerly.
+Explicit dimensions reserve space; the five icons in the initial shelf load eagerly.
 
 ## Full-label presentation
 
@@ -64,3 +64,20 @@ Both 1024 × 1024 originals were visually inspected and resized to 256 × 256 We
 No icon asset was found in the inspected `rirachii/shortstranscript` tree. No verified app icon or matching repository was found for Void Mail or Retro Cam.
 Their pre-existing cartridge illustrations remain until the user supplies the actual icon files, app links, or repository paths.
 Do not describe those fallback illustrations as actual app icons or manufacture a replacement brand mark.
+
+## Chirpberry addition
+
+The new Mac app uses `macOS/Artwork/Chirpberry.png` from the owner-supplied Chirpberry repository.
+The native icon preparation script uses this artwork for `AppIcon.icns`, named in the app's Info.plist.
+Source SHA-256: `91b2fdaa3b03c71ce02aeebe7a7fe4c98ba91f75c45ff9742da8d047a17819d7`.
+The complete cream bird, pink wing, and beak remain visible on a seamless mulberry background, matching the requested Converty and Foodex edge treatment.
+
+The built-in image tool used the original artwork as its sole edit reference.
+The prompt removed only the glossy rounded-square tile rim, bevel, inset boundary, corner highlights, and transparent outer margins, extending the existing background to every straight canvas edge.
+It required preserving the complete bird, wing, beak, and eye with their original silhouette, proportions, position, scale, materials, lighting, and shadows, and prohibited a new frame, padding, text, crop, or cartridge mockup.
+The derivative is portfolio presentation artwork, not a replacement native app icon.
+
+The inspected result was encoded with `cwebp -q 88 -m 6 -resize 256 256`.
+`public/assets/app-icons/chirpberry-seamless-09609b30.webp` is 3,282 bytes.
+All five current icons total 19,632 bytes.
+Chirpberry links to https://github.com/rirachii/chirpberry using View source; its portfolio copy distinguishes locally saved notes from paid Valsea cloud speech, translation, and summaries.
