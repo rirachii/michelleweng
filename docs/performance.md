@@ -23,7 +23,7 @@ Those timings describe that connection and machine, not a promise for every visi
 
 ## Keeping the artwork fast
 
-All four verified logos reuse the existing 256px WebP assets, totaling 17,824 bytes.
+All four logos use local 256px WebP assets, totaling 16,350 bytes after the seamless-background refinement documented in [app icons](app-icons.md).
 The complete image fills a square front label through CSS, with no larger source file, new image request, or new dependency.
 Every icon in the initial shelf loads eagerly, removing the delayed-loading hint from Foodex and Umami World.
 Image dimensions and the square label reserve their layout space.

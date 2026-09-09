@@ -10,6 +10,7 @@ The visual direction is quiet, tactile, nostalgic, and readable.
 The Game Boy reference belongs in the original cartridge shapes, molded shells, printed labels, and restrained control details.
 Cartridge shells and fallback illustrations are CSS.
 Verified app icons fill the entire square front label with the complete image visible and no overlaid title or category; project names remain on the spine, beneath resting cartridges, and in the selected caption.
+Converty and Foodex use approved artwork derivatives with their baked-in rounded tile rims removed, so blue and orange backgrounds continue to the sticker edges while retaining the central app marks.
 Labels without verified icons retain their title, category, and CSS illustration.
 Icon provenance is recorded in `docs/app-icons.md`.
 Do not substitute invented logos for missing app icons or use copied game covers or official Nintendo marks.
