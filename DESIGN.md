@@ -57,8 +57,28 @@ Only successful clipboard writes may show the copied state; failures point users
 Do not add unverified project links, metrics, client logos, or fabricated case-study outcomes.
 
 Hover motion applies only to fine pointers with hover support.
-The reduced-motion query removes transitions and smooth scrolling.
+The reduced-motion query removes transitions, animations, and smooth scrolling, including the dialog backdrop.
 Do not introduce autoplay, perpetual animation, scroll hijacking, novelty cursors, or a forced loading screen.
+
+## Motion
+
+Use finite motion to reinforce the cartridge interaction and guide the reading order.
+The collection settles into place with a 640ms arrival and 65ms spacing between cartridges.
+Each label plays one short effect on hover, keyboard focus, or opening: waveform, rising steam, mail through a portal, or camera sparkle.
+Fine-pointer tilt is limited to 5 degrees vertically and 7 degrees horizontally, updated at most once per animation frame and reset on exit.
+Touch controls must not require hover or use pointer tilt.
+
+Initially visible text stays fully visible through first paint and hydration.
+Lower sections may reveal once when they enter the viewport, but are never hidden waiting for JavaScript or an observer.
+Focusing a reveal target makes it immediately readable.
+All effects must stop when the reduced-motion preference changes, including effects already running.
+
+Dialogs use native open/close behavior with progressive CSS entry and exit transitions.
+Keep the last detail content mounted through the exit so the dialog does not collapse before fading out.
+Rapid close/reopen and pagination must always reflect the latest selection, with no delayed state-changing timers.
+Changing projects resets dialog scroll and moves reading focus to the new title; closing returns focus to the original cartridge.
+Browsers without discrete-transition support retain immediate, functional native dialogs.
+Use CSS and the Web Animations API without adding an animation runtime dependency.
 
 ## Performance and isolation
 
