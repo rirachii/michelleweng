@@ -10,45 +10,35 @@ const EDITIONS = [
     id: "short-transcript",
     type: "AI tool",
     color: "orange",
-    title: ["short", "transcript"],
     motif: "wave",
-    caption: "LESS WATCHING. MORE MAKING.",
     number: "01",
   },
   {
     id: "umami-world",
     type: "Mobile app",
     color: "green",
-    title: ["umami", "world"],
     motif: "bowl",
-    caption: "A WORLD WORTH TASTING.",
     number: "02",
   },
   {
     id: "void-mail",
     type: "Web app",
     color: "purple",
-    title: ["void", "mail"],
     motif: "portal",
-    caption: "HERE TODAY. GONE TOMORROW.",
     number: "03",
   },
   {
     id: "retro-cam",
     type: "Experiment",
     color: "yellow",
-    title: ["retro", "cam"],
     motif: "camera",
-    caption: "A DIFFERENT WAY TO SEE.",
     number: "04",
   },
   {
     id: "converty",
     type: "Mac app",
     color: "blue",
-    title: ["converty", ""],
     motif: "files",
-    caption: "NEW FORMAT. SAME FAMILIAR PLACE.",
     number: "05",
   },
 ] as const;
@@ -75,21 +65,11 @@ function Cartridge({ index }: { index: number }) {
       aria-hidden="true"
     >
       <span className="cartridge-top">
-        <span>MICHELLE™</span>
-        <b>GAME LIBRARY</b>
+        <span>MICHELLE</span>
       </span>
       <span className="cartridge-ridges" />
       <span className="cartridge-label">
-        <span className="label-top">
-          <span>MW ORIGINALS</span>
-          <span>№ {edition.number}</span>
-        </span>
-        <span className="label-title">
-          {edition.title[0]}
-          <br />
-          {edition.title[1]}
-          <span className="label-star">✳</span>
-        </span>
+        <span className="label-title">{PROJECTS[index].name}</span>
         <span
           className={`label-art label-art--${icon ? "app-icon" : edition.motif}`}
         >
@@ -149,13 +129,10 @@ function Cartridge({ index }: { index: number }) {
             </span>
           )}
         </span>
-        <span className="label-bottom">
-          <span>{edition.caption}</span>
-          <b>MW</b>
-        </span>
+        <span className="label-category">{edition.type}</span>
       </span>
       <span className="cartridge-bottom">
-        <span>DMG-MW-{edition.number}</span>
+        <span />
         <i />
         <span>▼</span>
       </span>
