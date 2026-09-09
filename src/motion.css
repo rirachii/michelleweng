@@ -22,6 +22,10 @@ html {
   --rest-angle: 7deg;
   --rest-y: -7deg;
 }
+.cartridge--blue {
+  --rest-angle: -4deg;
+  --rest-y: -7deg;
+}
 .project-card:nth-child(2) {
   --motion-order: 1;
 }
@@ -30,6 +34,9 @@ html {
 }
 .project-card:nth-child(4) {
   --motion-order: 3;
+}
+.project-card:nth-child(5) {
+  --motion-order: 4;
 }
 .copy-button[data-copied="true"] {
   color: #3e592c;
@@ -79,6 +86,7 @@ html {
     --portal-motion: portal-ripple;
     --mail-motion: mail-send;
     --camera-motion: camera-spark;
+    --file-motion: file-convert;
   }
   .wave-bars i {
     animation-name: var(--signal-motion, none);
@@ -112,6 +120,9 @@ html {
   }
   .camera-spark {
     animation: var(--camera-motion, none) 700ms var(--motion-ease);
+  }
+  .file-sheet--output {
+    animation: var(--file-motion, none) 700ms var(--motion-ease);
   }
 
   .site-header nav a {
@@ -203,6 +214,7 @@ html {
       --portal-motion: portal-ripple;
       --mail-motion: mail-send;
       --camera-motion: camera-spark;
+      --file-motion: file-convert;
     }
     .project-card:hover .cartridge {
       transform: translateY(-14px) rotate(-1deg) rotateX(var(--tilt-x, 0deg))
@@ -321,6 +333,16 @@ html {
   45% {
     rotate: 90deg;
     scale: 1.28;
+  }
+}
+@keyframes file-convert {
+  from {
+    translate: -18px 0;
+    opacity: 0.25;
+  }
+  to {
+    translate: 0 0;
+    opacity: 1;
   }
 }
 @keyframes copy-confirm {

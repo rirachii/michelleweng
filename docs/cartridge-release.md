@@ -95,3 +95,16 @@ The build, 50 browser assertions, mobile/desktop visual checks, and live-domain 
 The live Lighthouse audit scored performance 98 and all other standard categories 100, with 1.3s LCP and zero layout shift.
 The original archive still renders its 11 icons and taskbar, and its preserved source ref is unchanged.
 See [the motion review](motion-review.md) for the behavior contract, content assessment, payload, audit conditions, and full verification scope.
+
+## Converty addition
+
+Converty is cartridge 05 with an original blue label, a finite file-conversion effect, and a direct link to `https://converty-pi.vercel.app/`.
+Its description and SwiftUI/AppKit tags were verified against that product website on September 9, 2026.
+New projects live in `src/portfolio-content.ts`, extending the original collection without changing the archive's content module.
+Collection counts and previous/next wrapping use the actual number of projects.
+The grid uses five columns at 1200px and above, three at intermediate widths, and two at 800px and below.
+
+The production build and 27 browser assertions pass, covering 320/390/768/1024/1200/1440px layouts, Converty's dialog and direct hash, its website link, navigation wrapping, focus return, finite animation, and reduced-motion interruption.
+Desktop and mobile dialog visuals were inspected in Chrome.
+Initial HTML, JavaScript, CSS, and favicon total 65,286 bytes gzip, an increase of 853 bytes over the motion release.
+The BapOS JavaScript, CSS, and shared original content retain their previous asset hashes.

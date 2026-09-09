@@ -231,7 +231,7 @@ h1 > span {
 }
 .cartridge-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 30px;
 }
 .project-card {
@@ -327,6 +327,14 @@ h1 > span {
   --label: #edd572;
   --label-ink: #51452b;
   transform: rotate(7deg) rotateY(-7deg);
+}
+.cartridge--blue {
+  --shell: #d0d9df;
+  --shell-light: #eff3f5;
+  --shell-dark: #a3afb8;
+  --label: #b6d9ed;
+  --label-ink: #2c526c;
+  transform: rotate(-4deg) rotateY(-7deg);
 }
 .cartridge-top {
   height: 19%;
@@ -425,7 +433,8 @@ h1 > span {
   right: 0;
   font-size: 19px;
 }
-.cartridge--orange .label-star {
+.cartridge--orange .label-star,
+.cartridge--blue .label-star {
   display: none;
 }
 .cartridge--purple .label-title {
@@ -460,6 +469,52 @@ h1 > span {
   font-weight: 900;
   padding: 1px 2px;
   border: 1px solid currentColor;
+}
+.file-art {
+  position: relative;
+  width: 118px;
+  height: 76px;
+}
+.file-sheet {
+  position: absolute;
+  top: 7px;
+  width: 43px;
+  height: 57px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 9px;
+  border: 2px solid currentColor;
+  border-radius: 4px;
+  background: #e5f1f6;
+  font: 700 9px/1 var(--mono);
+}
+.file-sheet::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 9px;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  box-shadow: 0 6px currentColor;
+  opacity: 0.45;
+}
+.file-sheet--source {
+  left: 0;
+  rotate: -9deg;
+  opacity: 0.75;
+}
+.file-sheet--output {
+  right: 0;
+  rotate: 7deg;
+  box-shadow: 3px 3px 0 #2c526c30;
+}
+.file-arrow {
+  position: absolute;
+  top: 19px;
+  left: 45px;
+  font: 28px/1 sans-serif;
 }
 .wave-bars {
   height: 100%;
@@ -1011,6 +1066,10 @@ h1 > span {
   background: #ebe5cd;
   --paper: #ebe5cd;
 }
+.detail-art--blue {
+  background: #e2ecf1;
+  --paper: #e2ecf1;
+}
 .detail-art .cartridge {
   width: 228px;
   max-width: 85%;
@@ -1112,18 +1171,27 @@ h1 > span {
     transform: translate(2px, -2px);
   }
 }
+@media (min-width: 1200px) {
+  .cartridge-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .cartridge-stage {
+    height: 280px;
+  }
+}
 @media (min-width: 1440px) {
   .site-wrap {
     width: 1120px;
   }
   .cartridge-grid {
-    gap: 36px;
+    gap: 24px;
   }
   .cartridge {
     width: 228px;
   }
   .cartridge-stage {
-    height: 335px;
+    height: 290px;
   }
 }
 @media (max-width: 1000px) {
