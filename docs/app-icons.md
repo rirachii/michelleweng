@@ -59,10 +59,10 @@ The owner supplied `https://foodex.space/` and `https://oompf.app/` for separate
 
 Both 1024 × 1024 originals were visually inspected and resized to 256 × 256 WebP with Pillow, quality 84, method 6. The artwork was preserved. Portfolio assets are `public/assets/app-icons/foodex-51845474.webp` (4,754 bytes) and `public/assets/app-icons/oompf-ccda7e9a.webp` (5,992 bytes).
 
-## Sources still needed
+## Archived project artwork
 
 No icon asset was found in the inspected `rirachii/shortstranscript` tree. No verified app icon or matching repository was found for Void Mail or Retro Cam.
-Their pre-existing cartridge illustrations remain until the user supplies the actual icon files, app links, or repository paths.
+Short Transcript, Void Mail, and Retro Cam have since been removed from the current portfolio; the five remaining projects all have verified icons.
 Do not describe those fallback illustrations as actual app icons or manufacture a replacement brand mark.
 
 ## Chirpberry addition

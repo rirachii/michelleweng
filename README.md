@@ -53,8 +53,9 @@ See `docs/motion-review.md` for the motion review, measured payload, and browser
 - `scripts/prerender.mjs`: build-time HTML rendering through Vite and React.
 - `bapos/index.html` and `src/bapos-main.tsx`: isolated original desktop entry.
 
-Chirpberry leads the eight-project collection and uses a View source link to its verified GitHub repository because no public product URL was found.
-Converty, Oompf, and Foodex follow and link to the product websites supplied by the owner. Each has a Visit website action on its shelf preview, a hostname link in the top-right All projects menu, and a link in its detail dialog. The original four projects remain in the collection without invented URLs; their detail views offer an email link to ask about the project.
+Chirpberry leads the five-project collection and uses a View source link to its verified GitHub repository because no public product URL was found.
+Converty, Oompf, and Foodex follow and link to the product websites supplied by the owner. Each has a Visit website action on its shelf preview, a hostname link in the top-right All projects menu, and a link in its detail dialog. Umami World is the fifth project; its detail view offers an email link because no verified product URL is supplied.
+Short Transcript, Void Mail, and Retro Cam are removed from the current collection; the original BapOS archive retains its historical content.
 Chirpberry, Converty, Oompf, and Foodex include real product screenshot previews after selection and in their dialogs.
 Add a real `link` and optional `linkLabel` in `src/portfolio-content.ts` to enable a direct project link for new additions.
 Set `linkKind: "source"` when the destination is a source repository.

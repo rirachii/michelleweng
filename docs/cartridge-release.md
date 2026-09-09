@@ -196,3 +196,14 @@ Public mobile Lighthouse scored 100 in all four categories with 1.38s LCP, 0ms T
 The desktop performance score was 100 with 0.34s LCP.
 Both audits requested zero product screenshots before interaction.
 See [the audit record](performance.md) for exact conditions and timestamps.
+
+## Five-project collection, September 9, 2026
+
+The owner removed Short Transcript, Void Mail, and Retro Cam from the current portfolio.
+The shelf, project index, and dialogs now contain Chirpberry, Converty, Oompf, Foodex, and Umami World, numbered 01 through 05.
+The removed project hashes no longer open a dialog, and the five remaining hashes retain their identities.
+The original BapOS content and bundles remain unchanged.
+
+The build passed TypeScript, both Vite entries, and prerendering.
+Browser checks at 320px and 1440px confirmed the five entries, all five dialogs, 05 / 05 numbering, navigation wrap, removed hash handling, the Umami World hash, and no horizontal overflow or browser errors.
+The compact shelf was visually inspected with all five project names visible.
