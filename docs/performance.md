@@ -56,3 +56,27 @@ The checks confirmed that every logo fills its label in both the shelf and dialo
 Phone and desktop rendered artwork was inspected visually.
 The final production preview scored 100 in all four Lighthouse categories at `2026-09-09T19:09:03.173Z`, with 1.2s FCP, 1.7s LCP, 0ms TBT, and 0 CLS.
 This preview ran locally; the baseline above was measured on the public domain, so these timings are not a before/after speed comparison.
+
+## Published full-label results
+
+PR [10](https://github.com/rirachii/michelleweng/pull/10) merged as `bcbac1bcfac8ef851d618f74e40ed217c2ec6530` and passed the Vercel production check.
+The public HTML, both initial JavaScript files, CSS, all four icons, and `/bapos/` HTML match the tested build bytes.
+Hashed assets retain immutable caching.
+
+The public site was audited again with Lighthouse 12.8.2 at `2026-09-09T19:12:58.226Z` for mobile and `2026-09-09T19:13:09.960Z` for desktop.
+Mobile used the same simulated settings as the baseline; desktop used Lighthouse's desktop preset.
+
+| Measurement | Mobile | Desktop |
+| --- | --- | --- |
+| Performance | 100/100 | 100/100 |
+| Accessibility / Best Practices / SEO | 100 / 100 / 100 | 100 / 100 / 100 |
+| First contentful paint | 1.2s | 0.34s |
+| Largest contentful paint | 1.4s | 0.34s |
+| Total blocking time | 0ms | 0ms |
+| Cumulative layout shift | 0 | 0 |
+| Total transfer | 90 KiB | 90 KiB |
+
+The public mobile score and transfer size remain unchanged from the baseline; LCP varied from 1.2s to 1.4s across the two runs.
+Do not describe this artwork update as a measured timing improvement.
+Live visual checks confirmed the complete Foodex logo and dialog at 320px and Converty at 1440px, with no document overflow or console errors.
+The default page requests only its own bundles and the four icons; the original archive still renders its 11 desktop icons and taskbar.

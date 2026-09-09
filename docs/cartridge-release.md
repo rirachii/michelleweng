@@ -158,3 +158,12 @@ The production build passed. Browser checks at 320, 390, 768, and 1440 CSS pixel
 The reviewed source merged through PR [9](https://github.com/rirachii/michelleweng/pull/9) as `f7a4a33c85233dfa490a2d286d89957c1ef2d075`, following a successful Vercel preview build. Production verification is a separate gate; check for `portfolio-DJ6gOo4U.js` and `portfolio-kjDJPVhY.css` on the public domain before reporting this update live.
 
 Production deployed successfully from `d2e2644450820d17f318f3baadb86a1571bb4142` after the release-record push retriggered the Git integration. The public HTML, JavaScript, CSS, and archive HTML match the tested build bytes. Live browser checks at 320px with mobile/touch emulation and at 1440px confirmed the header placement, 24px navigation gap, menu and dialog interactions, keyboard focus return, and no overflow or console errors. The archived source ref remains unchanged.
+
+## Complete app-logo labels, September 9, 2026
+
+PR [10](https://github.com/rirachii/michelleweng/pull/10) merged as `bcbac1bcfac8ef851d618f74e40ed217c2ec6530` and passed its Vercel production check.
+Converty, Oompf, Foodex, and Umami World now use their complete app artwork across square cartridge labels, reusing the original four small WebP files.
+All four initial shelf icons load eagerly.
+The public JavaScript `portfolio-oFMzQqeP.js`, CSS `portfolio-BUhlQMyE.css`, HTML, icons, and archive entry match the tested build.
+The public site scores 100 in all four Lighthouse categories on mobile and desktop, with 1.4s mobile LCP, 0.34s desktop LCP, zero blocking time, zero layout shift, and 90 KiB initial transfer.
+See [the performance record](performance.md) for baseline comparisons, audit conditions, and browser verification.
