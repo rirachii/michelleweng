@@ -1,0 +1,348 @@
+/* Motion enhances the existing page. Nothing is hidden while waiting for JS. */
+:root {
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-settle: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+html {
+  scrollbar-gutter: stable;
+}
+.cartridge {
+  --rest-angle: -7deg;
+  --rest-y: -8deg;
+}
+.cartridge--green {
+  --rest-angle: 5deg;
+  --rest-y: -7deg;
+}
+.cartridge--purple {
+  --rest-angle: -5deg;
+  --rest-y: -7deg;
+}
+.cartridge--yellow {
+  --rest-angle: 7deg;
+  --rest-y: -7deg;
+}
+.project-card:nth-child(2) {
+  --motion-order: 1;
+}
+.project-card:nth-child(3) {
+  --motion-order: 2;
+}
+.project-card:nth-child(4) {
+  --motion-order: 3;
+}
+.copy-button[data-copied="true"] {
+  color: #3e592c;
+}
+.copy-button > span {
+  display: inline-block;
+}
+.detail-dialog:not([open]) {
+  pointer-events: none;
+}
+#detail-title:focus {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cartridge-stage {
+    animation: cartridge-arrive 640ms var(--motion-ease) both;
+    animation-delay: calc(var(--motion-order, 0) * 65ms);
+  }
+  .pixel-mark {
+    animation: mark-arrive 520ms var(--motion-ease);
+  }
+  .mini-dpad {
+    animation: dpad-arrive 700ms var(--motion-ease);
+  }
+  .cartridge {
+    transition:
+      transform 260ms var(--motion-settle),
+      box-shadow 260ms ease;
+  }
+  .project-card:focus-visible .cartridge {
+    transform: translateY(-12px) rotate(-1deg) rotateY(0);
+  }
+  .project-card:active .cartridge {
+    transform: translateY(-3px) rotate(0) scale(0.97);
+    transition-duration: 90ms;
+  }
+  .detail-dialog[open] .detail-art .cartridge {
+    animation: cartridge-insert 500ms var(--motion-ease);
+  }
+
+  /* Each label plays once per hover, keyboard focus, or cartridge insertion. */
+  .detail-dialog[open],
+  .project-card:focus-visible {
+    --signal-motion: signal-play;
+    --steam-motion: steam-rise;
+    --portal-motion: portal-ripple;
+    --mail-motion: mail-send;
+    --camera-motion: camera-spark;
+  }
+  .wave-bars i {
+    animation-name: var(--signal-motion, none);
+    animation-duration: 850ms;
+    animation-timing-function: ease-in-out;
+    transform-origin: center;
+  }
+  .wave-bars i:nth-child(3n) {
+    animation-delay: 70ms;
+  }
+  .wave-bars i:nth-child(3n + 1) {
+    animation-delay: 140ms;
+  }
+  .steam {
+    animation: var(--steam-motion, none) 1100ms ease-out;
+  }
+  .portal-art > span {
+    animation: var(--portal-motion, none) 900ms ease-out;
+  }
+  .portal-art > span:nth-child(2) {
+    animation-delay: 50ms;
+  }
+  .portal-art > span:nth-child(3) {
+    animation-delay: 100ms;
+  }
+  .portal-art > span:nth-child(4) {
+    animation-delay: 150ms;
+  }
+  .portal-art > i {
+    animation: var(--mail-motion, none) 950ms var(--motion-ease);
+  }
+  .camera-spark {
+    animation: var(--camera-motion, none) 700ms var(--motion-ease);
+  }
+
+  .site-header nav a {
+    position: relative;
+  }
+  .site-header nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 6px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 220ms var(--motion-ease);
+  }
+  .site-header nav a:is(:hover, :focus-visible)::after {
+    transform: scaleX(1);
+  }
+  .identity .pixel-mark {
+    transition: rotate 260ms var(--motion-ease);
+  }
+  .identity:is(:hover, :focus-visible) .pixel-mark {
+    rotate: 8deg;
+  }
+  .hello-button > span,
+  .email-link > span,
+  .writing-row > span {
+    transition: transform 220ms var(--motion-ease);
+  }
+  .hello-button:is(:hover, :focus-visible) > span,
+  .email-link:is(:hover, :focus-visible) > span {
+    transform: translate(3px, -3px);
+  }
+  .hello-button:active {
+    transform: translateY(1px);
+  }
+  .writing-row:is(:hover, :focus-visible) > span:nth-child(2) {
+    transform: translateX(5px);
+  }
+  .writing-row:is(:hover, :focus-visible) > span:last-child {
+    transform: translate(2px, -2px);
+  }
+  .copy-button[data-copied="true"] > span {
+    animation: copy-confirm 260ms var(--motion-ease);
+  }
+
+  /* Native discrete transitions keep the dialog in the top layer during exit. */
+  @supports (transition-behavior: allow-discrete) {
+    .detail-dialog {
+      opacity: 0;
+      transform: translateY(16px) scale(0.975);
+      transition:
+        opacity 200ms ease,
+        transform 260ms var(--motion-ease),
+        display 260ms allow-discrete,
+        overlay 260ms allow-discrete;
+    }
+    .detail-dialog[open] {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .detail-dialog::backdrop {
+      opacity: 0;
+      transition:
+        opacity 220ms ease,
+        display 260ms allow-discrete,
+        overlay 260ms allow-discrete;
+    }
+    .detail-dialog[open]::backdrop {
+      opacity: 1;
+    }
+    @starting-style {
+      .detail-dialog[open] {
+        opacity: 0;
+        transform: translateY(16px) scale(0.975);
+      }
+      .detail-dialog[open]::backdrop {
+        opacity: 0;
+      }
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .project-card:hover {
+      --signal-motion: signal-play;
+      --steam-motion: steam-rise;
+      --portal-motion: portal-ripple;
+      --mail-motion: mail-send;
+      --camera-motion: camera-spark;
+    }
+    .project-card:hover .cartridge {
+      transform: translateY(-14px) rotate(-1deg) rotateX(var(--tilt-x, 0deg))
+        rotateY(var(--tilt-y, 0deg));
+    }
+    .project-card:active .cartridge {
+      transform: translateY(-3px) scale(0.97);
+    }
+  }
+}
+
+@keyframes cartridge-arrive {
+  0% {
+    translate: 0 26px;
+    rotate: -2deg;
+  }
+  72% {
+    translate: 0 -3px;
+    rotate: 0.4deg;
+  }
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+}
+@keyframes cartridge-insert {
+  from {
+    translate: 0 -48px;
+    rotate: -8deg;
+    scale: 0.95;
+  }
+  to {
+    translate: 0 0;
+    rotate: 0deg;
+    scale: 1;
+  }
+}
+@keyframes mark-arrive {
+  from {
+    scale: 0.7;
+    rotate: -14deg;
+  }
+  to {
+    scale: 1;
+    rotate: 0deg;
+  }
+}
+@keyframes dpad-arrive {
+  from {
+    rotate: -65deg;
+    scale: 0.85;
+  }
+  to {
+    rotate: 0deg;
+    scale: 1;
+  }
+}
+@keyframes signal-play {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  25% {
+    transform: scaleY(0.45);
+  }
+  50% {
+    transform: scaleY(1.12);
+  }
+  75% {
+    transform: scaleY(0.72);
+  }
+}
+@keyframes steam-rise {
+  0%,
+  100% {
+    translate: 0 0;
+    opacity: 1;
+  }
+  65% {
+    translate: 1px -9px;
+    opacity: 0;
+  }
+  66% {
+    translate: 0 4px;
+    opacity: 0;
+  }
+}
+@keyframes portal-ripple {
+  0%,
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+  45% {
+    scale: 1.12;
+    opacity: 0.5;
+  }
+}
+@keyframes mail-send {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1;
+  }
+  45% {
+    translate: -12px -8px;
+    scale: 0.7;
+  }
+}
+@keyframes camera-spark {
+  0%,
+  100% {
+    rotate: 0deg;
+    scale: 1;
+  }
+  45% {
+    rotate: 90deg;
+    scale: 1.28;
+  }
+}
+@keyframes copy-confirm {
+  from {
+    transform: translateY(4px);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail-dialog::backdrop {
+    transition: none !important;
+    animation: none !important;
+  }
+  .project-card:is(:hover, :focus-visible, :active) .cartridge {
+    transform: rotate(var(--rest-angle)) rotateY(var(--rest-y));
+  }
+  .project-card:is(:hover, :focus-visible) .project-arrow {
+    transform: none;
+  }
+}

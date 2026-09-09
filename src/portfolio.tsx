@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { animateDetails, usePortfolioMotion } from "./usePortfolioMotion";
 import {
   CONTACT,
   PROFILE,
@@ -153,14 +154,23 @@ function ResumeLink() {
 
 export function Portfolio() {
   const [selection, setSelection] = useState<Selection | null>(null);
+  // Retain content during the native dialog's CSS exit transition.
+  const [displayedSelection, setDisplayedSelection] =
+    useState<Selection | null>(null);
   const [copied, setCopied] = useState(false);
   const [copyFailed, setCopyFailed] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const siteRef = useRef<HTMLDivElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
   const copyTimer = useRef<ReturnType<typeof setTimeout>>();
+  usePortfolioMotion(siteRef);
 
   useEffect(() => {
-    const update = () => setSelection(selectionFromHash());
+    const update = () => {
+      const next = selectionFromHash();
+      if (next) setDisplayedSelection(next);
+      setSelection(next);
+    };
     update();
     window.addEventListener("hashchange", update);
     return () => {
@@ -172,15 +182,23 @@ export function Portfolio() {
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
+    let stopDetailMotion = () => {};
     if (selection) {
       if (!dialog.open) dialog.showModal();
+      else
+        dialog
+          .querySelector<HTMLElement>("#detail-title")
+          ?.focus({ preventScroll: true });
+      dialog.scrollTop = 0;
       document.body.style.overflow = "hidden";
+      stopDetailMotion = animateDetails(dialog);
     } else {
       dialog.close();
       document.body.style.overflow = "";
       returnFocus.current?.focus({ preventScroll: true });
     }
     return () => {
+      stopDetailMotion();
       document.body.style.overflow = "";
     };
   }, [selection]);
@@ -192,6 +210,7 @@ export function Portfolio() {
         ? EDITIONS[next.index].id
         : `note-${next.index + 1}`;
     window.history.pushState(null, "", `#${hash}`);
+    setDisplayedSelection(next);
     setSelection(next);
   }
 
@@ -221,7 +240,7 @@ export function Portfolio() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <div className="site-wrap">
+      <div className="site-wrap" ref={siteRef}>
         <header className="site-header">
           <a href="#" className="identity" aria-label={`${PROFILE.name}, home`}>
             <span className="pixel-mark" aria-hidden="true">
@@ -300,6 +319,7 @@ export function Portfolio() {
                 <button
                   className={`project-card project-card--${EDITIONS[index].color}`}
                   key={project.name}
+                  data-reveal
                   onClick={(event) =>
                     openSelection(
                       { kind: "project", index },
@@ -343,14 +363,14 @@ export function Portfolio() {
             id="about"
             aria-labelledby="about-title"
           >
-            <div className="about-heading">
+            <div className="about-heading" data-reveal>
               <p className="eyebrow">MEET THE PLAYER</p>
               <h2 id="about-title">Behind the pixels.</h2>
               <div className="location">
                 <span aria-hidden="true">◎</span> {PROFILE.location}
               </div>
             </div>
-            <div className="about-copy">
+            <div className="about-copy" data-reveal>
               <p>
                 I like making complex things feel simple. Sometimes that’s a
                 mobile app. Sometimes it’s the backend quietly doing its job.
@@ -383,6 +403,7 @@ export function Portfolio() {
                 <button
                   className="writing-row"
                   key={post.title}
+                  data-reveal
                   onClick={(event) =>
                     openSelection(
                       { kind: "writing", index },
@@ -404,7 +425,11 @@ export function Portfolio() {
             </div>
           </section>
 
-          <section className="contact-section" aria-labelledby="contact-title">
+          <section
+            className="contact-section"
+            aria-labelledby="contact-title"
+            data-reveal
+          >
             <div>
               <p className="eyebrow">
                 <span className="status-light" /> TWO-PLAYER MODE
@@ -422,8 +447,14 @@ export function Portfolio() {
               <a className="hello-button" href={`mailto:${CONTACT.email}`}>
                 Let’s talk <span aria-hidden="true">↗</span>
               </a>
-              <button className="copy-button" onClick={copyEmail}>
-                {copied ? "Email copied ✓" : "Copy email address"}
+              <button
+                className="copy-button"
+                onClick={copyEmail}
+                data-copied={copied}
+              >
+                <span key={copied ? "copied" : "idle"}>
+                  {copied ? "Email copied ✓" : "Copy email address"}
+                </span>
               </button>
               <span className="copy-status" role="status">
                 {copyFailed
@@ -451,7 +482,7 @@ export function Portfolio() {
 
       <dialog
         ref={dialogRef}
-        className={`detail-dialog ${selection?.kind === "writing" ? "detail-dialog--writing" : ""}`}
+        className={`detail-dialog ${displayedSelection?.kind === "writing" ? "detail-dialog--writing" : ""}`}
         aria-labelledby="detail-title"
         onCancel={(event) => {
           event.preventDefault();
@@ -478,40 +509,49 @@ export function Portfolio() {
         >
           ×
         </button>
-        {selection?.kind === "project" && (
+        {displayedSelection?.kind === "project" && (
           <div className="project-detail">
             <div
-              className={`detail-art detail-art--${EDITIONS[selection.index].color}`}
+              className={`detail-art detail-art--${EDITIONS[displayedSelection.index].color}`}
             >
-              <Cartridge index={selection.index} />
+              <Cartridge
+                key={displayedSelection.index}
+                index={displayedSelection.index}
+              />
             </div>
             <div className="detail-copy">
               <p className="eyebrow">
-                CARTRIDGE {EDITIONS[selection.index].number} /{" "}
-                {EDITIONS[selection.index].type.toUpperCase()}
+                CARTRIDGE {EDITIONS[displayedSelection.index].number} /{" "}
+                {EDITIONS[displayedSelection.index].type.toUpperCase()}
               </p>
-              <h2 id="detail-title">{PROJECTS[selection.index].name}</h2>
-              <p className="detail-lead">{PROJECTS[selection.index].blurb}</p>
-              <p>{PROJECTS[selection.index].description}</p>
+              <h2 id="detail-title" tabIndex={-1}>
+                {PROJECTS[displayedSelection.index].name}
+              </h2>
+              <p className="detail-lead">
+                {PROJECTS[displayedSelection.index].blurb}
+              </p>
+              <p>{PROJECTS[displayedSelection.index].description}</p>
               <h3>BUILT WITH</h3>
               <ul className="stack-list">
-                {PROJECTS[selection.index].tags.map((tag) => (
+                {PROJECTS[displayedSelection.index].tags.map((tag) => (
                   <li key={tag}>{tag}</li>
                 ))}
               </ul>
-              {PROJECTS[selection.index].link ? (
+              {PROJECTS[displayedSelection.index].link ? (
                 <a
                   className="hello-button"
-                  href={PROJECTS[selection.index].link}
+                  href={PROJECTS[displayedSelection.index].link}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {PROJECTS[selection.index].linkLabel ?? "View project"} ↗
+                  {PROJECTS[displayedSelection.index].linkLabel ??
+                    "View project"}{" "}
+                  ↗
                 </a>
               ) : (
                 <a
                   className="text-link"
-                  href={`mailto:${CONTACT.email}?subject=${encodeURIComponent(`Tell me about ${PROJECTS[selection.index].name}`)}`}
+                  href={`mailto:${CONTACT.email}?subject=${encodeURIComponent(`Tell me about ${PROJECTS[displayedSelection.index].name}`)}`}
                 >
                   Ask me about this project <span aria-hidden="true">↗</span>
                 </a>
@@ -522,7 +562,7 @@ export function Portfolio() {
                     openSelection(
                       {
                         kind: "project",
-                        index: (selection.index + 3) % PROJECTS.length,
+                        index: (displayedSelection.index + 3) % PROJECTS.length,
                       },
                       returnFocus.current ?? document.body,
                     )
@@ -531,13 +571,13 @@ export function Portfolio() {
                 >
                   ← Previous
                 </button>
-                <span>{EDITIONS[selection.index].number} / 04</span>
+                <span>{EDITIONS[displayedSelection.index].number} / 04</span>
                 <button
                   onClick={() =>
                     openSelection(
                       {
                         kind: "project",
-                        index: (selection.index + 1) % PROJECTS.length,
+                        index: (displayedSelection.index + 1) % PROJECTS.length,
                       },
                       returnFocus.current ?? document.body,
                     )
@@ -550,20 +590,25 @@ export function Portfolio() {
             </div>
           </div>
         )}
-        {selection?.kind === "writing" && (
+        {displayedSelection?.kind === "writing" && (
           <article className="writing-detail">
             <p className="eyebrow">
-              SAVE FILE {String(selection.index + 1).padStart(2, "0")} /{" "}
-              <time dateTime={WRITING[selection.index].date}>
-                {WRITING[selection.index].date}
+              SAVE FILE {String(displayedSelection.index + 1).padStart(2, "0")}{" "}
+              /{" "}
+              <time dateTime={WRITING[displayedSelection.index].date}>
+                {WRITING[displayedSelection.index].date}
               </time>
             </p>
-            <h2 id="detail-title">{WRITING[selection.index].title}</h2>
-            <p className="detail-lead">{WRITING[selection.index].blurb}</p>
-            <p>{WRITING[selection.index].body}</p>
+            <h2 id="detail-title" tabIndex={-1}>
+              {WRITING[displayedSelection.index].title}
+            </h2>
+            <p className="detail-lead">
+              {WRITING[displayedSelection.index].blurb}
+            </p>
+            <p>{WRITING[displayedSelection.index].body}</p>
             <a
               className="text-link"
-              href={`mailto:${CONTACT.email}?subject=${encodeURIComponent(WRITING[selection.index].title)}`}
+              href={`mailto:${CONTACT.email}?subject=${encodeURIComponent(WRITING[displayedSelection.index].title)}`}
             >
               Let’s talk about it <span aria-hidden="true">↗</span>
             </a>

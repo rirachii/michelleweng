@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import { Portfolio } from "./portfolio";
 import "./portfolio.css";
+import "./motion.css";
 
 const root = document.getElementById("root")!;
 const app = (

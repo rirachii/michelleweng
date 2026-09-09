@@ -25,13 +25,18 @@ Check the new page at 320px, 390px, 768px, and 1440px widths.
 Open every cartridge, navigate between projects, press Escape, use browser Back, and reload a direct project hash.
 Check that focus returns to the opening cartridge, dialogs scroll at small heights, email copy reports success or failure, and the original `/bapos/` entry still loads.
 Respect reduced motion and verify that the main page never requests the archive bundle or wallpaper.
+Switch reduced motion on during a dialog transition and a scroll reveal; both must stop immediately.
+Close and reopen a dialog quickly, then check next/previous focus and the return to its opening cartridge.
+See `docs/motion-review.md` for the motion review, measured payload, and browser checks.
 
 ## Content and design
 
 - `src/content.ts`: original profile, project descriptions, writing summaries, résumé, and contact links, shared with the archive.
 - `src/portfolio.tsx`: page composition, cartridge presentation metadata, and interactions.
   If the project collection changes, update `EDITIONS` alongside `PROJECTS` in the same order and update the displayed collection count.
-- `src/portfolio.css`: responsive layouts, CSS cartridge artwork, focus styles, and motion preferences.
+- `src/portfolio.css`: responsive layouts, CSS cartridge artwork, and focus styles.
+- `src/motion.css`: finite cartridge and label animations, dialog transitions, interaction feedback, and reduced-motion overrides.
+- `src/usePortfolioMotion.ts`: progressive scroll reveals, fine-pointer tilt, and cancellable detail-copy animation.
 - `DESIGN.md`: current portfolio design and accessibility contract.
 - `docs/BAPOS-DESIGN.md`: preserved design system for the original desktop.
 - `src/main.tsx`: new page hydration in production and mounting in development.
