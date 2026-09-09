@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
 import { animateDetails, usePortfolioMotion } from "./usePortfolioMotion";
 import { PROJECTS } from "./portfolio-content";
+import { CartridgeShelf } from "./CartridgeShelf";
 import { CONTACT, PROFILE, RESUME_MD, RESUME_PDF, WRITING } from "./content";
 
 // Presentation metadata stays separate so the archived OS keeps its original content.
@@ -55,8 +56,7 @@ const EDITIONS = [
 const COLLECTION_COUNT = String(PROJECTS.length).padStart(2, "0");
 
 type Selection =
-  | { kind: "project"; index: number }
-  | { kind: "writing"; index: number };
+  { kind: "project"; index: number } | { kind: "writing"; index: number };
 
 function selectionFromHash(): Selection | null {
   const hash = window.location.hash.slice(1);
@@ -299,31 +299,15 @@ export function Portfolio() {
         <main id="main">
           <section className="intro" aria-labelledby="intro-title">
             <div className="intro-copy">
-              <p className="eyebrow">
-                <span className="status-light" /> SOFTWARE ENGINEER & CURIOUS
-                HUMAN
-              </p>
-              <h1 id="intro-title">
-                Thoughtful apps.
-                <br />
-                <span>A playful spirit.</span>
-              </h1>
+              <h1 id="intro-title">Hi, I’m Michelle.</h1>
               <p className="intro-description">
-                Hi, I’m Michelle. I build simple app experiences
-                <br className="desktop-break" /> and the systems that make them
+                I build simple app experiences and the systems that make them
                 work.
               </p>
-            </div>
-            <div className="player-note">
-              <span className="mini-dpad" aria-hidden="true" />
-              <span>
-                A few things I’ve made.
-                <br />
-                Scroll the stack. Pick one to take a look inside.
-              </span>
-              <span className="note-arrow" aria-hidden="true">
-                ↙
-              </span>
+              <p className="intro-aside">
+                Usually somewhere down a rabbit hole. Here are a few things I’ve
+                made along the way.
+              </p>
             </div>
           </section>
 
@@ -334,51 +318,19 @@ export function Portfolio() {
           >
             <div className="section-heading">
               <h2 id="collection-title">
-                THE COLLECTION <span>{COLLECTION_COUNT}</span>
+                Selected work <span>{COLLECTION_COUNT}</span>
               </h2>
-              <span className="section-note">
-                <span aria-hidden="true">↓</span> SCROLL TO BROWSE
-              </span>
+              <span className="section-note">PICK A CARTRIDGE</span>
             </div>
-            <div className="cartridge-stack">
-              {PROJECTS.map((project, index) => (
-                <button
-                  className={`project-card project-card--${EDITIONS[index].color}`}
-                  key={project.name}
-                  data-active={index === 0}
-                  style={{ "--stack-order": index } as CSSProperties}
-                  onClick={(event) =>
-                    openSelection(
-                      { kind: "project", index },
-                      event.currentTarget,
-                    )
-                  }
-                  aria-haspopup="dialog"
-                >
-                  <span className="cartridge-stage">
-                    <Cartridge index={index} />
-                  </span>
-                  <span className="project-info">
-                    <span className="project-meta">
-                      {EDITIONS[index].type}
-                      <span>{EDITIONS[index].number}</span>
-                    </span>
-                    <span className="project-title">
-                      {project.name}
-                      <span className="project-arrow" aria-hidden="true">
-                        ↗
-                      </span>
-                    </span>
-                    <span className="project-blurb">{project.blurb}</span>
-                  </span>
-                </button>
-              ))}
-            </div>
+            <CartridgeShelf
+              editions={EDITIONS}
+              renderCartridge={(index) => <Cartridge index={index} />}
+              onOpen={(index, source) =>
+                openSelection({ kind: "project", index }, source)
+              }
+            />
             <div className="collection-foot">
-              <span>
-                <span className="key-cap">A</span> A LITTLE COLLECTION, ALWAYS
-                GROWING.
-              </span>
+              <span>A LITTLE COLLECTION, ALWAYS GROWING.</span>
               <a href={CONTACT.links[0].url} target="_blank" rel="noreferrer">
                 More on GitHub <span aria-hidden="true">↗</span>
               </a>

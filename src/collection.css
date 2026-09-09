@@ -1,80 +1,387 @@
-/* A physical stack on the native page scroll. Every project stays readable. */
-html:has(.cartridge-stack .project-card:focus-visible) {
-  scroll-behavior: auto;
+/* Upright cartridges on a compact shelf. CSS faces need no graphics runtime. */
+.site-wrap {
+  width: min(760px, calc(100% - 80px));
 }
-.cartridge-stack {
-  max-width: 790px;
-  margin: 20px auto 36px;
-  padding: 12px 0 24px;
-  isolation: isolate;
+.site-header {
+  height: 100px;
+  border-bottom: 0;
 }
-.cartridge-stack .project-card {
-  position: relative;
-  width: 100%;
-  height: 340px;
-  z-index: calc(1 + var(--stack-order));
-  border-radius: 8px;
+.identity {
+  font-size: 15px;
 }
-.cartridge-stack .project-card + .project-card {
-  margin-top: -112px;
+.site-header nav {
+  gap: 24px;
+  font-size: 12px;
 }
-.cartridge-stack .project-card:is([data-active="true"], :focus-visible) {
-  z-index: 20;
+.intro {
+  display: block;
+  padding: 52px 0 32px;
 }
-.cartridge-stack .cartridge-stage {
-  position: absolute;
-  right: 18px;
-  top: 0;
-  width: 345px;
-  height: 340px;
-  padding: 0;
-  perspective: 1000px;
-  animation: none;
+.intro-copy {
+  max-width: 590px;
 }
-.cartridge-stack .cartridge {
-  width: 280px;
-  max-width: 94%;
-  transform: translateY(12px) rotateX(34deg) rotate(-7deg) rotateY(-6deg)
-    scale(0.92);
-  transform-origin: center 70%;
+.intro h1 {
+  font-size: 32px;
+  line-height: 1.25;
+  letter-spacing: -1.1px;
+  font-weight: 550;
+  margin: 0 0 16px;
 }
-.cartridge-stack .project-info {
-  width: min(42%, 295px);
-  margin-top: 116px;
-  padding: 0 0 0 18px;
-  position: relative;
+.intro-description {
+  font-size: 24px;
+  line-height: 1.45;
+  letter-spacing: -0.6px;
+  color: var(--ink);
 }
-.cartridge-stack .project-info::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 2px;
-  width: 3px;
-  height: 17px;
-  background: #d6d9ce;
-  border-radius: 2px;
+.intro-aside {
+  max-width: 510px;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin-top: 24px;
+  letter-spacing: -0.3px;
 }
-.cartridge-stack [data-active="true"] .project-info::before,
-.cartridge-stack .project-card:focus-visible .project-info::before {
-  background: #758653;
+.collection > .section-heading {
+  border: 0;
+  padding: 20px 0 0;
 }
-.cartridge-stack .project-meta {
+.collection > .section-heading h2 {
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+.collection > .section-heading h2 > span {
+  border: 0;
   font-size: 10px;
 }
-.cartridge-stack .project-title {
-  font-size: 25px;
-  margin-top: 11px;
-  line-height: 1.15;
-  letter-spacing: -0.8px;
+.cartridge-library {
+  --cart-width: 228px;
+  --step: 85px;
+  --slot: 70px;
+  --depth: 24px;
+  --spread: calc((var(--cart-width) - var(--slot)) / 2 + 12px);
 }
-.cartridge-stack .project-blurb {
-  margin-top: 10px;
+.shelf-viewport {
+  height: 358px;
+  position: relative;
+  overflow: clip;
+  perspective: 1400px;
+  touch-action: pan-y;
+  user-select: none;
+  margin: 5px -24px 0;
+}
+.shelf-position {
+  position: absolute;
+  left: 50%;
+  top: 53px;
+  width: var(--slot);
+  height: calc(var(--cart-width) / 0.875 + 12px);
+  padding: 0;
+  border: 0;
+  background: none;
+  transform: translateX(
+    calc(
+      -50% + var(--offset) * var(--step) + var(--spread-direction) *
+        var(--spread)
+    )
+  );
+  touch-action: pan-y;
+}
+.shelf-item {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  touch-action: pan-y;
+}
+.shelf-position[data-active="true"] {
+  width: var(--cart-width);
+}
+.shelf-position::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  width: 100px;
+  height: 30px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, #30332d24, transparent 68%);
+  pointer-events: none;
+}
+.shelf-position[data-active="true"]::before {
+  width: 190px;
+  bottom: -4px;
+  opacity: 0.8;
+}
+.shelf-item:focus-visible {
+  outline-offset: 8px;
+  border-radius: 6px;
+}
+.shelf-object {
+  --shell: #c9cac4;
+  --shell-light: #e6e7e2;
+  --shell-dark: #a1a49c;
+  position: absolute;
+  top: 0;
+  left: calc(50% - var(--cart-width) / 2);
+  width: var(--cart-width);
+  aspect-ratio: 0.875;
+  transform-style: preserve-3d;
+  transform: rotateX(-5deg) rotateY(72deg);
+  pointer-events: none;
+}
+.shelf-object.cartridge--green {
+  --shell: #bec9b0;
+  --shell-light: #e2e9d7;
+  --shell-dark: #909e82;
+}
+.shelf-object.cartridge--purple {
+  --shell: #525550;
+  --shell-light: #747970;
+  --shell-dark: #343a31;
+}
+.shelf-object.cartridge--yellow {
+  --shell: #e0dccc;
+  --shell-light: #f1ede3;
+  --shell-dark: #b9b4a7;
+}
+.shelf-object.cartridge--blue {
+  --shell: #a6bdce;
+  --shell-light: #d7e4ec;
+  --shell-dark: #708b9f;
+}
+.shelf-object .cartridge {
+  --shell: inherit;
+  --shell-light: inherit;
+  --shell-dark: inherit;
+  width: 100%;
+  max-width: none;
+  transform: translateZ(calc(var(--depth) / 2));
+  box-shadow:
+    inset 2px 2px 2px #ffffff80,
+    inset -2px -2px 2px #0002;
+  transition: none;
+}
+.shelf-object .cartridge::before {
+  display: none;
+}
+.shelf-position[data-active="true"] .shelf-object {
+  transform: translateY(-21px) rotateX(-3deg) rotateY(-9deg);
+}
+.shelf-back,
+.shelf-spine,
+.shelf-edge {
+  display: block;
+  position: absolute;
+  background: var(--shell);
+  border: 1px solid var(--shell-dark);
+  backface-visibility: hidden;
+}
+.shelf-back {
+  inset: 0;
+  border-radius: 8px;
+  transform: rotateY(180deg) translateZ(calc(var(--depth) / 2));
+}
+.shelf-spine {
+  width: var(--depth);
+  height: 100%;
+  left: calc(var(--depth) / -2);
+  top: 0;
+  transform: rotateY(-90deg);
+  border-radius: 5px;
+  background: linear-gradient(
+    to right,
+    var(--shell-dark),
+    var(--shell) 32%,
+    var(--shell-light) 88%,
+    var(--shell)
+  );
+  box-shadow: inset 2px 0 2px #fff5;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+.spine-grip {
+  display: block;
+  height: 26%;
+  width: 64%;
+  margin-top: 12px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #0003 0 1px,
+    #fff3 1px 2px,
+    transparent 2px 4px
+  );
+}
+.spine-name {
+  writing-mode: vertical-rl;
+  font: 9px/1 var(--mono);
+  margin-top: 16px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: #30372c;
+}
+.cartridge--purple .spine-name,
+.cartridge--purple .spine-number {
+  color: #e3e6dc;
+}
+.spine-number {
+  position: absolute;
+  bottom: 9px;
+  font: 8px var(--mono);
+  color: #30372c;
+}
+.shelf-edge {
+  width: 100%;
+  height: var(--depth);
+  left: 0;
+}
+.shelf-edge--top {
+  top: calc(var(--depth) / -2);
+  transform: rotateX(90deg);
+  border-radius: 6px;
+  background: var(--shell-light);
+}
+.shelf-edge--bottom {
+  bottom: calc(var(--depth) / -2);
+  transform: rotateX(-90deg);
+  background: var(--shell-dark);
+  box-shadow: 0 0 28px 8px #30332d20;
+}
+.shelf-number {
+  position: absolute;
+  top: calc(100% + 15px);
+  left: 0;
+  right: 0;
+  font: 10px var(--mono);
+  color: var(--muted);
+}
+.shelf-position[data-active="true"] .shelf-number {
+  opacity: 0;
+}
+.shelf-preview {
+  text-align: center;
+}
+.shelf-caption {
+  min-height: 65px;
+  max-width: 360px;
+  margin: 0 auto;
+}
+.shelf-caption h3 {
+  font-size: 17px;
+  line-height: 1.5;
+  font-weight: 550;
+  letter-spacing: -0.35px;
+}
+.shelf-caption p {
+  margin-top: 4px;
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.6;
+  color: var(--muted);
 }
-.cartridge-stack .project-arrow {
-  margin-left: 12px;
-  font-size: 21px;
+.shelf-action {
+  height: 48px;
+}
+.shelf-action .text-link {
+  border: 0;
+  background: none;
+  padding: 0 12px;
+  color: #496036;
+}
+.shelf-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 4px;
+}
+.shelf-navigation button {
+  height: 44px;
+  width: 44px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 20px;
+}
+.shelf-navigation button:hover {
+  background: #e8e9e0;
+}
+.shelf-navigation > span {
+  min-width: 50px;
+  font: 10px var(--mono);
+  color: var(--muted);
+}
+#shelf-help {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: 16px;
+}
+.project-index {
+  margin: 28px auto 0;
+  max-width: 460px;
+}
+.project-index summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  list-style: none;
+  cursor: pointer;
+  min-height: 44px;
+  font-size: 12px;
+}
+.project-index summary::-webkit-details-marker {
+  display: none;
+}
+.project-index summary:focus-visible {
+  outline: 2px solid #536b31;
+  outline-offset: 3px;
+}
+.project-index summary > span {
+  font-size: 17px;
+}
+.project-index[open] summary > span {
+  transform: rotate(45deg);
+}
+.project-index-list {
+  margin-top: 12px;
+}
+.project-index-list button {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+  padding: 18px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: none;
+}
+.index-number {
+  font: 10px var(--mono);
+  color: var(--muted);
+}
+.project-index-list button > span:nth-child(2) {
+  flex: 1;
+}
+.project-index-list strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 550;
+}
+.project-index-list strong + span {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 5px;
 }
 .label-art--app-icon {
   transform: none;
@@ -90,128 +397,184 @@ html:has(.cartridge-stack .project-card:focus-visible) {
   object-fit: contain;
   border-radius: 21%;
 }
+.collection-foot {
+  margin-top: 30px;
+}
+.about-section {
+  gap: 55px;
+  padding: 60px 0;
+}
+.about-heading h2 {
+  font-size: 29px;
+}
+.writing-row {
+  grid-template-columns: 100px 1fr 20px;
+  gap: 18px;
+}
+.contact-section h2 {
+  font-size: 36px;
+}
+.contact-actions {
+  margin-right: 0;
+}
 
 @media (prefers-reduced-motion: no-preference) {
-  .cartridge-stack .cartridge {
+  .shelf-position {
     transition:
-      transform 420ms var(--motion-ease),
-      box-shadow 420ms ease;
+      transform 600ms var(--motion-ease),
+      width 600ms var(--motion-ease);
   }
-  .cartridge-stack
-    .project-card:is([data-active="true"], :focus-visible)
-    .cartridge {
-    transform: translateY(-14px) rotateX(0) rotate(-3deg) rotateY(-5deg);
-    box-shadow:
-      inset 2px 2px 2px #ffffff90,
-      inset -3px -2px 2px #0002,
-      2px 4px 0 -1px var(--shell-dark),
-      0 24px 24px -10px #25282140,
-      0 46px 38px -24px #25282130;
+  .shelf-object {
+    transition: transform 650ms var(--motion-ease);
+  }
+  .shelf-number {
+    transition: opacity 180ms ease;
   }
   @media (hover: hover) and (pointer: fine) {
-    .cartridge-stack .project-card:hover {
-      z-index: 21;
+    .shelf-position:not([data-active="true"]):hover .shelf-object {
+      transform: translateY(-7px) rotateX(-5deg) rotateY(66deg);
     }
-    .cartridge-stack .project-card:hover .cartridge {
-      transform: translateY(-20px) rotate(-2deg) rotateX(var(--tilt-x, 0deg))
-        rotateY(var(--tilt-y, 0deg));
-    }
-    .cartridge-stack .project-card:active .cartridge {
-      transform: translateY(-8px) rotate(-2deg) scale(0.98);
+    .shelf-position[data-active="true"]:hover .shelf-object {
+      transform: translateY(-25px) rotateX(-3deg) rotateY(-5deg);
     }
   }
 }
-
 @media (max-width: 800px) {
-  .cartridge-stack {
-    margin-top: 14px;
+  .site-wrap {
+    width: calc(100% - 56px);
   }
-  .cartridge-stack .project-card {
-    height: 305px;
+  .cartridge-library {
+    --cart-width: 208px;
+    --step: 72px;
+    --slot: 62px;
   }
-  .cartridge-stack .project-card + .project-card {
-    margin-top: -76px;
-  }
-  .cartridge-stack .cartridge-stage {
-    width: 280px;
-    height: 305px;
-    right: 0;
-  }
-  .cartridge-stack .cartridge {
-    width: 238px;
-  }
-  .cartridge-stack .project-info {
-    width: 43%;
-    margin-top: 108px;
-    padding-left: 13px;
-  }
-  .cartridge-stack .project-title {
-    font-size: 23px;
+  .shelf-viewport {
+    height: 333px;
   }
 }
-
 @media (max-width: 560px) {
-  .cartridge-stack {
-    margin: 8px -3px 14px;
-    padding-top: 12px;
+  .site-wrap {
+    width: calc(100% - 40px);
   }
-  .cartridge-stack .project-card {
-    height: 275px;
+  .site-header {
+    height: 78px;
   }
-  .cartridge-stack .project-card + .project-card {
-    margin-top: -52px;
-  }
-  .cartridge-stack .cartridge-stage {
-    width: 59%;
-    height: 265px;
-    right: 0;
-  }
-  .cartridge-stack .cartridge {
-    width: 205px;
-  }
-  .cartridge-stack .project-info {
-    width: 39%;
-    margin-top: 81px;
-    padding-left: 10px;
-  }
-  .cartridge-stack .project-meta,
-  .cartridge-stack .project-meta > span {
-    font-size: 8px;
-    letter-spacing: 0;
-  }
-  .cartridge-stack .project-title {
-    font-size: 19px;
-    margin-top: 8px;
-    line-height: 1.15;
-    letter-spacing: -0.6px;
-  }
-  .cartridge-stack .project-blurb {
+  .site-header nav {
+    gap: 18px;
     font-size: 12px;
-    line-height: 1.6;
-    margin-top: 8px;
   }
-  .cartridge-stack .project-arrow {
-    display: none;
+  .identity {
+    font-size: 13px;
+    gap: 10px;
+  }
+  .intro {
+    padding: 30px 0 18px;
+  }
+  .intro h1 {
+    font-size: 27px;
+    letter-spacing: -0.8px;
+    margin-bottom: 14px;
+  }
+  .intro-description {
+    font-size: 21px;
+    line-height: 1.45;
+  }
+  .intro-aside {
+    font-size: 17px;
+    margin-top: 20px;
+  }
+  .collection > .section-heading {
+    padding-top: 20px;
+  }
+  .section-note {
+    font-size: 8px;
+  }
+  .cartridge-library {
+    --cart-width: 184px;
+    --step: 57px;
+    --slot: 48px;
+    --depth: 21px;
+  }
+  .shelf-viewport {
+    height: 303px;
+    margin-left: -12px;
+    margin-right: -12px;
+  }
+  .shelf-position {
+    top: 48px;
+  }
+  .shelf-caption {
+    max-width: 280px;
+    min-height: 70px;
+  }
+  .shelf-caption h3 {
+    font-size: 16px;
+  }
+  .shelf-caption p {
+    font-size: 13px;
+  }
+  .shelf-object .label-title {
+    font-size: 25px;
+  }
+  .shelf-object .cartridge-label {
+    padding: 7px 8px 5px;
+  }
+  .spine-name {
+    font-size: 8px;
+    margin-top: 11px;
   }
   .label-art--app-icon {
     margin: 3px 0;
   }
+  .about-section {
+    gap: 24px;
+    padding: 44px 0;
+  }
+  .contact-section {
+    padding: 52px 0;
+  }
+  .contact-section h2 {
+    font-size: 34px;
+  }
+  .writing-row {
+    grid-template-columns: 1fr 20px;
+    gap: 5px 12px;
+  }
+  .writing-row time {
+    grid-column: 1;
+  }
+  .writing-row > span:nth-child(2) {
+    grid-column: 1;
+  }
+  .writing-row > span:last-child {
+    grid-column: 2;
+    grid-row: 1 / 3;
+  }
 }
-
 @media (max-width: 360px) {
-  .cartridge-stack .project-title {
-    font-size: 17px;
+  .cartridge-library {
+    --cart-width: 166px;
+    --step: 49px;
+    --slot: 44px;
+    --depth: 19px;
   }
-  .cartridge-stack .project-card + .project-card {
-    margin-top: -32px;
+  .shelf-viewport {
+    height: 284px;
+  }
+  .shelf-object .label-title {
+    font-size: 22px;
+  }
+  .shelf-object .cartridge-top > span {
+    font-size: 13px;
+  }
+  .intro-description {
+    font-size: 20px;
   }
 }
-
 @media (prefers-reduced-motion: reduce) {
-  .cartridge-stack .project-card .cartridge,
-  .cartridge-stack
-    .project-card:is(:hover, :active, :focus-visible)
-    .cartridge {
-    transform: rotate(-4deg) rotateY(-5deg) scale(0.94);
+  .shelf-position,
+  .shelf-object,
+  .shelf-number {
+    transition: none;
   }
 }
