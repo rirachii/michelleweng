@@ -1,4 +1,10 @@
-import { useRef, useState, type CSSProperties, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import { PROJECTS } from "./portfolio-content";
 
 interface Props {
@@ -29,6 +35,12 @@ export function CartridgeShelf({ editions, renderCartridge, onOpen }: Props) {
 
   return (
     <div className="cartridge-library">
+      <div className="section-heading collection-heading">
+        <h2 id="collection-title">
+          Selected work <span>{String(count).padStart(2, "0")}</span>
+        </h2>
+        <ProjectIndex editions={editions} onOpen={onOpen} />
+      </div>
       <div
         className="shelf-viewport"
         role="group"
@@ -216,41 +228,83 @@ export function CartridgeShelf({ editions, renderCartridge, onOpen }: Props) {
         </div>
         <p id="shelf-help">Swipe, use the arrows, or pick a cartridge.</p>
       </div>
-
-      <details className="project-index">
-        <summary>
-          All projects <span aria-hidden="true">+</span>
-        </summary>
-        <div className="project-index-list">
-          {PROJECTS.map((project, index) => (
-            <div className="project-index-row" key={project.name}>
-              <button
-                onClick={(event) => onOpen(index, event.currentTarget)}
-                aria-haspopup="dialog"
-              >
-                <span className="index-number">{editions[index].number}</span>
-                <span>
-                  <strong>{project.name}</strong>
-                  <span>{project.blurb}</span>
-                </span>
-                <span aria-hidden="true">→</span>
-              </button>
-              {project.link && (
-                <a
-                  className="index-website text-link"
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Visit ${project.name} website (opens in a new tab)`}
-                >
-                  {new URL(project.link).hostname}{" "}
-                  <span aria-hidden="true">↗</span>
-                </a>
-              )}
-            </div>
-          ))}
-        </div>
-      </details>
     </div>
+  );
+}
+
+function ProjectIndex({
+  editions,
+  onOpen,
+}: Pick<Props, "editions" | "onOpen">) {
+  const indexRef = useRef<HTMLDetailsElement>(null);
+
+  useEffect(() => {
+    const dismiss = (event: MouseEvent | KeyboardEvent) => {
+      const index = indexRef.current;
+      // Keep the index available as the return-focus target for a project dialog.
+      if (!index?.open || document.querySelector("dialog[open]")) return;
+      if (event instanceof KeyboardEvent) {
+        if (event.key !== "Escape") return;
+        index.open = false;
+        index.querySelector("summary")?.focus();
+      } else if (!index.contains(event.target as Node)) {
+        index.open = false;
+      }
+    };
+    document.addEventListener("click", dismiss);
+    document.addEventListener("keydown", dismiss);
+    return () => {
+      document.removeEventListener("click", dismiss);
+      document.removeEventListener("keydown", dismiss);
+    };
+  }, []);
+
+  return (
+    <details
+      className="project-index"
+      ref={indexRef}
+      onBlur={(event) => {
+        if (
+          event.relatedTarget &&
+          !event.currentTarget.contains(event.relatedTarget) &&
+          !document.querySelector("dialog[open]")
+        ) {
+          event.currentTarget.open = false;
+        }
+      }}
+    >
+      <summary>
+        All projects <span aria-hidden="true">+</span>
+      </summary>
+      <div className="project-index-list">
+        {PROJECTS.map((project, index) => (
+          <div className="project-index-row" key={project.name}>
+            <button
+              onClick={(event) => onOpen(index, event.currentTarget)}
+              aria-haspopup="dialog"
+            >
+              <span className="index-number">{editions[index].number}</span>
+              <span>
+                <strong>{project.name}</strong>
+                <span>{project.blurb}</span>
+              </span>
+              <span aria-hidden="true">→</span>
+            </button>
+            {project.link && (
+              <a
+                className="index-website text-link"
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visit ${project.name} website (opens in a new tab)`}
+              >
+                {new URL(project.link).hostname}{" "}
+                <span aria-hidden="true">↗</span>
+              </a>
+            )}
+          </div>
+        ))}
+      </div>
+    </details>
   );
 }

@@ -307,12 +307,6 @@ export function Portfolio() {
             id="collection"
             aria-labelledby="collection-title"
           >
-            <div className="section-heading">
-              <h2 id="collection-title">
-                Selected work <span>{COLLECTION_COUNT}</span>
-              </h2>
-              <span className="section-note">PICK A CARTRIDGE</span>
-            </div>
             <CartridgeShelf
               editions={EDITIONS}
               renderCartridge={(index) => <Cartridge index={index} />}

@@ -29,9 +29,9 @@ See `docs/upright-shelf.md` for the observed reference, the vgpu investigation, 
 
 - Use a narrow, centered page with a short personal introduction above the interactive shelf.
 - Seven upright Game Boy cartridges make up the collection. Desktop centers the full shelf; phones show the first five at rest, with all seven reachable through the arrows, gestures, keyboard, and project index. The three projects with supplied website URLs lead the shelf. Selecting one centers and rotates its front toward the visitor, moving the neighboring spines aside.
-- The selected name, summary, and primary Visit website link and secondary Project details action sit below the shelf. Keep that area's height stable when content changes.
+- The selected name, summary, and primary Visit website link and secondary Project details action sit below the shelf. Keep that area's height stable when content changes. Leave 24px above the arrow controls so their focus outlines stay clear of the project actions.
 - Tap/click selects a preview; Visit website opens the project website in a new tab, and Project details opens the native dialog. Projects without a verified URL show only Project details. Arrow buttons, horizontal touch swipes, horizontal trackpad gestures, and keyboard arrows also browse the shelf.
-- Keep vertical document scrolling native. Swiping is optional; every project is also available in the All projects disclosure beneath the shelf.
+- Keep vertical document scrolling native. Swiping is optional; every project is also available in the All projects menu at the top right beside Selected work. It replaces the decorative Pick a cartridge note; there is no duplicate control beneath the shelf. The native disclosure opens a bounded, scrollable project list, closes on outside click, Escape, or keyboard focus leaving the menu, and stays open behind a project dialog to preserve return focus.
 - Tablet and mobile retain the same hierarchy with smaller cartridge faces. Supporting sections and dialog contents stack on small screens.
 - Minimum verified target width is 320 CSS pixels. The initial visible cartridge buttons must each have at least a 44px hit target.
 - Neighboring cartridges may be clipped within the shelf when one is selected. The selected face and caption must stay fully visible without document overflow.
