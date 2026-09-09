@@ -124,3 +124,9 @@ The collection now uses an upright shelf, following the newly visible mobile ref
 The production build and 69 browser assertions pass. Desktop/mobile idle and selected states were inspected visually. The complete initial payload is 75,101 bytes gzip, and all four standard Lighthouse categories score 100 in the final local production preview. The original OS, its archive ref, app icons, and My OS link remain preserved. See [the upright shelf review](upright-shelf.md) for reference research, interaction details, and audit conditions.
 
 PR https://github.com/rirachii/michelleweng/pull/6 merged as `0029a8e35b86e06c07986b8565ebf91bf846c444`; its Vercel production check succeeded. The public JavaScript and CSS match the tested build bytes and retain immutable caching. Live checks confirmed all five shelf buttons, Converty selection and its dialog/icon at 1440px, Umami selection/icon at 390px, no horizontal overflow, the My OS link, and the archive's 11 icons and taskbar. No browser console errors were reported. The live website was opened in Comet.
+
+## Label readability update
+
+PR https://github.com/rirachii/michelleweng/pull/7 merged as `d14704a784ebeb994d6bb86f64a585459f50ff5b`, and its Vercel production check succeeded. Larger bold labels, stronger contrast, flat project names, and a straight-on selected face address the user's readability screenshot. Miniature decorative print is removed. See [the readability review](label-readability.md) for type sizes, responsive checks, and the 100-point mobile lab audit.
+
+Live verification at 320px confirmed all five names, a 23px Converty title, the unrotated selected face, no horizontal overflow, and a working dialog with its actual icon. The production JavaScript, CSS, and `/bapos/` HTML match the tested build bytes. My OS remains linked, the archive source ref is unchanged, and no browser console errors were reported. The updated site was opened in Comet.
