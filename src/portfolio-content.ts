@@ -122,9 +122,10 @@ export const PROJECTS: PortfolioProject[] = [
     linkLabel: "Visit Foodex",
     icon: "/assets/app-icons/foodex-seamless-bbf20b33.webp",
   },
-  ...ORIGINAL_PROJECTS.map((project) =>
-    project.name === "Umami World"
-      ? { ...project, icon: "/assets/app-icons/umami-world-f1bbebd9.webp" }
-      : project,
+  ...ORIGINAL_PROJECTS.filter((project) => project.name === "Umami World").map(
+    (project) => ({
+      ...project,
+      icon: "/assets/app-icons/umami-world-f1bbebd9.webp",
+    }),
   ),
 ];

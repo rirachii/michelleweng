@@ -36,32 +36,11 @@ const EDITIONS = [
     number: "04",
   },
   {
-    id: "short-transcript",
-    type: "AI tool",
-    color: "orange",
-    motif: "wave",
-    number: "05",
-  },
-  {
     id: "umami-world",
     type: "Mobile app",
     color: "green",
     motif: "bowl",
-    number: "06",
-  },
-  {
-    id: "void-mail",
-    type: "Web app",
-    color: "purple",
-    motif: "portal",
-    number: "07",
-  },
-  {
-    id: "retro-cam",
-    type: "Experiment",
-    color: "yellow",
-    motif: "camera",
-    number: "08",
+    number: "05",
   },
 ] as const;
 
@@ -122,25 +101,6 @@ function Cartridge({ index }: { index: number }) {
               <span className="noodles" />
               <span className="bowl" />
               <span className="bowl-foot" />
-            </span>
-          )}
-          {!icon && edition.motif === "portal" && (
-            <span className="portal-art">
-              <span />
-              <span />
-              <span />
-              <span />
-              <i>✉</i>
-            </span>
-          )}
-          {!icon && edition.motif === "camera" && (
-            <span className="camera-art">
-              <span className="camera-body">
-                <i />
-                <b />
-                <em />
-              </span>
-              <span className="camera-spark">✦</span>
             </span>
           )}
           {!icon && edition.motif === "files" && (

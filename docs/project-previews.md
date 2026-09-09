@@ -11,7 +11,8 @@ Opening their project details also shows the gallery, including visits through a
 Alternative screens use thumbnail buttons with an explicit pressed state, and the selected caption stays in ordinary page text.
 Full size opens the selected WebP in a new tab, allowing the browser's native image zoom.
 Changing projects resets the gallery to its first screen.
-The four older projects have no verified screen sources in this pass and retain their original content.
+Umami World has no verified screenshot source in this pass and retains its existing detail content.
+Short Transcript, Void Mail, and Retro Cam were subsequently removed from the current collection.
 
 The gallery is absent from initial prerendered HTML and is mounted only when requested.
 Only the selected full screenshot and that project's small thumbnails load.
@@ -43,7 +44,7 @@ Each filename suffix is the first eight characters of its encoded SHA-256, match
 | foodex-atlas | `foodex-atlas-86d995f2.webp` | 34,864 | 5,086 |
 | foodex-capture | `foodex-capture-9e7d47aa.webp` | 27,138 | 4,030 |
 
-## Verification
+## Screenshot release verification
 
 The production build passed TypeScript and prerendering.
 Browser checks at 320, 390, 768, and 1440 CSS pixels covered every shelf selection, all eight detail dialogs, thumbnail switching, full-size image opening, screenshot reset when returning to a project, keyboard arrows and Home, Escape and focus return, and no document overflow.
