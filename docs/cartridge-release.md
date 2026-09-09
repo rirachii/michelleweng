@@ -178,3 +178,21 @@ Live Chrome inspection confirmed the continuous blue and orange label edges.
 The public HTML, `portfolio-BGldM6EF.js`, unchanged CSS/shared bundle, all four current icons, and archive HTML match the tested build bytes; versioned assets retain immutable caching.
 The live Lighthouse 12.8.2 mobile audit at `2026-09-09T19:30:23.853Z` retained performance 100, 1.4s LCP, 0ms TBT, and 0 CLS, with 90,754 bytes transferred.
 See [app icon provenance and edit notes](app-icons.md) for the derivative assets and background-edit instructions.
+
+## Chirpberry and product screenshots, September 9, 2026
+
+PR [12](https://github.com/rirachii/michelleweng/pull/12) merged as `ca1c2927c8f669a8d0cee51f86ba2f79b0b76d85` and passed Vercel's production check.
+Chirpberry leads the eight-cartridge collection with a seamless bird label and a verified source-repository link.
+Chirpberry, Converty, Oompf, and Foodex reveal real product screenshot galleries after selection and inside project details.
+The built-in thumbnail controls reset per project, and Full size opens the selected image in a new tab.
+See [screenshot sources and behavior](project-previews.md) and [icon provenance](app-icons.md).
+
+The build, responsive browser checks at 320/390/768/1440px, all eight selections and dialogs, direct Chirpberry hash, source link, thumbnail switching and reset, full-size links, keyboard navigation, Escape and focus return, reduced motion, and original archive passed.
+Live checks at 320px and 1440px confirmed the new cartridge, source action, galleries, image loading, no initial screenshot requests, and no overflow or browser errors.
+The public HTML, JavaScript, CSS, all five icons, fourteen preview assets, and archive HTML matched the tested build bytes with immutable asset caching.
+The original BapOS source and bundles remain unchanged.
+
+Public mobile Lighthouse scored 100 in all four categories with 1.38s LCP, 0ms TBT, 0 CLS, and 96,065 bytes transferred.
+The desktop performance score was 100 with 0.34s LCP.
+Both audits requested zero product screenshots before interaction.
+See [the audit record](performance.md) for exact conditions and timestamps.

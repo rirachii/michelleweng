@@ -102,8 +102,8 @@ export const PROJECTS: PortfolioProject[] = [
         thumbnail: "/assets/project-previews/foodex-atlas-thumb-37a72a95.webp",
         width: 480,
         height: 1044,
-        caption: "Your own food atlas",
-        alt: "Foodex Country Atlas showing a world map and collected dishes by country.",
+        caption: "Explore dishes around the world",
+        alt: "Foodex Country Atlas showing a public discovery map and country guides.",
       },
       {
         src: "/assets/project-previews/foodex-capture-9e7d47aa.webp",

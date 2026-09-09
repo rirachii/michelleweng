@@ -96,3 +96,26 @@ A Lighthouse 12.8.2 audit at `2026-09-09T20:29:26.875Z` scored 100 in all four c
 This is a local production-preview audit under the same default simulated mobile settings, not a public-site or visitor field measurement.
 The initial requests contained only the five icons and portfolio resources, with no screenshots or BapOS assets.
 The initial transfer remains below the 100 KiB budget.
+
+### Public screenshot-preview release
+
+PR [12](https://github.com/rirachii/michelleweng/pull/12) merged as `ca1c2927c8f669a8d0cee51f86ba2f79b0b76d85` and passed Vercel production deployment.
+The public HTML, initial bundles, all five icons, all fourteen screenshot and thumbnail assets, and the archive entry match the tested build bytes.
+The image assets return WebP content types and immutable cache headers.
+
+Lighthouse 12.8.2 audited the public site at `2026-09-09T20:32:58.480Z` with the same simulated mobile settings, then at `2026-09-09T20:33:13.020Z` with the desktop preset.
+Mobile scored 100 for performance, accessibility, best practices, and SEO.
+Desktop's performance-only audit scored 100.
+
+| Measurement | Mobile | Desktop |
+| --- | --- | --- |
+| First contentful paint | 1.23s | 0.30s |
+| Largest contentful paint | 1.38s | 0.34s |
+| Total blocking time | 0ms | 0ms |
+| Cumulative layout shift | 0 | 0 |
+| Initial transfer | 96,065 bytes | 96,041 bytes |
+| Initial screenshot requests | 0 | 0 |
+
+Both remain below the 100 KiB budget.
+These are lab measurements, not visitor field data.
+The 5,311-byte increase from the previous public mobile audit includes the fifth icon and gallery code and metadata; the product screenshots themselves remain on demand.

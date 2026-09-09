@@ -49,5 +49,7 @@ The production build passed TypeScript and prerendering.
 Browser checks at 320, 390, 768, and 1440 CSS pixels covered every shelf selection, all eight detail dialogs, thumbnail switching, full-size image opening, screenshot reset when returning to a project, keyboard arrows and Home, Escape and focus return, and no document overflow.
 Network observation at each width confirmed zero initial screenshot requests and no archive resources on the root page.
 The rendered Chirpberry desktop and Foodex phone galleries were inspected at both 320px and 1440px.
-The separate direct-hash, source-link, reduced-motion, and archive checks are part of the release verification.
+Direct Chirpberry hash navigation, its source link, reduced motion, and the original archive also passed with no browser errors.
+Live checks at 320px and 1440px confirmed all eight controls, Chirpberry gallery switching and source action, Foodex preview loading, no initial screenshot requests, and no overflow or browser errors.
+The Foodex atlas caption describes its public discovery map rather than implying that the public counts are a personal collection.
 See `performance.md` for the mobile audit and `cartridge-release.md` for the production gate.
